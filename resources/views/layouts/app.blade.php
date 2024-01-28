@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>Michelangelo</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -20,8 +20,8 @@
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-gradient-to-r from-blue-800 to-gray-500 dark:from-blue-900 dark:to-gray-700 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header style="background: linear-gradient(to right, rgb(68, 67, 122), rgb(218, 200, 164)); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>

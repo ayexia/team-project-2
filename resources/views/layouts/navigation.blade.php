@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-gradient-to-r from-blue-800 to-gray-500 dark:from-blue-900 dark:to-gray-700">
+<nav x-data="{ open: false }" style="background: linear-gradient(to right, rgb(68, 67, 122), rgb(218, 200, 164)); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -16,13 +16,13 @@
                     {{ __('Home') }}
                   </x-nav-link>
                   <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('About') }}
-                  </x-nav-link>
-                  <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('Services') }}
+                    {{ __('Products') }}
                   </x-nav-link>
                   <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     {{ __('Contact') }}
+                  </x-nav-link>
+                  <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{ __('About') }}
                   </x-nav-link>
             </div>
 
