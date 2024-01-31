@@ -88,7 +88,7 @@ form.example button:hover {
 
 </div>
 <div class = "right"> 
-<form action="{{ route('products.search') }}" method="GET">
+
     <input type="text" name="query" placeholder="Search for a product">
     <button type="submit">Search</button>
     </form>
