@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-4xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Home') }}
+            {{ __('Michelangelo') }}
         </h2>
     </x-slot>
 
@@ -88,9 +88,9 @@ form.example button:hover {
 
 </div>
 <div class = "right"> 
-    <form class = "example" method="GET" action="search.php">
-        <input type="text" name="query" placeholder="Search for an item or brand">
-        <button type="submit">Search</button>
+<form action="{{ route('products.search') }}" method="GET">
+    <input type="text" name="query" placeholder="Search for a product">
+    <button type="submit">Search</button>
     </form>
 	</div>
 </body>
