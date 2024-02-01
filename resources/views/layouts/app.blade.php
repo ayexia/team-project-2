@@ -23,8 +23,8 @@
             <header style="background: linear-gradient(to right, rgb(68, 67, 122), rgb(218, 200, 164)); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
-                    </div>
-                </header>
+                </div>
+            </header>
             @endif
 
             <!-- Page Content -->

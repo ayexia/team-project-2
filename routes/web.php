@@ -27,7 +27,7 @@ Route::get('/', function () {
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
-// Route::get('post', [HomeController::class, 'post'])->middleware(['auth', 'admin']);
+// Route::get('post', [HomeController::class, 'post'])->middleware(['auth', 'admin']); - used for test
 
 //links to profile page for verified users only, redirects to login page otherwise
 Route::get('/profile', function () {
