@@ -9,8 +9,8 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     public function index(){
-        $products = Product::all();
-        return view('products.index', ['products' => $products]);
+        $products = Product::orderBy('created_at', 'DESC')->get();
+        return view('products.index', compact('products'));
     }
 
     public function create(){
@@ -38,6 +38,10 @@ class ProductController extends Controller
 
     public function edit(Product $product){
         return view('products.edit', ['product' => $product]);
+    }
+
+    public function show(Product $product){
+        return view('products.show', ['product' => $product]);
     }
 
     public function update(Product $product, Request $request){

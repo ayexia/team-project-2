@@ -7,7 +7,7 @@
     <title>Michelangelo</title>
 </head>
 <body>
-    <h1>Product</h1>
+    <h1>Product details</h1>
     <div>
         @if(session()->has('success'))
            <div>
@@ -16,9 +16,6 @@
         @endif
     </div>
     <div>
-        <div>
-            <a href="{{route('product.create')}}">Create a Product</a>
-        </div>
         <table border="1">
             <tr>
                 <th>ID</th>
@@ -31,10 +28,7 @@
                 <th>Brand</th>
                 <th>Size</th>
                 <th>Category</th>
-                <th>Edit</th>
-                <th>Delete</th>
             </tr>
-            @foreach($products as $product)
                  <tr>
                     <td>{{$product->id}}</td>
                     <td>{{$product->name}}</td>
@@ -46,21 +40,7 @@
                     <td>{{$product->brand}}</td>
                     <td>{{$product->size}}</td>
                     <td>{{$product->category}}</td>
-                    <td>
-                        <a href="{{route('product.show', ['product' => $product])}}">View</a>
-                    </td>
-                    <td>
-                        <a href="{{route('product.edit', ['product' => $product])}}">Edit</a>
-                    </td>
-                    <td>
-                        <form method="post" action="{{route('product.destroy', ['product' => $product])}}">
-                            @csrf
-                            @method('delete')
-                            <input type="submit" value="Delete" />
-                        </form>
-                    </td>
                  </tr>
-            @endforeach
         </table>
     </div>
 </body>

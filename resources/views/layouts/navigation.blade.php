@@ -15,15 +15,6 @@
                   <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                     {{ __('Home') }}
                   </x-nav-link>
-                  <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                    {{ __('Products') }}
-                  </x-nav-link>
-                  <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                    {{ __('Contact') }}
-                  </x-nav-link>
-                  <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                    {{ __('About') }}
-                  </x-nav-link>
             </div>
 
             <!-- Settings Dropdown -->
@@ -76,7 +67,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                {{ __('Dashboard') }}
+                {{ __('Home') }}
             </x-responsive-nav-link>
         </div>
 
