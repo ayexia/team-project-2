@@ -16,6 +16,10 @@
         @endif
     </div>
     <div>
+        <div>
+            <a href="{{route('product.index')}}">Back</a>
+        </div>
+        <br>
         <table border="1">
             <tr>
                 <th>ID</th>

@@ -7,7 +7,7 @@
     <title>Michelangelo</title>
 </head>
 <body>
-    <h1>Product</h1>
+    <h1>List of Products</h1>
     <div>
         @if(session()->has('success'))
            <div>
@@ -19,6 +19,7 @@
         <div>
             <a href="{{route('product.create')}}">Create a Product</a>
         </div>
+        <br>
         <table border="1">
             <tr>
                 <th>ID</th>
@@ -31,6 +32,7 @@
                 <th>Brand</th>
                 <th>Size</th>
                 <th>Category</th>
+                <th>View</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
