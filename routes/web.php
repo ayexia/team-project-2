@@ -21,11 +21,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+
+Route::get('post', [HomeController::class, 'post'])->middleware(['auth', 'admin']);
 
 //links to profile page for verified users only, redirects to login page otherwise
 Route::get('/profile', function () {

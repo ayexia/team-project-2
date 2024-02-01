@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div style="background: linear-gradient(to right, rgb(68, 67, 122), rgb(218, 200, 164)); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">    <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <p class="text-lg font-bold">{{ __("You're logged in!") }}</p>
+                    <p class="text-lg font-bold">{{ __("You're logged in as Admin!") }}</p>
                     <html>
 <style>
 body {
