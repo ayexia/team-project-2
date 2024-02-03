@@ -32,7 +32,7 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name(
 //links to profile page for verified users only, redirects to login page otherwise
 Route::get('/profile', function () {
     return '<h1>Your profile</h1>';
-})->middleware('verified');
+})->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
