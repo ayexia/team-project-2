@@ -41,6 +41,7 @@
                 <th>Brand</th>
                 <th>Size</th>
                 <th>Category</th>
+                <th>Available?</th>
                 <th>View</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -57,7 +58,8 @@
                     <td>{{$product->colour}}</td>
                     <td>{{$product->brand}}</td>
                     <td>{{$product->size}}</td>
-                    <td>{{$product->category}}</td>
+                    <td>{{$product->category_id}}</td>
+                    <td>{{$product->available}}</td>
                     <td>
                         <a href="{{route('product.show', ['product' => $product])}}">View</a>
                     </td>

@@ -27,8 +27,8 @@
             <input type="text" name="name" placeholder="Name" />
         </div><br>
         <div>
-            <label>Description</label>
-            <input type="text" name="description" placeholder="Description" />
+            <label>Description</label><br>
+            <textarea name="description" cols="30" rows="10" placeholder="Description"></textarea>
         </div><br>
         <div>
             <label>Price</label>
@@ -55,8 +55,21 @@
             <input type="text" name="size" placeholder="Size" />
         </div><br>
         <div>
-            <label>Category</label>
-            <input type="text" name="category" placeholder="Category" />
+          <select name="category_id" id="category_id" class="form-control">
+            <option value ="">Category</option>
+          @if ($category->isNotEmpty())
+            @foreach ($category as $category)
+            <option value="{{$category->id}}">{{ $category->name }}</option>
+            @endforeach
+          @endif 
+          </select>
+        </div><br>
+        <div class="form-group">
+            <label for="available">Available?</label>
+            <select name="available" id="available" class="form-control">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+            </select>
         </div><br>
         <div>
             <input type="submit" value="Save a New Product" />

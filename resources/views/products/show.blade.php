@@ -32,6 +32,7 @@
                 <th>Brand</th>
                 <th>Size</th>
                 <th>Category</th>
+                <th>Available?</th>
             </tr>
                  <tr>
                     <td>{{$product->id}}</td>
@@ -43,7 +44,8 @@
                     <td>{{$product->colour}}</td>
                     <td>{{$product->brand}}</td>
                     <td>{{$product->size}}</td>
-                    <td>{{$product->category}}</td>
+                    <td>{{$product->category_id}}</td>
+                    <td>{{$product->available}}</td>
                  </tr>
         </table>
     </div>

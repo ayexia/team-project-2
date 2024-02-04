@@ -18,6 +18,7 @@ class Product extends Model
         'colour',
         'brand',
         'size',
-        'category'
+        'category_id',
+        'available',
     ];
 }
