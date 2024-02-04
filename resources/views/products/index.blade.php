@@ -15,10 +15,19 @@
            </div>
         @endif
     </div>
-    <div>
         <div>
             <a href="{{route('product.create')}}">Create a Product</a>
-        </div>
+        </div><br>
+        <form action="/product" method="GET">
+  <div class="input-group" style="width: 250px;">
+    <input value="{{ Request::get('keyword') }}" type="text" name="keyword" class="float-right" placeholder="Search">
+    <div class="input-group-append">
+      <button type="submit" class="btn btn-default">
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
         <br>
         <table border="1">
             <tr>
@@ -36,6 +45,7 @@
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
+            @if ($products->isNotEmpty())
             @foreach($products as $product)
                  <tr>
                     <td>{{$product->id}}</td>
@@ -63,7 +73,10 @@
                     </td>
                  </tr>
             @endforeach
-        </table>
+        </table>        
+        @else
+            Records not found
+        @endif
     </div>
 </body>
 </html>

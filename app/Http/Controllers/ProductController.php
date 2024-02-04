@@ -8,11 +8,19 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index(){
-        $products = Product::orderBy('created_at', 'DESC')->get();
+    public function index(Request $request)
+    {
+        $products = Product::orderBy('created_at', 'DESC');
+    
+        if ($request->has('keyword')) {
+            $keyword = $request->input('keyword');
+            $products->where('name', 'like', '%' . $keyword . '%');
+        }
+    
+        $products = $products->get();
+    
         return view('products.index', compact('products'));
     }
-
     public function create(){
         return view('products.create');
     }
