@@ -19,7 +19,7 @@ class HomeController extends Controller
             {
                 return view('dashboard');
             }
-            else  if($usertype=='admin')
+            else if($usertype=='admin')
             {
                 return view('admin.adminhome');
             }

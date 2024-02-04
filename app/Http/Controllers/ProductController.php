@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -19,9 +21,19 @@ class ProductController extends Controller
         }
     
         $products = $products->get();
-    
-        return view('products.index', compact('products'));
+
+        $usertype=Auth()->user()->usertype;
+
+            if($usertype=='user')
+            {
+                return view('products.search', compact('products'));
+            }
+            else if($usertype=='admin')
+            {
+                return view('products.index', compact('products'));
+            }
     }
+
     public function create(){
         $data = [];
         $category = Category::orderBy('name', 'ASC')->get();
@@ -57,7 +69,16 @@ class ProductController extends Controller
     }
 
     public function show(Product $product){
-        return view('products.show', ['product' => $product]);
+        $usertype=Auth()->user()->usertype;
+
+            if($usertype=='user')
+            {
+                return view('products.view', ['product' => $product]);
+            }
+            else if($usertype=='admin')
+            {
+                return view('products.show', ['product' => $product]);
+            }
     }
 
     public function update(Product $product, Request $request){

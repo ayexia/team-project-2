@@ -58,7 +58,7 @@
                     <td>{{$product->colour}}</td>
                     <td>{{$product->brand}}</td>
                     <td>{{$product->size}}</td>
-                    <td>{{$product->category_id}}</td>
+                    <td>{{ $product->category->name }}</td>
                     <td>{{$product->available}}</td>
                     <td>
                         <a href="{{route('product.show', ['product' => $product])}}">View</a>

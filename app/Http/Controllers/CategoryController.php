@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -19,7 +21,17 @@ class CategoryController extends Controller
 
     $category = $category->get();
 
-    return view('category.index', compact('category'));
+    
+    $usertype=Auth()->user()->usertype;
+
+    if($usertype=='user')
+    {
+        return view('category.search', compact('category'));
+    }
+    else if($usertype=='admin')
+    {
+        return view('category.index', compact('category'));
+    }
 }
 
     public function create(){
@@ -44,7 +56,18 @@ class CategoryController extends Controller
     }
 
     public function show(Category $category){
-        return view('category.show', ['category' => $category]);
+
+        $usertype=Auth()->user()->usertype;
+
+            if($usertype=='user')
+            {
+                return view('category.view', ['category' => $category]);
+            }
+            else if($usertype=='admin')
+            {
+                return view('category.show', ['category' => $category]);
+            }
+        
     }
 
     public function update(Category $category, Request $request){

@@ -44,7 +44,7 @@
                     <td>{{$product->colour}}</td>
                     <td>{{$product->brand}}</td>
                     <td>{{$product->size}}</td>
-                    <td>{{$product->category_id}}</td>
+                    <td>{{ $product->category->name }}</td>
                     <td>{{$product->available}}</td>
                  </tr>
         </table>
