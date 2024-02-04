@@ -15,6 +15,10 @@
            </div>
         @endif
     </div>
+    <div>
+        <a href="{{route('home')}}">Back</a>
+        </div>
+        <br>
         <div>
             <a href="{{route('product.create')}}">Create a Product</a>
         </div><br>

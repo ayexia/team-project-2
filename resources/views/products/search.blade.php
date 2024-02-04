@@ -32,6 +32,7 @@
             </tr>
             @if ($products->isNotEmpty())
             @foreach($products as $product)
+            @if ($product->available === 'yes')
                  <tr>
                     <td>{{$product->name}}</td>
                     <td>{{$product->price}}</td>
@@ -44,6 +45,7 @@
                         <a href="{{route('product.show', ['product' => $product])}}">View</a>
                     </td>
                  </tr>
+            @endif
             @endforeach
         </table>        
         @else

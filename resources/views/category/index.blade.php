@@ -16,6 +16,9 @@
         @endif
     </div>
     <div>
+        <a href="{{route('home')}}">Back</a>
+        </div>
+        <br>
         <div>
             <a href="{{route('categories.create')}}">Create a Category</a>
         </div><br>
