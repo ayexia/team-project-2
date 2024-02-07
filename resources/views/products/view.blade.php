@@ -35,13 +35,15 @@
                     <td>{{$product->name}}</td>
                     <td>{{$product->description}}</td>
                     <td>{{$product->price}}</td>
-                    <td><img src="{{$product->image_url}}" alt="Product Image" style="width: 200px; height: 200px;"></td>
+                    <td><img src="{{$product->image_url}}" style="width: 200px; height: 200px;"></td>
                     <td>{{$product->colour}}</td>
                     <td>{{$product->brand}}</td>
                     <td>{{$product->size}}</td>
                     <td>{{ $product->category->name }}</td>
                  </tr>
         </table>
+                        
+        <br><br><p class="btn-holder"><a href="{{ route('add.to.cart', $product->id) }}" class="btn btn-outline-danger">Add to cart</a> </p>
     </div>
 </body>
 </html>

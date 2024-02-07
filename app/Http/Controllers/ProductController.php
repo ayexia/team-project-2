@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -103,5 +105,52 @@ class ProductController extends Controller
     public function destroy(Product $product){
         $product->delete();
         return redirect(route('product.index'))->with('success', 'Product deleted successfully');
+    }
+
+    public function cart()
+    {
+        return view('cart');
+    }
+
+    public function addToCart($item)
+    {
+        $product = Product::findOrFail($item);
+        $cart = session()->get('cart', []);
+        if(isset($cart[$item])) {
+            $cart[$item]['quantity']++;
+        } else {
+            $cart[$item] = [
+                "name" => $product->name,
+                "quantity" => 1,
+                "price" => $product->price,
+                "image" => $product->image_url,
+            ];
+        }
+        // $product->quantity--;
+        // $product->save();
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product has been added to cart!');
+    }
+    
+    public function updateCart(Request $request)
+    {
+        if($request->item && $request->quantity){
+            $cart = session()->get('cart');
+            $cart[$request->item]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Product added to cart.');
+        }
+    }
+  
+    public function deleteProduct(Request $request)
+    {
+        if($request->item) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->item])) {
+                unset($cart[$request->item]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'Product successfully deleted.');
+        }
     }
 }

@@ -21,7 +21,7 @@ return new class extends Migration
         $table->string('colour')->nullable();
         $table->string('brand')->nullable();
         $table->string('size')->nullable();
-        $table->foreignId('category_id')->constrained('categories');
+        $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
         $table->enum('available', ['yes','no'])->default('yes');
         $table->timestamps();
     });

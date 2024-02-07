@@ -51,6 +51,10 @@ Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name(
 Route::put('/product/{product}/update', [ProductController::class, 'update'])->name('product.update')->middleware(['auth', 'admin']);
 Route::delete('/product/{product}/destroy', [ProductController::class, 'destroy'])->name('product.destroy')->middleware(['auth', 'admin']);
 Route::get('/product/{product}/show', [ProductController::class, 'show'])->name('product.show')->middleware('auth');
+Route::get('/cart', [ProductController::class, 'cart'])->name('cart')->middleware('auth');
+Route::get('/product/{item}', [ProductController::class, 'addToCart'])->name('add.to.cart')->middleware('auth');
+Route::patch('/update-shopping-cart', [ProductController::class, 'updateCart'])->name('update.cart')->middleware('auth');
+Route::delete('/delete-cart-product', [ProductController::class, 'deleteProduct'])->name('delete.product')->middleware('auth');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index')->middleware('auth');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create')->middleware(['auth', 'admin']);
