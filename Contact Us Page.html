@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <style>
+   body {
+    font-family: Arial;
+  }
+
+  .input{
+    height:30px;
+  }
+  </style>
+
+  <h1>Contact Us</h1>
+  <p>Email: info@example.com</p>
+  <p>Phone: (123) 456-7890</p>
+  <p>Follow us on social media:</p>
+  <ul>
+    <li><a href="https://www.facebook.com/example">Facebook</a></li>
+    <li><a href="https://www.twitter.com/example">Twitter</a></li>
+    <li><a href="https://www.instagram.com/example">Instagram</a></li>
+  </ul>
+  <h2>Send us a message</h2>
+  <form action="/submit_contact_form" method="post">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email"><br>
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message"></textarea><br>
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
