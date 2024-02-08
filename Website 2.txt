@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Menswear - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            margin-right: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .content {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .promo-banner {
+            background-color: #008080;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .teal {
+            color: #008080;
+        }
+        
+        /* Homepage styles */
+        .homepage-image {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            max-width: 100%; /* Set maximum width to 100% */
+            height: auto; /* Ensure the aspect ratio is maintained */
+        }
+        
+        .slogan {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .search-bar {
+            text-align: center;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            flex: 1;
+        }
+        
+        .search-bar input[type="text"] {
+            margin-right: 10px;
+        }
+        
+        .user-icons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-icons i {
+            margin-right: 10px;
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .shop-now-btn {
+            position: absolute;
+            bottom: 40px; /* Adjust as needed */
+            right: 40px; /* Adjust as needed */
+            background-color: #008080;
+            color: #fff;
+            padding: 15px 30px; /* Adjust as needed */
+            border: none;
+            border-radius: 10px; /* Adjust as needed */
+            text-decoration: none;
+            font-size: 20px; /* Adjust as needed */
+            transition: background-color 0.3s ease;
+        }
+        
+        .shop-now-btn:hover {
+            background-color: #006666;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="your-logo.png" alt="ML Menswear Logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="user-icons">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-shopping-basket"></i>
+            <i class="fas fa-user"></i>
+        </div>
+    </header>
+    <nav>
+        <a href="#"><i class="fas fa-home"></i>Home</a>
+        <a href="#">Tops</a>
+        <a href="#">Coats & Jackets</a>
+        <a href="#">Trousers</a>
+        <a href="#">Shoes</a>
+        <a href="#">Accessories</a>
+    </nav>
+    <div class="container">
+        <div class="promo-banner">
+            Free Express Shipping on First Orders | Free Same Day Click and Collect | Free Standard Delivery
+        </div>
+        <div class="content">
+            <h1>Welcome to ML Menswear</h1>
+            <div class="image-container">
+                <img src="Homepage image.webp" alt="Homepage Image" class="homepage-image">
+                <a href="#" class="shop-now-btn">Shop Now</a>
+            </div>
+            <p class="slogan">Elevate Your Style with Our Premium Collection</p>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 ML Menswear. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
