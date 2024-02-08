@@ -43,7 +43,11 @@
                  </tr>
         </table>
                         
-        <br><br><p class="btn-holder"><a href="{{ route('add.to.cart', $product->id) }}" class="btn btn-outline-danger">Add to cart</a> </p>
+        <br><br><form action="{{ route('add.to.cart', $product->id) }}" class="btn btn-outline-danger"> 
+        @csrf
+        <input class="btn btn-primary" type="submit" value="Add to Cart">
+</form>
+
     </div>
 </body>
 </html>

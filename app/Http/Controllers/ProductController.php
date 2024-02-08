@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Cart;
+use App\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -114,43 +115,38 @@ class ProductController extends Controller
 
     public function addToCart($item)
     {
-        $product = Product::findOrFail($item);
-        $cart = session()->get('cart', []);
-        if(isset($cart[$item])) {
-            $cart[$item]['quantity']++;
-        } else {
-            $cart[$item] = [
-                "name" => $product->name,
-                "quantity" => 1,
-                "price" => $product->price,
-                "image" => $product->image_url,
-            ];
-        }
-        // $product->quantity--;
-        // $product->save();
-        session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product has been added to cart!');
-    }
+    $user = auth()->user();
+    $product=Product::find($item);
+    $cart = Cart::where('user_id', auth()->user()->id)->first();
+    $cartItem = CartItem::where('product_id', $product->id)->first();
     
-    public function updateCart(Request $request)
-    {
-        if($request->item && $request->quantity){
-            $cart = session()->get('cart');
-            $cart[$request->item]["quantity"] = $request->quantity;
-            session()->put('cart', $cart);
-            session()->flash('success', 'Product added to cart.');
-        }
+    if (!$cart) {
+        $cart = new Cart();
+        $cart->user_id = auth()->user()->id;
+        $cart->save();
     }
-  
-    public function deleteProduct(Request $request)
-    {
-        if($request->item) {
-            $cart = session()->get('cart');
-            if(isset($cart[$request->item])) {
-                unset($cart[$request->item]);
-                session()->put('cart', $cart);
-            }
-            session()->flash('success', 'Product successfully deleted.');
-        }
+    if ($cartItem) {
+        $cartItem->quantity += 1;
+        $cartItem->save();
+
+    } else {
+        $cartItem = new CartItem([
+            'cart_id' => $cart->id,
+            'product_id' => $product->id,
+            'quantity' => 1,
+            'price' => $product->price,
+        ]);
+        $cartItem->save();
+    }
+
+    return redirect()->back()->with('success', 'Product added to cart!');
+    }
+
+    public function removeFromCart($item){
+
+        $product=CartItem::find($item);
+        $product->delete();
+
+        return redirect()->back()->with('success', 'Product deleted from cart!');
     }
 }

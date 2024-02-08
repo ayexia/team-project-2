@@ -1,3 +1,9 @@
+<?php
+use App\Models\User;
+use App\Models\CartItem;
+use App\Models\Cart;
+use App\Models\Product;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +23,6 @@
     </div>
     <div>
         <a href="{{route('home')}}">Back</a>
-        </div>
         <br>
         <br>
         <table border="1">
@@ -25,38 +30,40 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Quantity</th>
-                <th>Total Price</th>
+                <th>Action</th>
             </tr>
-        @if(session('cart'))
-            @php
-            $totalPrice = 0;
-            @endphp
-            @foreach(session('cart') as $item => $details)
-                <tr rowId="{{ $item }}">
-                    <td data-th="Product">
-                        <div class="row">
-                            <div class="col-sm-3 hidden-xs"><img src="{{ $details['image'] }}" style="width: 200px; height: 200px;" class="card-img-top"/></div>
-                            <div class="col-sm-9">
-                                <h4 class="nomargin">{{ $details['name'] }}</h4>
-                            </div>
-                        </div>
-                    </td>
-                    <td data-th="Price">£{{ $details['price'] }}</td>
-                    <td data-th="Quantity">{{ $details['quantity'] }}</td>
-                    @php
-                    $subtotal = $details['price'] * $details['quantity'];
-                    $totalPrice += $subtotal;
-                    @endphp
-                    <td data-th="Total" class="text-center">£{{$totalPrice}}</td>
-                    <td class="actions">
-                        <a class="btn btn-outline-danger btn-sm delete-product"><i class="fa fa-trash-o"></i></a>
-                    </td>
-                </tr>
+            <?php
+            $user = auth()->user();
+            $cart = Cart::where('user_id', auth()->user()->id)->first();
+            $totalPrice = CartItem::where('cart_id', $cart->id)->sum(DB::raw('price * quantity'));
+            $cartItems = DB::table('cart_items')
+            ->join('carts', 'cart_items.cart_id', '=', 'carts.id')
+            ->join('products', 'cart_items.product_id', '=', 'products.id')
+            ->select('cart_items.quantity', 'products.name', 'cart_items.price', 'products.image_url', 'cart_items.id')
+            ->where('cart_items.cart_id', $cart->id)
+            ->get();
+            ?>
+            @if ($cartItems->isNotEmpty())
+            @foreach($cartItems as $cartItem) 
+            <tr><td><div class="col-sm-9">
+            <div class="row">
+             <div class="col-sm-3 hidden-xs"><img src="{{ $cartItem->image_url }}" style="width: 200px; height: 200px;" class="card-img-top"/></div>
+              <h4 class="nomargin">{{ $cartItem->name }}</h4>
+                </div>
+                </td>
+                <td data-th="Price">£{{ $cartItem->price }}</td>
+                <td data-th="Quantity">{{ $cartItem->quantity }}</td>
+                <td class="actions">
+                    <a class="btn btn-outline-danger" href="{{route('remove.from.cart', $cartItem->id)}}">Delete</a>
+                </td>
+            </tr>
             @endforeach
-        </table>       
-        @else
-            Records not found
+            <td><td><td><td data-th="Total" class="text-center"><h4>Total Price:</h4> £{{$totalPrice}}</td>
+        </table>
+        @else    
+        Records not found
         @endif
+        <br><button class="btn btn-success" style="margin-left:25%">Confirm Order</button>
     </div>
 </body>
 </html>
