@@ -3,6 +3,7 @@ use App\Models\User;
 use App\Models\CartItem;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\OrderItem;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +14,7 @@ use App\Models\Product;
     <title>Michelangelo</title>
 </head>
 <body>
-    <h1>Cart</h1>
+    <h1>Checkout</h1>
     <div>
         @if(session()->has('success'))
            <div>
@@ -57,10 +58,21 @@ use App\Models\Product;
             </tr>
             @endforeach
             <td><td><td><td data-th="Total" class="text-center"><h4>Total Price:</h4> £{{$totalPrice}}</td>
-        </table>
-        <br><a href="{{url('/checkout')}}"><button class="btn btn-success" style="margin-left:25%">Checkout</button></a>
-        @else    
-        Cart is empty!
+        </table><br>
+        <h3>Address</h3>
+        <form action="{{ route('order') }}" method="POST">
+        @csrf
+        <input type="text" name="address" placeholder="Street"><br><br>
+        <input type="text" name="address" placeholder="City"><br><br>
+        <input type="text" name="address" placeholder="Postcode"><br><br>
+        
+        <h3>Payment Details</h3><br>
+        <input type="text" placeholder="Card Number"><br><br>
+        <input type="text" placeholder="Expiry Date">
+        <input type="text" placeholder="CVC"><br><br>
+        <input type="text" placeholder="Name on Card">
+        <br><br><button class="btn btn-success" style="margin-left:25%">Place Order</button></a>
+        </form>
         @endif
     </div>
 </body>

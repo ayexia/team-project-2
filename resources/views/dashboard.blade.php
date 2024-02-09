@@ -2,6 +2,7 @@
 use App\Models\User;
 use App\Models\CartItem;
 use App\Models\Cart;
+use App\Models\Order;
 ?>
 <x-app-layout>
     <x-slot name="header">
@@ -95,11 +96,14 @@ form.example button:hover {
 <div class = "right"> 
 <?php
 $user = auth()->user();
-$cart = Cart::where('user_id', auth()->user()->id)->first();
+$cart = Cart::where('user_id', optional($user)->id)->first();
+$count = 0;
+if($cart){
 $count = CartItem::where('cart_id', $cart->id)->sum('quantity');
+}
 ?>
 <ul>
-<li><a href="/cart"><font size="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cart ({{$count}})</font></a></li>
+<li><a href="/cart"><font size="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cart ({{$count}})  ||  <a href="{{route('orders')}}">Orders</a></font></a></li>
 </li>
 </ul>
 <form action="/product" method="GET">

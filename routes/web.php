@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -52,10 +54,14 @@ Route::put('/product/{product}/update', [ProductController::class, 'update'])->n
 Route::delete('/product/{product}/destroy', [ProductController::class, 'destroy'])->name('product.destroy')->middleware(['auth', 'admin']);
 Route::get('/product/{product}/show', [ProductController::class, 'show'])->name('product.show')->middleware('auth');
 
-Route::get('/cart', [ProductController::class, 'cart'])->name('cart')->middleware('auth');
-Route::get('/product/{item}', [ProductController::class, 'addToCart'])->name('add.to.cart')->middleware('auth');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart')->middleware('auth');
+Route::get('/product/{item}', [CartController::class, 'addToCart'])->name('add.to.cart')->middleware('auth');
 //Route::patch('/update-cart', [ProductController::class, 'updateCart'])->name('update.cart')->middleware('auth');
-Route::get('/delete/{item}', [ProductController::class, 'removeFromCart'])->name('remove.from.cart')->middleware('auth');
+Route::get('/delete/{item}', [CartController::class, 'removeFromCart'])->name('remove.from.cart')->middleware('auth');
+
+Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout')->middleware('auth');
+Route::post('/checkout', [OrderController::class, 'confirmOrder'])->name('order')->middleware('auth');
+Route::get('/orders', [OrderController::class, 'order'])->name('orders')->middleware('auth');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index')->middleware('auth');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create')->middleware(['auth', 'admin']);
