@@ -65,6 +65,7 @@ class OrderController extends Controller
         }
 
         $cartItem->delete();
+        $cart->delete();
         }
         
     }
