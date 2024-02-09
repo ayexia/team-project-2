@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.container {
+    width: 100%;
+    margin: 0 ;
+    padding: 0px;
+    text-align: center;
+}
+
+.content {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.promo-banner {
+    background-color: #008080;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    
+    bottom: 0;
+    width: 100%;
+    height: fit-content;
+}
+
+.teal {
+    color: #008080;
+}
+
+/* Homepage styles */
+.homepage-image {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    max-width: 100%; /* Set maximum width to 100% */
+    height: auto; /* Ensure the aspect ratio is maintained */
+}
+
+.slogan {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    text-align: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+}
+
+.search-bar input[type="text"] {
+    margin-right: 10px;
+}
+
+.user-icons {
+    display: flex;
+    align-items: center;
+}
+
+.user-icons i {
+    margin-right: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.shop-now-btn {
+    position: absolute;
+    bottom: 40px; /* Adjust as needed */
+    right: 40px; /* Adjust as needed */
+    background-color: #008080;
+    color: #fff;
+    padding: 15px 30px; /* Adjust as needed */
+    border: none;
+    border-radius: 10px; /* Adjust as needed */
+    text-decoration: none;
+    font-size: 20px; /* Adjust as needed */
+    transition: background-color 0.3s ease;
+}
+.logo img{
+  width: 60px;
+}
+.shop-now-btn:hover {
+    background-color: #006666;
+}
+
+.product{
+    width: 250px; /* Adjust the width according to your preference */
+    padding: 10px;
+    margin: 1%; /* Add some margin between the products */
+    display: inline-block; /* Display the products horizontally */
+    vertical-align: top; /* Align the products to the top */
+  }
+  
+.product img{
+    width:200px
+}
+@media (max-width: 768px) {
+    nav {
+        display: none;
+    }
+}
