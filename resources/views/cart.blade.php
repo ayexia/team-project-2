@@ -36,12 +36,13 @@ use App\Models\Product;
             $user = auth()->user();
             $cart = Cart::where('user_id', optional($user)->id)->first();
             $totalPrice = 0;
+            $cartItems = [];
             if ($cart) {
                 $totalPrice = CartItem::where('cart_id', $cart->id)->sum(DB::raw('price * quantity'));
+                $cartItems = optional($cart)->cartItems()->with('product')->get();
             }
-            $cartItems = optional($cart)->cartItems()->with('product')->get();
             ?>
-            @if ($cartItems->isNotEmpty())
+            @if ($cartItems)
             @foreach($cartItems as $cartItem) 
             <tr><td><div class="col-sm-9">
             <div class="row">
