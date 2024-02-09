@@ -93,6 +93,21 @@
         cursor: pointer;
       }
 
+      .carousel-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    flex-direction: row; /* Change flex-direction to row */
+  }
+
+    .carousel img {
+      width: 100%;
+    }
     </style>
   </head>
   <body>
@@ -122,6 +137,12 @@
         <a href="#">Other</a>
       </nav>
     </div>
+    <div class="carousel-container">
+      <div class="carousel">
+     <img src="C:\Users\nadia\Downloads\slav-romanov-r38u2Uq1AXk-unsplash.jpg" alt="first image">
+    <img src=C:\Users\nadia\Downloads\nijwam-swargiary-h01dNqqvZZU-unsplash.jpg alt="second image">
+  </div>
+</div>
   <button>Subscribe to our mailing list!</button>
   <script>
     function subscribe() {
@@ -133,7 +154,34 @@
   
     let subscribeButton = document.querySelector("button");
     subscribeButton.addEventListener("click", subscribe);
+
+    let currentIndex = 0;
+  const carousel = document.querySelector('.carousel');
+  const totalImages = document.querySelectorAll('.carousel img').length;
+  const imageWidth = document.querySelector('.carousel img').clientWidth;
+
+  function showImage(index) {
+    const transformValue = -index * imageWidth + 'px';
+    carousel.style.transform = `translateX(${transformValue})`;
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % totalImages;
+    showImage(currentIndex);
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+    showImage(currentIndex);
+  }
+
+  setInterval(nextImage, 5000); // Change image every 5 seconds
+
+  document.addEventListener('DOMContentLoaded', () => {
+    showImage(currentIndex);
+  });
   </script>
   </body>
 </html>
+
 
