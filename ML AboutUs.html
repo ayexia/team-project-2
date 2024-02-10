@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - ML Menswear</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333; /* Main text color */
+        }
+        
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            margin-right: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: column; 
+        }
+        
+        .content {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            flex: 2; 
+        }
+        
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        
+        h1, h2 {
+            color: #008080;
+        }
+        
+        .teal {
+            color: #008080;
+        }
+        
+        .values {
+            text-align: left; 
+            margin-left: 20px; 
+            color: #000000; 
+        }
+        
+        .about {
+            display: flex;
+            flex-direction: row; 
+            align-items: center; 
+            margin-top: 20px; 
+        }
+        .about-content {
+            flex: 2;
+            max-width: 600px; 
+        }
+        .about-content h2 {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .about-image {
+            flex: 1;
+            margin-left: 20px; 
+            overflow: hidden;
+        }
+        .about-image img {
+            max-width: 100%;
+            height: 300px;
+            display: block;
+            border-radius: 10px; 
+            transition: 0.5s ease;
+        }
+        .about-image:hover img {
+            transform: scale(1.2);
+        }
+        .values li {
+            margin-bottom: 10px; 
+            list-style-type: none; 
+        }
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+  
+    <header>
+        <div class="logo">
+            <img src="your-logo.png" alt="ML Menswear Logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="user-icons">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-shopping-basket"></i>
+            <i class="fas fa-user"></i>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="#"><i class="fas fa-home"></i>Home</a>
+        <a href="#">Tops</a>
+        <a href="#">Coats & Jackets</a>
+        <a href="#">Trousers</a>
+        <a href="#">Shoes</a>
+        <a href="#">Accessories</a>
+    </nav>
+    
+  
+    <div class="container">
+        <div class="content">
+         
+            <div class="heading">
+                <h1>About Us</h1>
+                <p>Welcome to ML Menswear, your go-to destination for premium men's athleisure wear. At ML Menswear, we are passionate about providing high-quality, stylish athleisure wear that seamlessly combines comfort, functionality, and fashion.</p>
+            </div>
+            <div class="about">
+                <div class="about-content">
+                    <h2>Mission Statement</h2>
+                    <p>Our mission at ML Menswear is to empower men to live active, confident lifestyles by providing them with premium athleisure wear that inspires both performance and style. We are committed to innovation, sustainability, and customer satisfaction as we continue to grow and evolve in the ever-changing world of fashion.</p>
+                </div>
+                <div class="about-image">
+                    <img src="images\Image 3.jpeg" alt="aboutus2">
+                </div>
+            </div>
+            <div class="about">
+                <div class="about-image">
+                    <img src="images\Image 2.jpeg" alt="aboutus1">
+                </div>
+                <div class="about-content">
+                    <h2>Our Values</h2>
+                    <ul class="values">
+                        <li>Quality: We believe in offering only the highest quality athleisure wear crafted from premium materials.</li>
+                        <li>Style: Our designs are carefully curated to ensure you look and feel your best, whether you're hitting the gym or running errands.</li>
+                        <li>Customer Satisfaction: Your satisfaction is our top priority. We strive to exceed your expectations with every purchase.</li>
+                        <li>Inclusivity: We celebrate diversity and aim to offer sizes and styles that cater to all body types and preferences.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   
+    <footer>
+        <p>&copy; 2024 ML Menswear. All rights reserved.</p>
+    </footer>
+</body>
+</html>
