@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js" rel="javascript"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Shopping Cart</title>
+    <style>
+        body{
+            background-color:#f5eee7;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .shopping-cart{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        .product-list {
+            border-right: 1px solid gray
+        }
+        .product-block-wrapper {
+            max-height: 50%;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+        .product-block{
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .product-block img{
+            margin-top: 25px;
+            border: 1px gray;
+            border-radius: 20px;
+            height:100px;
+        }
+        .summary {
+            width: 40%;            
+        }
+        .footer {
+            background-color: gray; /* Footer background color */
+            padding: 20px;
+            text-align: center;
+        }
+        iframe[seamless] {
+            border: none;
+        }
+        .list {
+          position: relative;
+        }
+        .list h2 {
+          color: #000;
+          font-weight: 700;
+          letter-spacing: 1px;
+          margin-bottom: 10px;
+        }
+        .list ul {
+          position: relative;
+        }
+        .list ul li {
+          position: relative;
+          left: 0;
+          color: black;
+          list-style: none;
+          margin: 4px 0;
+          border-left: 2px solid lightseagreen;
+          transition: 0.5s;
+          cursor: pointer;
+          height: 25px;
+          max-width: 70%;
+          
+        }
+        .list ul li:hover {
+          left: 10px;
+        }
+        .list ul li span {
+          position: relative;
+          padding: 2px;
+          padding-left: 12px;
+          display: inline-block;
+          z-index: 1;
+          transition: 0.5s;
+        }
+        .list ul li:hover span {
+          color: white;
+        }
+        .list ul li:before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: lightskyblue;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: 0.5s;
+        }
+        .list ul li:hover:before {
+          transform: scaleX(1);
+        }
+        /*header,footer,nav styles */
+        body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+              background-color: #f0f0f0;
+              color: #333; /* Main text color */
+          }
+          
+          header {
+              background-color: #000;
+              color: #fff;
+              padding: 20px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+          }
+          
+          nav {
+              background-color: #333;
+              color: #fff;
+              padding: 10px;
+              text-align: center;
+              display: flex;
+              justify-content: center; /* Center the nav items */
+              align-items: center;
+              flex: 1;
+          }
+          
+          nav a {
+              color: #fff;
+              text-decoration: none;
+              padding: 10px;
+              margin-right: 20px;
+          }
+          
+          .content {
+              background-color: #fff;
+              padding: 20px;
+              margin-bottom: 20px;
+              width: 100%;
+          }
+          
+          footer {
+              background-color: #000;
+              color: #fff;
+              text-align: center;
+              padding: 20px;
+              position: fixed;
+              bottom: 0;
+              width: 100%;
+          }
+          /* Teal color for headers */
+          h1, h2 {
+              color: #008080;
+          }
+          
+          .teal {
+              color: #008080;
+          }
+          
+          /* Align search bar to the right */
+          .search-bar {
+              text-align: right;
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              flex: 1;
+          }
+          
+          .search-bar input[type="text"] {
+              margin-right: 10px;
+          }
+          
+          .user-icons {
+              display: flex;
+              align-items: center;
+          }
+          
+          .user-icons i {
+              margin-right: 10px;
+              color: #fff;
+              cursor: pointer;
+          }
+          
+          @media (max-width: 768px) {
+              nav {
+                  display: none;
+              }
+          }
+    </style>
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+      <div class="logo">
+        <img src="your-logo.png" width="70px" height="35px" alt="ML Menswear Logo">
+      </div>
+      <div class="search-bar">
+          <input type="text" placeholder="Search">
+          <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="user-icons">
+          <i class="fas fa-heart"></i>
+          <i class="fas fa-shopping-basket"></i>
+          <i class="fas fa-user"></i>
+      </div>
+  </header>
+  
+  <!-- Navigation section -->
+  <nav>
+      <a href="#"><i class="fas fa-home"></i>Home</a>
+      <a href="#">Tops</a>
+      <a href="#">Coats & Jackets</a>
+      <a href="#">Trousers</a>
+      <a href="#">Shoes</a>
+      <a href="#">Accessories</a>
+  </nav>
+  
+<!-- Main content section -->
+    <b><h2>Shopping Cart:</h2></b>
+    <div class="shopping-cart">
+        <div class="product-block-wrapper">
+            <div class="product-list" id="product-list">
+                <!-- Product Blocks -->
+            </div>
+        </div>
+        <div class="summary list">
+            <!-- Product Names and Prices List -->
+            <h2>Product List</h2>
+            <ul id="product-summary">
+            </ul>
+            <!-- Total Price -->
+            <h2><div id="totalPrice"></div></h2>
+            <button type="submit" class="btn btn-primary" id="checkout-Btn" style="margin-top: 5px;" onclick="redirectPayments()">Checkout</button>
+        </div>
+    </div>
+    <footer>
+      <p>&copy; 2024 ML Menswear. All rights reserved.</p>
+    </footer>
+    <script>
+        let x = Math.floor((Math.random() * 7) + 2);
+        var products = [];
+        for(let i=0;i<x;i++){
+            products.push({price:Math.floor((Math.random() * 50) + 50), quantity:1});
+        }
+        setProducts(products);
+        var addBtn = document.getElementById("addQuantity");
+        var removeBtn = document.getElementById("removeQuantity");
+        function addQuantity(i){
+          products[i].quantity +=1;
+          setProducts(products);
+        }
+
+        function removeQuantity(i){
+          if(products[i].quantity == 0)
+            return;
+          products[i].quantity -=1;
+          setProducts(products);
+        }
+
+        function setProducts(products){
+          let allProducts="";
+          let productSummary="";
+          let all=0;
+          for(let i=0;i<x;i++){
+            allProducts +=`<div class="product-block"><img src="placeholder.webp" alt="Product Image"><div class="product-summary"><h3>Product Name</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p>Price: £${products[i].price}</p><div style="display:flex;align-items:center">Quantity: <button onclick="addQuantity(${i})" class="btn btn-primary">+</button><h5>&nbsp;${products[i].quantity}&nbsp;</h5><button onclick="removeQuantity(${i})" class="btn btn-primary">&nbsp;-</button></div></div></div>`;
+            productSummary += `<li><span>Product ${(i+1)} - £${products[i].price * products[i].quantity}</span></li>`;
+            all+=products[i].price * products[i].quantity;
+          }
+          document.getElementById("product-list").innerHTML=allProducts;
+          document.getElementById("product-summary").innerHTML=productSummary;
+          document.getElementById("totalPrice").innerHTML = `Total - £${all}`;
+        }
+
+        function redirectPayments(){
+          window.location.href = window.location.href.substring(0, window.location.href.lastIndexOf('/'))+"/payment.html";
+        }
+    </script>
+</body>
+</html>

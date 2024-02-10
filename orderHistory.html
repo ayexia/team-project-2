@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js" rel="javascript"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Order History</title>
+    <style>
+        body{
+            background-color:#f5eee7;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .product-block-wrapper {
+            max-height: 60%;
+            min-height: 300px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+        .product-row{
+            display: flex;
+        }
+        .product-block{
+            display: flex;
+            justify-content: space-between;
+            padding-left: 25px;
+            width:42% !important;
+        }
+        .product-block img{
+            margin-top: 25px;
+            border: 1px gray;
+            border-radius: 20px;
+            height:100px;
+        }
+        /*header, footer, navbar styles */
+        body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+              background-color: #f0f0f0;
+              color: #333; /* Main text color */
+          }
+          
+          header {
+              background-color: #000;
+              color: #fff;
+              padding: 20px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+          }
+          
+          nav {
+              background-color: #333;
+              color: #fff;
+              padding: 10px;
+              text-align: center;
+              display: flex;
+              justify-content: center; /* Center the nav items */
+              align-items: center;
+              flex: 1;
+          }
+          
+          nav a {
+              color: #fff;
+              text-decoration: none;
+              padding: 10px;
+              margin-right: 20px;
+          }
+          
+          .content {
+              background-color: #fff;
+              padding: 20px;
+              margin-bottom: 20px;
+              width: 100%;
+          }
+          
+          footer {
+              background-color: #000;
+              color: #fff;
+              text-align: center;
+              padding: 20px;
+              position: fixed;
+              bottom: 0;
+              width: 100%;
+          }
+          /* Teal color for headers */
+          h1, h2 {
+              color: #008080;
+          }
+          
+          .teal {
+              color: #008080;
+          }
+          
+          /* Align search bar to the right */
+          .search-bar {
+              text-align: right;
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              flex: 1;
+          }
+          
+          .search-bar input[type="text"] {
+              margin-right: 10px;
+          }
+          
+          .user-icons {
+              display: flex;
+              align-items: center;
+          }
+          
+          .user-icons i {
+              margin-right: 10px;
+              color: #fff;
+              cursor: pointer;
+          }
+
+          .table-icons i {
+              margin-right: 10px;
+              color: lightblue;
+              height: 20px;
+          }
+          
+          @media (max-width: 768px) {
+              nav {
+                  display: none;
+              }
+          }
+    </style>
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+        <div class="logo">
+            <img src="your-logo.png" width="70px" height="35px" alt="ML Menswear Logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="user-icons">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-shopping-basket"></i>
+            <i class="fas fa-user"></i>
+        </div>
+    </header>
+    
+    <!-- Navigation section -->
+    <nav>
+        <a href="#"><i class="fas fa-home"></i>Home</a>
+        <a href="#">Tops</a>
+        <a href="#">Coats & Jackets</a>
+        <a href="#">Trousers</a>
+        <a href="#">Shoes</a>
+        <a href="#">Accessories</a>
+    </nav>
+
+    <div style="display: flex;justify-content: start;align-items: center;padding: 10px;">
+        <b><h2>Order History&nbsp;&nbsp;</h2></b>
+        <input class="search-bar" type="text" placeholder="&#xF002; Search Order History" style="font-family:Arial, FontAwesome" />
+    </div>
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Order no</th>
+            <th scope="col">Your Reference</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Shipping Status</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="product-list">
+
+        </tbody>
+      </table>
+
+    <footer>
+        <p>&copy; 2024 ML Menswear. All rights reserved.</p>
+    </footer>
+    <script>
+        let numProducts = Math.floor((Math.random() * 7) + 5);
+        let randomOrderNo = Math.floor((Math.random() * 1768539)+1);
+        let randomReferenceNo = Math.floor((Math.random() * 524581)+1);
+        let randomDate = "07-02-2024";
+        console.log(numProducts)
+        let allProducts='';
+        let icons = '<div class="table-icons"><i class="fas fa-shopping-basket"></i><i class="fas fa-download"></i></div>';
+        for(let i=0;i<numProducts;i++){
+            allProducts += `<tr><th scope="row"><a href="#">${randomOrderNo+i}</th><td>${randomReferenceNo+i}</td><td>${randomDate}</td><td>${Math.random()<0.5 ? "Open" : "Shipped"}</td><td>${icons}</td></tr>`
+        }
+        allProducts+="</div>"
+        document.getElementById("product-list").innerHTML=allProducts;
+    </script>
+</body>
