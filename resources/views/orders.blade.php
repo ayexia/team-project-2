@@ -60,7 +60,10 @@ use App\Models\Product;
                     <td colspan="5"><h4>Status:</h4> {{ $order->status }}</td>
                 </tr>
                 <tr>
-                    <td colspan="5"><h4>Total Price:</h4> £{{ $order->total_price }}</td>
+                    <td colspan="5"><h4>Total Price:</h4> {{ $order->total_price }}</td>
+                </tr>
+                <tr>
+                    <td colspan="5"><h4>Order Date:</h4> {{ $order->order_date }}</td>
                 </tr>
             </table>
         @endforeach

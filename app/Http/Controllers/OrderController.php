@@ -59,7 +59,7 @@ class OrderController extends Controller
         $order->total_price += ($product->price*$cartItem->quantity);
         $product->quantity -= $cartItem->quantity;
         $product->save();
-        if ($product->quantity == 0) {
+        if ($product->quantity <= 0) {
             $product->available = 'no';
             $product->save();
         }

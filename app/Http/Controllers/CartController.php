@@ -26,7 +26,9 @@ class CartController extends Controller
     $user = auth()->user();
     $product=Product::find($item);
     $cart = Cart::where('user_id', auth()->user()->id)->first();
-    $cartItem = CartItem::where('product_id', $product->id)->first();
+    $cartItem = CartItem::where('cart_id', optional($cart)->id)
+    ->where('product_id', $product->id)
+    ->first();
     
     if (!$cart) {
         $cart = new Cart();
