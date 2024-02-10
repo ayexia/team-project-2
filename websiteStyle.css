@@ -1,3 +1,4 @@
+/*page, header, nav bar, promo banner, footer styles*/
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -8,6 +9,7 @@ body {
 header {
     background-color: #000;
     color: #fff;
+    height: 40px;
     padding: 20px;
     display: flex;
     justify-content: space-between;
@@ -67,7 +69,8 @@ footer {
     color: #008080;
 }
 
-/* Homepage styles */
+/*homepage styles*/
+
 .homepage-image {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -123,12 +126,15 @@ footer {
     transition: background-color 0.3s ease;
 }
 .logo img{
-  width: 60px;
+  width: 120px;
+  height: 70px;
 }
 .shop-now-btn:hover {
     background-color: #006666;
 }
 
+
+/*category product display page styles*/
 .product{
     width: 250px; /* Adjust the width according to your preference */
     padding: 10px;
@@ -140,6 +146,76 @@ footer {
 .product img{
     width:200px
 }
+
+
+/*individual product display page styles*/
+.product-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .product-image {
+    flex-basis: 50%;
+    margin-right: 20px;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .product-description {
+    flex-basis: 50%;
+  }
+
+  .product-title {
+    margin: 0 0 10px;
+  }
+
+  .product-price {
+    margin: 0;
+  }
+
+  .product-details {
+    margin: 10px 0 0 0;
+  }
+
+  .product-details p {
+    margin: 0;
+  }
+
+.add-to-basket{
+    width: 120px;
+    height: 40px;
+    margin-block-start: 30px;
+    color: teal;
+}
+
+/*filter styles*/
+.filter-select {
+    margin-left: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  
+  .filter-select::-ms-expand {
+    display: none;
+  }
+  
+  .filter-select option {
+    padding: 0.5rem;
+  }
+/*hamburger menu styles*/
 @media (max-width: 768px) {
     nav {
         display: none;
