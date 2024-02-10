@@ -171,7 +171,7 @@
             <th scope="col">Order no</th>
             <th scope="col">Your Reference</th>
             <th scope="col">Order Date</th>
-            <th scope="col">Shipping Status</th>
+            <th scope="col">Status</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -192,7 +192,7 @@
         let allProducts='';
         let icons = '<div class="table-icons"><i class="fas fa-shopping-basket"></i><i class="fas fa-download"></i></div>';
         for(let i=0;i<numProducts;i++){
-            allProducts += `<tr><th scope="row"><a href="#">${randomOrderNo+i}</th><td>${randomReferenceNo+i}</td><td>${randomDate}</td><td>${Math.random()<0.5 ? "Open" : "Shipped"}</td><td>${icons}</td></tr>`
+            allProducts += `<tr><th scope="row"><a href="#">${randomOrderNo+i}</th><td>${randomReferenceNo+i}</td><td>${randomDate}</td><td>${Math.random()<0.5 ? "Processing" : "Shipped"}</td><td>${icons}</td></tr>`
         }
         allProducts+="</div>"
         document.getElementById("product-list").innerHTML=allProducts;
