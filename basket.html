@@ -101,6 +101,22 @@
         .list ul li:hover:before {
           transform: scaleX(1);
         }
+        .btn-primary{
+          background-color: lightseagreen !important;
+          border-color: lightseagreen !important;
+        }
+        .input{
+            position: relative;
+        }
+        .input i{
+           position: absolute;
+            top: 10px;
+            left: 11px;
+            color: #989898;
+        }
+        .input input{
+        text-indent: 25px;
+        }
         /*header,footer,nav styles */
         body {
               font-family: Arial, sans-serif;
@@ -235,6 +251,59 @@
             </ul>
             <!-- Total Price -->
             <h2><div id="totalPrice"></div></h2>
+            <div class="col-md-10">  
+              <div class="card">
+                <div class="accordion" id="accordionExample">
+                  <div class="card">
+                    <div class="card-header p-0">
+                      <h2 class="mb-0">
+                        <button class="btn btn-light btn-block text-left p-3 rounded-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          <div class="d-flex align-items-center justify-content-between">
+                            <span>Delivery Address</span> 
+                          </div>
+                        </button>
+                      </h2>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                      <div class="card-body payment-card-body">
+                        <div class="row mt-3 mb-3">
+                          <div class="col-md-6">
+                            <span class="font-weight-normal card-text">Name</span>
+                            <div class="input">
+                              <i class="fas fa-user-circle"></i>
+                              <input type="text" class="form-control" placeholder="Receiver Name">
+                            </div> 
+                          </div>
+                          <div class="col-md-6">
+                            <span class="font-weight-normal card-text">First line of Address</span>
+                            <div class="input">
+                              <i class="fas fa-home"></i>
+                              <input type="text" class="form-control" placeholder="House-no, flat-no, street">
+                            </div> 
+                          </div>
+                        </div>
+                        <div class="row mt-3 mb-3">
+                          <div class="col-md-6">
+                            <span class="font-weight-normal card-text">City</span>
+                            <div class="input">
+                              <i class="fas fa-building"></i>
+                              <input type="text" class="form-control" placeholder="Birmingham">
+                            </div> 
+                          </div>
+                          <div class="col-md-6">
+                            <span class="font-weight-normal card-text">Postal Code</span>
+                            <div class="input">
+                              <i class="fas fa-address-card"></i>
+                              <input type="text" class="form-control" placeholder="B4 7ET">
+                            </div> 
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <button type="submit" class="btn btn-primary" id="checkout-Btn" style="margin-top: 5px;" onclick="redirectPayments()">Checkout</button>
         </div>
     </div>
@@ -267,7 +336,7 @@
           let productSummary="";
           let all=0;
           for(let i=0;i<x;i++){
-            allProducts +=`<div class="product-block"><img src="placeholder.webp" alt="Product Image"><div class="product-summary"><h3>Product Name</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p>Price: £${products[i].price}</p><div style="display:flex;align-items:center">Quantity: <button onclick="addQuantity(${i})" class="btn btn-primary">+</button><h5>&nbsp;${products[i].quantity}&nbsp;</h5><button onclick="removeQuantity(${i})" class="btn btn-primary">&nbsp;-</button></div></div></div>`;
+            allProducts +=`<div class="product-block"><img src="placeholder.webp" alt="Product Image"><div class="product-summary"><h3>Product Name</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p>Price: £${products[i].price}</p><div style="display:flex;align-items:center;">Quantity: <div style="display:flex;align-items:center;background-color:white;border:1px solid gray;border-radius:5px;"><button onclick="removeQuantity(${i})" class="btn btn-primary btn-xs"><i class='fas fa-minus' style='color:white'></i></button><h5 style="margin-top:5px">&nbsp;&nbsp;&nbsp;${products[i].quantity}&nbsp;&nbsp;&nbsp;</h5><button onclick="addQuantity(${i})" class="btn btn-primary btn-xs"><i class='fas fa-plus' style='color:white'></i></button></div></div></div></div>`;
             productSummary += `<li><span>Product ${(i+1)} - £${products[i].price * products[i].quantity}</span></li>`;
             all+=products[i].price * products[i].quantity;
           }
