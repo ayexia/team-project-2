@@ -128,11 +128,17 @@ footer {
     display: inline-block;
     bottom: 50px;
 }
+
 .homepage-image {
+margin-top: 50px;
+margin-bottom: 50px;
+max-width: 100%;
+height: auto;
 position: relative;
 top: 0;
 left: 0;
 object-fit: cover;
+transition: opacity 0.5s ease-in-out;
 }
 
 .shop-now-btn {
@@ -151,6 +157,25 @@ object-fit: cover;
 
 .shop-now-btn:hover {
     background-color: #006666;
+}
+
+.subscribe-button {
+    color: #008080;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto;
+    padding: 15px 20px;
+    background: white;
+    border: 1px solid #008080;
+    border-radius: 30px;
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.2);
+    transition: all 200ms ease-in-out;
+}
+
+.subscribe-button:hover {
+    background-color: #008080;
+    color: white;
+    cursor: pointer;
 }
 
 .logo img{
@@ -186,7 +211,9 @@ object-fit: cover;
   }
   
 .product img{
-    width:200px
+    width:270px;
+    height: 300px;
+    object-fit: cover;
 }
 
 
