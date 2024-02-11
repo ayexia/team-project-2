@@ -5,190 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ML Menswear - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-        
-        header {
-            background-color: #000;
-            color: #fff;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav {
-            background-color: #333;
-            padding: 10px;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex: 1;
-        }
-        
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px;
-            margin-right: 20px;
-        }
-        
-        .container {
-            max-width: 100%;
-            padding: 20px;
-            text-align: center;
-            margin: 0 auto;
-        }
-        
-        .content {
-            background-color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .promo-banner {
-            background-color: #008080;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            position: relative;
-            bottom: 20px;
-            overflow: hidden;
-        }
-
-        .text-container {
-            color: #fff;
-            animation: slideText 12s linear infinite;
-            white-space: nowrap;
-            display: inline-block;
-        }
-
-        @keyframes slideText {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-
-        footer {
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            bottom: 0;
-            width: 100%;
-        }
-        
-        .teal {
-            color: #008080;
-        }
-
-        .subscribe-button {
-            color: #008080;
-            font-size: 16px;
-            display: block;
-            margin: 20px auto;
-            padding: 15px 20px;
-            background: white;
-            border: 1px solid #008080;
-            border-radius: 30px;
-            box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.2);
-            transition: all 200ms ease-in-out;
-        }
-
-        .subscribe-button:hover {
-            background-color: #008080;
-            color: white;
-            cursor: pointer;
-        }
-
-        .homepage-image {
-            margin-top: 50px;
-            margin-bottom: 50px;
-            max-width: 100%;
-            height: auto;
-            position: relative;
-            top: 0;
-            left: 0;
-            object-fit: cover;
-            transition: opacity 0.5s ease-in-out;
-        }
-        
-        .slogan {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 20px;
-            position: relative;
-            bottom: 80px;
-        }
-        
-        .search-bar {
-            text-align: center;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            flex: 1;
-        }
-        
-        .search-bar input[type="text"] {
-            margin-right: 10px;
-        }
-        
-        .user-icons {
-            display: flex;
-            align-items: center;
-        }
-        
-        .user-icons i {
-            margin: 10px;
-            color: #fff;
-            cursor: pointer;
-        }
-        
-        .image-container {
-            position: relative;
-            display: inline-block;
-            bottom: 50px;
-        }
-        
-        .shop-now-btn {
-            position: absolute;
-            top: 160px; 
-            left: 30px; 
-            background-color: #008080;
-            color: #fff;
-            padding: 20px 50px; 
-            border: none;
-            border-radius: 10px; 
-            text-decoration: none;
-            font-size: 20px; 
-            transition: background-color 0.3s ease;
-        }
-        
-        .shop-now-btn:hover {
-            background-color: #006666;
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="websiteStyle.css">
+    
 </head>
+
 <body>
     <header>
         <div class="logo">
-            <img src="your-logo.png" alt="ML Menswear Logo">
+            <a href="ML Homepage.html">
+                <img src="images/ML Menswear Logo.JPG" alt="ML Menswear Logo">
+            </a>
         </div>
         <div class="search-bar">
             <input type="text" placeholder="Search">
@@ -196,12 +22,12 @@
         </div>
         <div class="user-icons">
             <i class="fas fa-heart"></i>
-            <i class="fas fa-shopping-basket"></i>
-            <i class="fas fa-user"></i>
+            <a href="basket.html"><i class="fas fa-shopping-basket"></i></a>            
+            <a href="loginPage.html"><i class="fas fa-user"></i></a>
         </div>
     </header>
     <nav>
-        <a href="#">Tops</a>
+        <a href="topsDisplayPage.html">Tops</a>
         <a href="#">Coats & Jackets</a>
         <a href="#">Trousers</a>
         <a href="#">Shoes</a>
@@ -210,21 +36,25 @@
     <div class="container">
         <div class="promo-banner">
             <div class="text-container">
-                Free Express Shipping on First Orders | Free Same Day Click and Collect | Free Standard Delivery
-            </div>
+            Free Express Shipping on First Orders | Free Same Day Click and Collect | Free Standard Delivery
+        </div>
         </div>
         <div class="content">
             <h1>Welcome to ML Menswear</h1>
             <div class="image-container">
                 <img id="homepageImage" src="images\Image 1.jpeg" alt="Homepage Image" class="homepage-image">
             </div>
-            <a href="#" class="shop-now-btn">Shop Now</a>
-            <p class="slogan">Elevate Your Style with Our Premium Collection</p>
-
-            <button class="subscribe-button" onclick="subscribe()">Subscribe Now</button>
+             <a href="#" class="shop-now-btn">Shop Now</a>
+             <p class="slogan">Elevate Your Style with Our Premium Collection</p>
+             <button class="subscribe-button" onclick="subscribe()">Subscribe Now</button>
         </div>
-    </div>
+    <!-- Footer section -->
     <footer>
+        <div class="business-details">
+            <p>Email: info@mlmenswear.com</p>
+            <p>Contact Number: +44 1234 567890</p>
+            <p>Address: 123 Fashion Street, London, UK</p>
+        </div>
         <p>&copy; 2024 ML Menswear. All rights reserved.</p>
     </footer>
     <script>
