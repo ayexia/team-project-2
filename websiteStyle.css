@@ -163,6 +163,15 @@ object-fit: cover;
     nav {
         display: none;
     }
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+    .login-form {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
 }
 
 
@@ -182,6 +191,7 @@ object-fit: cover;
 
 
 /*individual product display page styles*/
+
 .product-container {
     display: flex;
     flex-wrap: nowrap;
@@ -248,6 +258,206 @@ object-fit: cover;
   .filter-select option {
     padding: 0.5rem;
   }
+
+
+/*login page styles*/
+
+  .login-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-content {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Login form styles */
+.login-form {
+    width: calc(50% - 20px);
+    margin-right: 20px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-form input[type="submit"] {
+    background-color: #008080;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #006666;
+}
+
+/*Signup page*/
+
+.signup-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.signup-content {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Sign up form styles */
+.signup-form {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.signup-form input[type="text"],
+.signup-form input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.signup-form input[type="submit"] {
+    background-color: #008080;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.signup-form input[type="submit"]:hover {
+    background-color: #006666;
+}
+
+/* Admin page styles */
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.dashboard-content {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.dashboard {
+    width: 100%;
+    text-align: left;
+}
+
+.dashboard h1 {
+    color: #008080;
+    margin-bottom: 20px;
+}
+
+.dashboard .sales-details,
+.dashboard .order-status,
+.dashboard .users-management {
+    width: calc(50% - 20px);
+    margin-bottom: 20px;
+}
+
+.dashboard .sales-details p,
+.dashboard .order-status p,
+.dashboard .users-management p {
+    margin-bottom: 10px;
+}
+
+.dashboard .sales-details label,
+.dashboard .order-status label,
+.dashboard .users-management label {
+    font-weight: bold;
+}
+
+.dashboard .sales-details select,
+.dashboard .order-status select,
+.dashboard .users-management select {
+    padding: 5px;
+    width: calc(100% - 10px);
+}
+
+.dashboard .btn {
+    background-color: #008080;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard .btn:hover {
+    background-color: #006666;
+}
+
+.dashboard .users-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.dashboard .users-table th,
+.dashboard .users-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.dashboard .users-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    text-align: left;
+}
+
+.dashboard .users-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
 
 
 /*basket page styles*/
@@ -360,7 +570,19 @@ text-indent: 25px;
       color: #008080;
   }  
   
-  /*order history page styles*/
+/*order history page styles*/
+
+.orderHistory-footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: fit-content;
+}          
+   
   .product-block-wrapper {
     max-height: 60%;
     min-height: 300px;
