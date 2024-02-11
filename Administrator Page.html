@@ -5,177 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrator Dashboard - ML Menswear</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            color: #333; /* Main text color */
-        }
-        
-        header {
-            background-color: #000;
-            color: #fff;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        nav {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            display: flex;
-            justify-content: center; /* Center the nav items */
-            align-items: center;
-            flex: 1;
-        }
-        
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px;
-            margin-right: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        
-        .content {
-            background-color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        
-        footer {
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            width: 100%;
-        }
-        
-        /* Dashboard styles */
-        .dashboard {
-            width: 100%;
-            text-align: left;
-        }
-        
-        .dashboard h1 {
-            color: #008080;
-            margin-bottom: 20px;
-        }
-        
-        .dashboard .sales-details,
-        .dashboard .order-status,
-        .dashboard .users-management {
-            width: calc(50% - 20px);
-            margin-bottom: 20px;
-        }
-        
-        .dashboard .sales-details p,
-        .dashboard .order-status p,
-        .dashboard .users-management p {
-            margin-bottom: 10px;
-        }
-        
-        .dashboard .sales-details label,
-        .dashboard .order-status label,
-        .dashboard .users-management label {
-            font-weight: bold;
-        }
-        
-        .dashboard .sales-details select,
-        .dashboard .order-status select,
-        .dashboard .users-management select {
-            padding: 5px;
-            width: calc(100% - 10px);
-        }
-        
-        .dashboard .btn {
-            background-color: #008080;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        
-        .dashboard .btn:hover {
-            background-color: #006666;
-        }
-        
-        .dashboard .users-table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-        
-        .dashboard .users-table th,
-        .dashboard .users-table td {
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-        
-        .dashboard .users-table th {
-            background-color: #f0f0f0;
-            font-weight: bold;
-            text-align: left;
-        }
-        
-        .dashboard .users-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-    </style>
+    <link rel="stylesheet" href="websiteStyle.css">
+    
 </head>
 <body>
     <!-- Header section -->
     <header>
-        <div class="logo">
-            <img src="your-logo.png" alt="ML Menswear Logo">
+      <div class="logo">
+        <a href="ML Homepage.html">
+            <img src="images/ML Menswear Logo.JPG" alt="ML Menswear Logo">
+        </a>
+      </div>
+      <div class="search-bar">
+          <input type="text" placeholder="Search">
+          <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="user-icons">
+          <i class="fas fa-heart"></i>
+          <a href="basket.html"><i class="fas fa-shopping-basket"></i></a>          
+          <a href="loginPage.html"><i class="fas fa-user"></i></a>
         </div>
-        <div class="search-bar">
-            <input type="text" placeholder="Search">
-            <button><i class="fas fa-search"></i></button>
-        </div>
-        <div class="user-icons">
-            <i class="fas fa-heart"></i>
-            <i class="fas fa-shopping-basket"></i>
-            <i class="fas fa-user"></i>
-            <span id="userName" style="display: none;"></span>
-        </div>
-    </header>
-    
-    <!-- Navigation section -->
-    <nav>
-        <a href="#"><i class="fas fa-home"></i>Home</a>
-        <a href="#">Tops</a>
-        <a href="#">Coats & Jackets</a>
-        <a href="#">Trousers</a>
-        <a href="#">Shoes</a>
-        <a href="#">Accessories</a>
-    </nav>
+  </header>
+  
+  <!-- Navigation section -->
+  <nav>
+    <a href="prodDispTemp.html">Tops</a>
+    <a href="#">Coats & Jackets</a>
+    <a href="#">Trousers</a>
+    <a href="#">Shoes</a>
+    <a href="#">Accessories</a>
+  </nav>
     
     <!-- Main content section -->
-    <div class="container">
-        <div class="content">
+    <div class="dashboard-container">
+        <div class="dashboard-content">
             <!-- Administrator Dashboard -->
             <div class="dashboard">
                 <h1>Administrator Dashboard</h1>
