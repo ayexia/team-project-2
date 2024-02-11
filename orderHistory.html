@@ -9,24 +9,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="websiteStyle.css">
     <title>Order History</title>
-    <style>
-         footer {
-      background-color: #000;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-  }          
-         
-    </style>
+    
 </head>
 <body>
     <!-- Header section -->
     <header>
         <div class="logo">
-            <img src="images/ML Menswear Logo.JPG" width="70px" height="35px" alt="ML Menswear Logo">
+            <a href="ML Homepage.html">
+                <img src="images/ML Menswear Logo.JPG" alt="ML Menswear Logo">
+            </a> 
         </div>
         <div class="search-bar">
             <input type="text" placeholder="Search">
@@ -34,15 +25,14 @@
         </div>
         <div class="user-icons">
             <i class="fas fa-heart"></i>
-            <i class="fas fa-shopping-basket"></i>
-            <i class="fas fa-user"></i>
+            <a href="basket.html"><i class="fas fa-shopping-basket"></i></a>            
+            <a href="loginPage.html"><i class="fas fa-user"></i></a>
         </div>
     </header>
     
     <!-- Navigation section -->
     <nav>
-        <a href="#"><i class="fas fa-home"></i>Home</a>
-        <a href="#">Tops</a>
+        <a href="topsDisplayPage.html">Tops</a>
         <a href="#">Coats & Jackets</a>
         <a href="#">Trousers</a>
         <a href="#">Shoes</a>
@@ -68,7 +58,13 @@
         </tbody>
       </table>
 
-    <footer>
+    <!-- Footer section -->
+    <footer class="orderHistory-footer">
+        <div class="business-details">
+            <p>Email: info@mlmenswear.com</p>
+            <p>Contact Number: +44 1234 567890</p>
+            <p>Address: 123 Fashion Street, London, UK</p>
+        </div>
         <p>&copy; 2024 ML Menswear. All rights reserved.</p>
     </footer>
     <script>
