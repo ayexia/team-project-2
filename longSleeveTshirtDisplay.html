@@ -9,7 +9,9 @@
   <body>
     <header>
         <div class="logo">
+          <a href="ML Homepage.html">
             <img src="images/ML Menswear Logo.JPG" alt="ML Menswear Logo">
+          </a>
         </div>
         <div class="search-bar">
             <input type="text" placeholder="Search">
@@ -17,63 +19,23 @@
         </div>
         <div class="user-icons">
             <i class="fas fa-heart"></i>
-            <i class="fas fa-shopping-basket"></i>
-            <i class="fas fa-user"></i>
+            <a href="basket.html"><i class="fas fa-shopping-basket"></i></a>
+            <a href="loginPage.html"><i class="fas fa-user"></i></a>
         </div>
     </header>
     <nav>
-        <a href="WebsiteTemplate.html"><i class="fas fa-home"></i>Home</a>
-        <a href="#">Tops</a>
-        <a href="#">Coats & Jackets</a>
-        <a href="#">Trousers</a>
-        <a href="#">Shoes</a>
-        <a href="#">Accessories</a>
+      <a href="topsDisplayPage.html">Tops</a>
+      <a href="#">Coats & Jackets</a>
+      <a href="#">Trousers</a>
+      <a href="#">Shoes</a>
+      <a href="#">Accessories</a>
     </nav>
     <div class="container">
         <div class="promo-banner">
             Free Express Shipping on First Orders | Free Same Day Click and Collect | Free Standard Delivery
     </div>
     <style>
-      .product-container {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        box-sizing: border-box;
-      }
-
-      .product-image {
-        flex-basis: 50%;
-        margin-right: 20px;
-      }
-
-      .product-image img {
-        width: 100%;
-        height: auto;
-      }
-
-      .product-description {
-        flex-basis: 50%;
-      }
-
-      .product-title {
-        margin: 0 0 10px;
-      }
-
-      .product-price {
-        margin: 0;
-      }
-
-      .product-details {
-        margin: 10px 0 0 0;
-      }
-
-      .product-details p {
-        margin: 0;
-      }
+      
     </style>
   </head>
   <body>
@@ -85,20 +47,27 @@
         <h2 class="product-title">Long Sleeve T-Shirt</h2>
         <p class="product-price">£20</p>
         <div class="product-details">
-          <p>This standard-fit t-shirt, in the black colorway, is made from comfortable soft cotton fabric and offers a crew neckline with ribbed detailing.</p>
-          <p>Color name: Black</p>
-          <p>Fabric: Soft cotton</p>
-          <p>Neckline: Crew neckline with ribbed detailing</p>
-          <p>Sleeves: Short sleeves for a classic look</p>
+            <p>This muscle-fit t-shirt, in the white colorway, is made from comfortable stretchy fabric and offers a crew neckline with ribbed detailing.</p>
+            <p>Color name: White<br>
+            Fabric: 88% polyester 12% elastacene<br>
+            Neckline: Crew neckline with ribbed detailing<br>
+            Sleeves: Long cuffed sleeves for a comfortable feel</p>
         </div>
-        <button class="add-to-basket">
+        <a href="basket.html"><button class="add-to-basket">
             <i class="fas fa-shopping-basket basket-icon"></i>
             Add to Basket
         </button>
+      </a>
       </div>
     </div>
+    <!-- Footer section -->
     <footer>
-        <p>&copy; 2024 ML Menswear. All rights reserved.</p>
-    </footer>
+      <div class="business-details">
+          <p>Email: info@mlmenswear.com</p>
+          <p>Contact Number: +44 1234 567890</p>
+          <p>Address: 123 Fashion Street, London, UK</p>
+      </div>
+      <p>&copy; 2024 ML Menswear. All rights reserved.</p>
+  </footer>
   </body>
 </html>
