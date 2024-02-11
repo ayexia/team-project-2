@@ -5,154 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Your Details - ML Menswear</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            color: #333; /* Main text color */
-        }
-        
-        header {
-            background-color: #000;
-            color: #fff;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        nav {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            display: flex;
-            justify-content: center; /* Center the nav items */
-            align-items: center;
-            flex: 1;
-        }
-        
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px;
-            margin-right: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        
-        .content {
-            background-color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 600px;
-        }
-        
-        footer {
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            width: 100%;
-        }
-        
-        /* Sign up form styles */
-        .signup-form {
-            width: 100%;
-            margin-top: 20px;
-        }
-        
-        .signup-form input[type="text"],
-        .signup-form input[type="password"] {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        
-        .signup-form input[type="submit"] {
-            background-color: #008080;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        
-        .signup-form input[type="submit"]:hover {
-            background-color: #006666;
-        }
-        
-        /* Teal color for headers */
-        h1, h2 {
-            color: #008080;
-        }
-        
-        .teal {
-            color: #008080;
-        }
-        
-        /* Align search bar to the right */
-        .search-bar {
-            text-align: right;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            flex: 1;
-        }
-        
-        .search-bar input[type="text"] {
-            margin-right: 10px;
-        }
-        
-        .user-icons {
-            display: flex;
-            align-items: center;
-        }
-        
-        .user-icons i {
-            margin-right: 10px;
-            color: #fff;
-            cursor: pointer;
-        }
-        
-        .business-details {
-            margin-top: 20px;
-            text-align: left;
-        }
-        
-        /* Password rule styles */
-        .password-rules {
-            text-align: left;
-            margin-top: 10px;
-        }
-        
-        @media (max-width: 768px) {
-            nav {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="websiteStyle.css">
+    
 </head>
 <body>
     <!-- Header section -->
     <header>
         <div class="logo">
-            <img src="your-logo.png" alt="ML Menswear Logo">
+          <a href="ML Homepage.html">
+              <img src="images/ML Menswear Logo.JPG" alt="ML Menswear Logo">
+          </a>
         </div>
         <div class="search-bar">
             <input type="text" placeholder="Search">
@@ -160,16 +22,14 @@
         </div>
         <div class="user-icons">
             <i class="fas fa-heart"></i>
-            <i class="fas fa-shopping-basket"></i>
-            <i class="fas fa-user"></i>
-            <span id="userName" style="display: none;"></span>
-        </div>
+            <a href="basket.html"><i class="fas fa-shopping-basket"></i></a>          
+            <a href="loginPage.html"><i class="fas fa-user"></i></a>
+          </div>
     </header>
     
     <!-- Navigation section -->
     <nav>
-        <a href="#"><i class="fas fa-home"></i>Home</a>
-        <a href="#">Tops</a>
+        <a href="topsDisplayPage.html">Tops</a>
         <a href="#">Coats & Jackets</a>
         <a href="#">Trousers</a>
         <a href="#">Shoes</a>
@@ -177,8 +37,8 @@
     </nav>
     
     <!-- Main content section -->
-    <div class="container">
-        <div class="content">
+    <div class="signup-container">
+        <div class="signup-content">
             <!-- Register Your Details form -->
             <h1>Register Your Details</h1>
             <p>Please choose your account type:</p>
