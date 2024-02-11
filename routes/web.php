@@ -46,7 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/product', [ProductController::class, 'index'])->name('product.index')->middleware('auth');
+Route::get('/product', [ProductController::class, 'index'])->name('product.index')->middleware(['auth', 'admin']);
+Route::get('/products', [ProductController::class, 'indexForUser'])->name('products');
 Route::get('/product/create', [ProductController::class, 'create'])->name('product.create')->middleware(['auth', 'admin']);
 Route::post('/product', [ProductController::class, 'store'])->name('product.store')->middleware(['auth', 'admin']);
 Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit')->middleware(['auth', 'admin']);
@@ -54,7 +55,13 @@ Route::put('/product/{product}/update', [ProductController::class, 'update'])->n
 Route::delete('/product/{product}/destroy', [ProductController::class, 'destroy'])->name('product.destroy')->middleware(['auth', 'admin']);
 Route::get('/product/{product}/show', [ProductController::class, 'show'])->name('product.show')->middleware('auth');
 
-Route::get('/cart', [CartController::class, 'cart'])->name('cart')->middleware('auth');
+Route::get('/tops', [ProductController::class, 'viewTops'])->name('tops');
+Route::get('/trousers', [ProductController::class, 'viewTrousers'])->name('trousers');
+Route::get('/shoes', [ProductController::class, 'viewShoes'])->name('shoes');
+Route::get('/coats-and-jackets', [ProductController::class, 'viewCoatsAndJackets'])->name('coats-and-jackets');
+Route::get('/accessories', [ProductController::class, 'viewAccessories'])->name('accessories');
+
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::get('/product/{item}', [CartController::class, 'addToCart'])->name('add.to.cart')->middleware('auth');
 //Route::patch('/update-cart', [ProductController::class, 'updateCart'])->name('update.cart')->middleware('auth');
 Route::get('/delete/{item}', [CartController::class, 'removeFromCart'])->name('remove.from.cart')->middleware('auth');

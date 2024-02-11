@@ -17,7 +17,7 @@
     </div>
     <div>
         <div>
-            <a href="{{route('product.index')}}">Back</a>
+            <a href="{{route('products')}}">Back</a>
         </div>
         <br>
         <table border="1">

@@ -27,18 +27,24 @@ class ProductController extends Controller
     
         $products = $products->get();
 
-        $usertype=Auth()->user()->usertype;
-
-            if($usertype=='user')
-            {
-                return view('products.search', compact('products'));
-            }
-            else if($usertype=='admin')
-            {
-                return view('products.index', compact('products'));
-            }
+        return view('products.index', compact('products'));
+    
     }
 
+    public function indexForUser(Request $request)
+    {
+        $products = Product::orderBy('created_at', 'DESC');
+    
+        if ($request->has('keyword')) {
+            $keyword = $request->input('keyword');
+            $products->where('name', 'like', '%' . $keyword . '%');
+        }
+    
+        $products = $products->get();
+
+        return view('products.search', compact('products'));
+    }
+    
     public function create(){
         $data = [];
         $category = Category::orderBy('name', 'ASC')->get();
@@ -108,5 +114,25 @@ class ProductController extends Controller
     public function destroy(Product $product){
         $product->delete();
         return redirect(route('product.index'))->with('success', 'Product deleted successfully');
+    }
+
+    public function viewTops(){
+        return view('products.tops');
+    }
+
+    public function viewTrousers(){
+        return view('products.trousers');
+    }
+
+    public function viewShoes(){
+        return view('products.shoes');
+    }
+
+    public function viewCoatsAndJackets(){
+        return view('products.coats-and-jackets');
+    }
+
+    public function viewAccessories(){
+        return view('products.accessories');
     }
 }

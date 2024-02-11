@@ -56,10 +56,11 @@ use App\Models\Product;
                     <a class="btn btn-outline-danger" href="{{route('remove.from.cart', $cartItem->id)}}">Delete</a>
                 </td>
             </tr>
-            @endforeach
             <td><td><td><td data-th="Total" class="text-center"><h4>Total Price:</h4> £{{$totalPrice}}</td>
         </table>
         <br><a href="{{url('/checkout')}}"><button class="btn btn-success" style="margin-left:25%">Checkout</button></a>
+            @endforeach
+            
         @else    
         Cart is empty!
         @endif
