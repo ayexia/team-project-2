@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('address');
             $table->dateTime('order_date');
             $table->decimal('total_price', 8, 2);
-            $table->enum('status', ['pending','dispatched','delivered','cancelled'])->default('pending');
+            $table->enum('status', ['Pending','Processing','Shipped','Delivered','Cancelled'])->default('Pending');
             $table->timestamps();
         });
     }
