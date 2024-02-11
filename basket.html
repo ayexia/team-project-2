@@ -9,126 +9,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="websiteStyle.css">
     <title>Shopping Cart</title>
-    <style>
-       
-        .shopping-cart{
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-        }
-        .product-list {
-            border-right: 1px solid gray
-        }
-        .product-block-wrapper {
-            max-height: 50%;
-            width: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-        }
-        .product-block{
-            display: flex;
-            justify-content: space-evenly;
-        }
-        .product-block img{
-            margin-top: 25px;
-            border: 1px gray;
-            border-radius: 20px;
-            height:100px;
-        }
-        .summary {
-            width: 40%;            
-        }
-        
-        iframe[seamless] {
-            border: none;
-        }
-        .list {
-          position: relative;
-        }
-        .list h2 {
-          color: #000;
-          font-weight: 700;
-          letter-spacing: 1px;
-          margin-bottom: 10px;
-        }
-        .list ul {
-          position: relative;
-        }
-        .list ul li {
-          position: relative;
-          left: 0;
-          color: black;
-          list-style: none;
-          margin: 4px 0;
-          border-left: 2px solid lightseagreen;
-          transition: 0.5s;
-          cursor: pointer;
-          height: 25px;
-          max-width: 70%;
-          
-        }
-        .list ul li:hover {
-          left: 10px;
-        }
-        .list ul li span {
-          position: relative;
-          padding: 2px;
-          padding-left: 12px;
-          display: inline-block;
-          z-index: 1;
-          transition: 0.5s;
-        }
-        .list ul li:hover span {
-          color: white;
-        }
-        .list ul li:before {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background: lightskyblue;
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: 0.5s;
-        }
-        .list ul li:hover:before {
-          transform: scaleX(1);
-        }
-        .btn-primary{
-          background-color: lightseagreen !important;
-          border-color: lightseagreen !important;
-        }
-        .input{
-            position: relative;
-        }
-        .input i{
-           position: absolute;
-            top: 10px;
-            left: 11px;
-            color: #989898;
-        }
-        .input input{
-        text-indent: 25px;
-        }
-        
-          /* Teal color for headers */
-          h1, h2 {
-              color: #008080;
-          }
-          
-          .teal {
-              color: #008080;
-          }  
-          
-          
-    </style>
+    
 </head>
 <body>
     <!-- Header section -->
     <header>
       <div class="logo">
-        <img src="images/ML Menswear Logo.JPG" height="30px" width="70px" alt="ML Menswear Logo">
+        <a href="ML Homepage.html">
+            <img src="images/ML Menswear Logo.JPG" alt="ML Menswear Logo">
+        </a>
       </div>
       <div class="search-bar">
           <input type="text" placeholder="Search">
@@ -136,19 +25,18 @@
       </div>
       <div class="user-icons">
           <i class="fas fa-heart"></i>
-          <i class="fas fa-shopping-basket"></i>
-          <i class="fas fa-user"></i>
-      </div>
+          <a href="basket.html"><i class="fas fa-shopping-basket"></i></a>          
+          <a href="loginPage.html"><i class="fas fa-user"></i></a>
+        </div>
   </header>
   
   <!-- Navigation section -->
   <nav>
-      <a href="WebsiteTemplate.html"><i class="fas fa-home"></i>Home</a>
-      <a href="prodDispTemp.html">Tops</a>
-      <a href="#">Coats & Jackets</a>
-      <a href="#">Trousers</a>
-      <a href="#">Shoes</a>
-      <a href="#">Accessories</a>
+    <a href="topsDisplayPage.html">Tops</a>
+    <a href="#">Coats & Jackets</a>
+    <a href="#">Trousers</a>
+    <a href="#">Shoes</a>
+    <a href="#">Accessories</a>
   </nav>
   
 <!-- Main content section -->
@@ -222,9 +110,15 @@
             <button type="submit" class="btn btn-primary" id="checkout-Btn" style="margin-top: 5px;" onclick="redirectPayments()">Checkout</button>
         </div>
     </div>
+    <!-- Footer section -->
     <footer>
+      <div class="business-details">
+          <p>Email: info@mlmenswear.com</p>
+          <p>Contact Number: +44 1234 567890</p>
+          <p>Address: 123 Fashion Street, London, UK</p>
+      </div>
       <p>&copy; 2024 ML Menswear. All rights reserved.</p>
-    </footer>
+  </footer>
     <script>
         let x = Math.floor((Math.random() * 7) + 2);
         var products = [];
