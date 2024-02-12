@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Product Display Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      header {
+        background-color: #dad6d6;
+        color: #FFFFFF;
+        padding: 50px;
+        text-align: center;
+      }
+      .logo {
+        float: left;
+      }
+      nav {
+        background-color: #270fff;
+        padding: 10px;
+        text-align: center;
+        word-spacing: 100px;
+      }
+      nav a {
+        color: #FFFFFF;
+        text-decoration: none;
+        margin: 0 5px;
+      }
+      nav a:hover {
+        background-color: #333;
+        color: white;
+      }
+      search {
+        float: right;
+      }
+      main {
+        clear: both;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 20px;
+      }
+      .product {
+        background-color: #f2f2f2;
+        padding: 20px;
+        flex-basis: 25%;
+        margin-bottom: 20px;
+      }
+      .product img {
+        width: 100%;
+      }
+      footer {
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+      search {
+        float: right;
+      }
+      .user-login-basket {
+        float: right;
+      }
+      .logo{
+        width: 75px;
+        float: left;
+        margin-top: 0%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img class="logo" src="images/ML Menswear Logo.JPG"  />
+      <div class="sort-Search">
+        <select>
+          <option>Sort by</option>
+          <option>Price (low to high)</option>
+          <option>Price (high to low)</option>
+          <option>Popularity</option>
+        </select>
+        <input type="text" placeholder="Search" />
+      </div>
+    </header>
+    <nav>
+      <a href="#">Tops</a>
+      <a href="#">Hoodies</a>
+      <a href="#">Trousers</a>
+      <a href="#">Trainers</a>
+      <a href="#">Accessories</a>
+    </nav>
+    <main>
+      <style>
+        img{
+          width: 100px;
+         object-fit: cover;
+          float: center;
+        }
+        .product{
+          width: 100px;
+          padding: 10%;
+        }
+      </style>
+      <div class="product">
+        <img src="images/T-Shirt.jpeg" alt="t-shirt" />
+        <h3>Short Sleeve T-Shirt</h3>
+        <p>£20</p>
+        <p>This standard-fit t-shirt, in the black colorway, is made from comfortable soft cotton fabric and offers a crew neckline with ribbed detailing.</p>
+        <p>Color name: Black<br>
+        Fabric: Soft cotton<br>
+        Neckline: Crew neckline with ribbed detailing<br>
+        Sleeves: Short sleeves for a classic look</p>
+      </div>
+      <div class="product">
+        <img src="images/Long sleeve shirt.jpeg" alt="long sleeve t-shirt" />
+        <h3>Long Sleeve T-Shirt</h3>
+        <p>£25</p>
+        <p>This muscle-fit t-shirt, in the white colorway, is made from comfortable stretchy fabric and offers a crew neckline with ribbed detailing.</p>
+        <p>Color name: White<br>
+        Fabric: 88% polyester 12% elastacene<br>
+        Neckline: Crew neckline with ribbed detailing<br>
+        Sleeves: Long cuffed sleeves for a comfortable feel</p>
+      </div>
+    </main>
+  </body>
+</html>

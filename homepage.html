@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage</title>
+    <style>
+      body {
+        background-color: white;
+        margin: 0;
+      }
+
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 50px;
+        padding: 0 20px;
+      }
+
+      .search-bar {
+        border-radius: 20px;
+        padding: 10px;
+        margin-left: 10px;
+      }
+
+      .user-login,
+      .basket {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+      }
+
+      .user-login img,
+      .basket img {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+      }
+
+      .user-login span,
+      .basket span {
+        font-size: 12px;
+      }
+
+      nav {
+        background-color: #342d6c;
+        padding: 20px;
+        text-align: center;
+        word-spacing: 100px;
+      }
+
+      nav a {
+        color: #ffffff;
+        text-decoration: none;
+        margin: 0 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        font: Arial;
+      }
+
+      nav a:hover {
+        background-color: #333;
+        color: white;
+      }
+
+      .logo img {
+        width: 100px; 
+        height: 100px; 
+        margin-bottom: 20px;
+  
+      }
+      img {  
+        margin: 0 auto;
+        width: 300px;
+        height: 300px;
+        }
+        button {
+        color: #333;
+        font-size: 16px;
+        display: block;
+        margin: 20px auto;
+        padding: 15px 20px;
+        background: white;
+        border: 1px solid black;
+        border-radius: 30px;
+        box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.2);
+        transition: all 200ms ease-in-out;
+      }
+        button:hover {
+        background-color: darkblue;
+        color: white;
+        cursor: pointer;
+      }
+
+      .carousel-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    flex-direction: row; /* Change flex-direction to row */
+  }
+
+    .carousel img {
+      width: 100%;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="logo">
+      <img src="C:\Users\nadia\Downloads\IMG_0284.JPG" alt="Logo">
+    </div>
+    <div class="container">
+      <div class="user-login">
+        <img src="C:\Users\nadia\OneDrive\Documents\user-login-icon.png" alt="User Login Icon">
+        <span>User Login</span>
+      </div>
+      <div class="basket">
+        <img src="C:\Users\nadia\OneDrive\Pictures\basket icon.png" alt="Basket Icon">
+        <span>Basket</span>
+      </div>
+      <input type="text" class="search-bar" placeholder="Search" />
+    </div>
+    <div>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Tops</a>
+        <a href="#">Trousers</a>
+        <a href="#">Hoodies</a>
+        <a href="#">Accesories</a>
+        <a href="#">Jackets</a>
+        <a href="#">Shoes</a>
+        <a href="#">Other</a>
+      </nav>
+    </div>
+    <div class="carousel-container">
+      <div class="carousel">
+     <img src="C:\Users\nadia\Downloads\slav-romanov-r38u2Uq1AXk-unsplash.jpg" alt="first image">
+    <img src=C:\Users\nadia\Downloads\nijwam-swargiary-h01dNqqvZZU-unsplash.jpg alt="second image">
+  </div>
+</div>
+  <button>Subscribe to our mailing list!</button>
+  <script>
+    function subscribe() {
+      let name = prompt("Enter your email to subscribe to our mailing list and receive exclusive offers and discounts!");
+      {
+      alert ("Thank you! You have been subscribed!");
+      }
+    }
+  
+    let subscribeButton = document.querySelector("button");
+    subscribeButton.addEventListener("click", subscribe);
+
+    let currentIndex = 0;
+  const carousel = document.querySelector('.carousel');
+  const totalImages = document.querySelectorAll('.carousel img').length;
+  const imageWidth = document.querySelector('.carousel img').clientWidth;
+
+  function showImage(index) {
+    const transformValue = -index * imageWidth + 'px';
+    carousel.style.transform = `translateX(${transformValue})`;
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % totalImages;
+    showImage(currentIndex);
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+    showImage(currentIndex);
+  }
+
+  setInterval(nextImage, 5000); // Change image every 5 seconds
+
+  document.addEventListener('DOMContentLoaded', () => {
+    showImage(currentIndex);
+  });
+  </script>
+  </body>
+</html>
+
+

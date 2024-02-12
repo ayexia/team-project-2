@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ML Menswear</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="websiteStyle.css">
+    
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+        <div class="logo">
+            <a href="ML Homepage.html">
+                <img src="images/ML Menswear Logo.JPG" alt="ML Menswear Logo">
+            </a>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="user-icons">
+            <i class="fas fa-heart"></i>
+            <a href="basket.html"><i class="fas fa-shopping-basket"></i></a>            
+            <a href="loginPage.html"><i class="fas fa-user"></i></a>
+            <span id="userName" style="display: none;"></span>
+        </div>
+    </header>
+    
+    <!-- Navigation section -->
+    <nav>
+        <a href="topsDisplayPage.html">Tops</a>
+        <a href="#">Coats & Jackets</a>
+        <a href="#">Trousers</a>
+        <a href="#">Shoes</a>
+        <a href="#">Accessories</a>
+    </nav>
+    
+    <!-- Main content section -->
+    <div class="login-container">
+        <div class="login-content">
+            <!-- Login form -->
+            <form class="login-form" action="#" method="POST" onsubmit="loginUser(event)">
+                <h1>Login</h1>
+                <p>Existing customers, login below:</p>
+                <input type="text" name="email" placeholder="Email Address">
+                <input type="password" name="password" placeholder="Password">
+                <input type="submit" value="Login">
+                <p>Forgotten your password? <a href="#">Reset it here</a></p>
+            </form>
+            <!-- New users text -->
+            <div class="new-users">
+                <h2>Or create an account to enjoy these benefits:</h2>
+                <ul>
+                    <li>Get our latest product recommendations for you</li>
+                    <li>Personalize your ML Menswear experience on mobile, tablet, and desktop</li>
+                    <li>Manage your orders and preferences</li>
+                    <li>Access your saved items</li>
+                    <li>Create and share gift lists</li>
+                    <li>Earn rewards for your purchases with our loyalty program</li>
+                </ul>
+                <a href="Sign Up page.html">Create an account</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer section -->
+    <footer>
+        <div class="business-details">
+            <p>Email: info@mlmenswear.com</p>
+            <p>Contact Number: +44 1234 567890</p>
+            <p>Address: 123 Fashion Street, London, UK</p>
+        </div>
+        <p>&copy; 2024 ML Menswear. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function loginUser(event) {
+            event.preventDefault();
+            var email = document.querySelector('input[name="email"]').value;
+            var password = document.querySelector('input[name="password"]').value;
+            // Your login authentication logic here
+            alert("Welcome back, " + email + "!");
+        }
+    </script>
+</body>
+</html>

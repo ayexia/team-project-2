@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator Dashboard - ML Menswear</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="websiteStyle.css">
+    
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+      <div class="logo">
+        <a href="ML Homepage.html">
+            <img src="images/ML Menswear Logo.JPG" alt="ML Menswear Logo">
+        </a>
+      </div>
+      <div class="search-bar">
+          <input type="text" placeholder="Search">
+          <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="user-icons">
+          <i class="fas fa-heart"></i>
+          <a href="basket.html"><i class="fas fa-shopping-basket"></i></a>          
+          <a href="loginPage.html"><i class="fas fa-user"></i></a>
+        </div>
+  </header>
+  
+  <!-- Navigation section -->
+  <nav>
+    <a href="topsDisplayPage.html">Tops</a>
+    <a href="#">Coats & Jackets</a>
+    <a href="#">Trousers</a>
+    <a href="#">Shoes</a>
+    <a href="#">Accessories</a>
+  </nav>
+    
+    <!-- Main content section -->
+    <div class="dashboard-container">
+        <div class="dashboard-content">
+            <!-- Administrator Dashboard -->
+            <div class="dashboard">
+                <h1>Administrator Dashboard</h1>
+                <!-- Sales details -->
+                <div class="sales-details">
+                    <h2>Sales Details</h2>
+                    <p>
+                        <label for="salesPeriod">Select Sales Period:</label>
+                        <select name="salesPeriod" id="salesPeriod">
+                            <option value="monthly">Monthly</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="daily">Daily</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </p>
+                    <p>Total Sales: £xxxx</p>
+                    <p>Total Number of Sales: xxx</p>
+                    <!-- Additional sales details can be added here -->
+                </div>
+                <!-- Order status -->
+                <div class="order-status">
+                    <h2>Change Order Status</h2>
+                    <p>
+                        <label for="orderStatus">Select Order Status:</label>
+                        <select name="orderStatus" id="orderStatus">
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="delivered">Delivered</option>
+                        </select>
+                    </p>
+                    <input type="text" id="orderNumber" placeholder="Enter Order Number">
+                    <button class="btn" onclick="updateOrderStatus()">Update Status</button>
+                </div>
+                <!-- Users management -->
+                <div class="users-management">
+                    <h2>Users Management</h2>
+                    <p>
+                        <label for="userEmail">Search User by Email:</label>
+                        <input type="email" id="userEmail" placeholder="Enter User Email">
+                    </p>
+                    <button class="btn" onclick="searchUser()">Search</button>
+                    <p>User Type:</p>
+                    <select name="userType" id="userType">
+                        <option value="customer">Customer</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <button class="btn" onclick="changeUserType()">Change User Type</button>
+                </div>
+                <!-- Users table -->
+                <div class="users-table">
+                    <h2>Users List</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Type</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userList">
+                            <!-- Example User -->
+                            <tr>
+                                <td>John Doe</td>
+                                <td>john@example.com</td>
+                                <td>Customer</td>
+                                <td>
+                                    <button class="btn">Edit</button>
+                                    <button class="btn">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer section -->
+    <footer>
+        <div class="business-details">
+            <p>Email: info@mlmenswear.com</p>
+            <p>Contact Number: +44 1234 567890</p>
+            <p>Address: 123 Fashion Street, London, UK</p>
+        </div>
+        <p>&copy; 2024 ML Menswear. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript functionality
+        function updateOrderStatus() {
+            var orderNumber = document.getElementById("orderNumber").value;
+            var orderStatus = document.getElementById("orderStatus").value;
+            // Perform action to update order status
+            console.log("Order Number:", orderNumber);
+            console.log("New Order Status:", orderStatus);
+        }
+
+        function searchUser() {
+            var userEmail = document.getElementById("userEmail").value;
+            // Perform action to search for user
+            console.log("Searching for user with email:", userEmail);
+        }
+
+        function changeUserType() {
+            var userEmail = document.getElementById("userEmail").value;
+            var userType = document.getElementById("userType").value;
+            // Perform action to change user type
+            console.log("Changing user type for user with email:", userEmail);
+            console.log("New User Type:", userType);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Your Details - ML Menswear</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="websiteStyle.css">
+    
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+        <div class="logo">
+          <a href="ML Homepage.html">
+              <img src="images/ML Menswear Logo.JPG" alt="ML Menswear Logo">
+          </a>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="user-icons">
+            <i class="fas fa-heart"></i>
+            <a href="basket.html"><i class="fas fa-shopping-basket"></i></a>          
+            <a href="loginPage.html"><i class="fas fa-user"></i></a>
+          </div>
+    </header>
+    
+    <!-- Navigation section -->
+    <nav>
+        <a href="topsDisplayPage.html">Tops</a>
+        <a href="#">Coats & Jackets</a>
+        <a href="#">Trousers</a>
+        <a href="#">Shoes</a>
+        <a href="#">Accessories</a>
+    </nav>
+    
+    <!-- Main content section -->
+    <div class="signup-container">
+        <div class="signup-content">
+            <!-- Register Your Details form -->
+            <h1>Register Your Details</h1>
+            <p>Please choose your account type:</p>
+            <select name="userType">
+                <option value="customer">Customer</option>
+                <option value="admin">Admin</option>
+            </select>
+            <form class="signup-form" action="#" method="POST" onsubmit="registerUser(event)">
+                <input type="text" name="firstName" placeholder="First Name">
+                <input type="text" name="surname" placeholder="Surname">
+                <input type="text" name="email" placeholder="Email Address">
+                <input type="text" name="telephone" placeholder="Telephone">
+                <input type="password" name="password" placeholder="Password" pattern=".{8,}" title="Please enter 8 or more characters">
+                <input type="password" name="confirmPassword" placeholder="Confirm Password">
+                <div class="password-rules">
+                    <p>Password must contain 8 or more characters.</p>
+                </div>
+                <input type="submit" value="Register">
+            </form>
+        </div>
+    </div>
+    
+    <!-- Footer section -->
+    <footer>
+        <div class="business-details">
+            <p>Email: info@mlmenswear.com</p>
+            <p>Contact Number: +44 1234 567890</p>
+            <p>Address: 123 Fashion Street, London, UK</p>
+        </div>
+        <p>&copy; 2024 ML Menswear. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function registerUser(event) {
+            event.preventDefault();
+            var firstName = document.querySelector('input[name="firstName"]').value;
+            var surname = document.querySelector('input[name="surname"]').value;
+            document.getElementById("userName").innerText = "Hi " + firstName + " " + surname + "!";
+            document.getElementById("userName").style.display = "inline";
+            alert("Registration Successful!");
+        }
+    </script>
+</body>
+</html>
+
+
