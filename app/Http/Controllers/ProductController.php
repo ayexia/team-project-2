@@ -14,6 +14,10 @@ use App\Models\OrderItem;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+/**
+ * Authors: Ayesha and Nagina
+ */
+
 class ProductController extends Controller
 {
     public function index(Request $request)

@@ -8,6 +8,10 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Authors: Ayesha and Nagina
+ */
+
 class CategoryController extends Controller
 {
     public function index(Request $request)
