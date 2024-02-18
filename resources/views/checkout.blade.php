@@ -62,6 +62,7 @@ $count = CartItem::where('cart_id', $cart->id)->sum('quantity');
         <a href="{{ route('trousers') }}">Trousers</a>
         <a href="{{ route('shoes') }}">Shoes</a>
         <a href="{{ route('accessories') }}">Accessories</a>
+        <a href="{{route('orders')}}">Orders</a>
         <a href="#">About Us</a>
         <a href="#">Contact Us</a>
         
