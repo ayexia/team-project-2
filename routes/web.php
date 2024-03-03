@@ -63,7 +63,7 @@ Route::get('/accessories', [ProductController::class, 'viewAccessories'])->name(
 
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::get('/product/{item}', [CartController::class, 'addToCart'])->name('add.to.cart')->middleware('auth');
-//Route::patch('/update-cart', [ProductController::class, 'updateCart'])->name('update.cart')->middleware('auth');
+Route::post('/update-cart', [CartController::class, 'updateCart'])->name('update.cart')->middleware('auth');
 Route::get('/delete/{item}', [CartController::class, 'removeFromCart'])->name('remove.from.cart')->middleware('auth');
 
 Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout')->middleware('auth');

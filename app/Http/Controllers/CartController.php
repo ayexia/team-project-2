@@ -67,4 +67,28 @@ class CartController extends Controller
     
         return redirect()->back()->with('success', 'Product deleted from cart!');
     }
+
+    public function updateCart(Request $request)
+{
+    $cartItem = CartItem::find($request->input('cart_item_id'));
+
+    if ($cartItem) {
+        $quantity = $request->input('quantity');
+
+        if ($quantity > 0) {
+            $cartItem->quantity = $quantity;
+            $cartItem->save();
+        } else {
+            $cartItem->delete();
+            $cart = Cart::find($cartItem->cart_id);
+            if ($cart->cartItems->isEmpty()) {
+                $cart->delete();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Cart updated successfully!');
+    }
+
+    return redirect()->back()->with('error', 'Failed to update cart.');
+    }
 }

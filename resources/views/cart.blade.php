@@ -99,7 +99,12 @@ $count = CartItem::where('cart_id', $cart->id)->sum('quantity');
       <img src="{{ $cartItem->product->image_url }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
       <h3>{{$cartItem->product->name}}</h3>
         <p>£{{$cartItem->price}}</p>
-        <p>Quantity: {{$cartItem->quantity}}</p>
+        <form action="{{ route('update.cart') }}" method="POST">
+            @csrf
+            <input type="hidden" name="cart_item_id" value="{{ $cartItem->id }}">
+            <p>Quantity: <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="0" max="{{$cartItem->product->quantity}}">
+                <button type="submit">Update</button></p>
+        </form>
             <p><a class="btn btn-outline-danger" href="{{route('remove.from.cart', $cartItem->id)}}">Delete</a></p>
               
             @endforeach
