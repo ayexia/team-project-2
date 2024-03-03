@@ -36,14 +36,14 @@ class CartController extends Controller
         $cart->save();
     }
     if ($cartItem) {
-        $cartItem->quantity += 1;
+        $cartItem->quantity += request('quantity');
         $cartItem->save();
 
     } else {
         $cartItem = new CartItem([
             'cart_id' => $cart->id,
             'product_id' => $product->id,
-            'quantity' => 1,
+            'quantity' => request('quantity'),
             'price' => $product->price,
         ]);
         $cartItem->save();
@@ -56,7 +56,15 @@ class CartController extends Controller
 
         $product=CartItem::find($item);
         $product->delete();
+        $cart = Cart::find($product->cart_id);
 
+        if ($cart) {
+            $cartItems = CartItem::where('cart_id', $cart->id)->get();
+                if ($cartItems->isEmpty()) {
+                $cart->delete();
+            }
+        }
+    
         return redirect()->back()->with('success', 'Product deleted from cart!');
     }
 }

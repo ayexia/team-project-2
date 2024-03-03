@@ -96,10 +96,15 @@ $count = CartItem::where('cart_id', $cart->id)->sum('quantity');
         </div>
         <form action="{{ route('add.to.cart', $product->id) }}" class="btn btn-outline-danger"> 
         @csrf
-        <button class="btn btn-primary" type="submit" value="Add to Cart">
-            <i class="fas fa-shopping-basket basket-icon"></i>
-            Add to Basket
-        </button>
+        <div class="input-group">
+        <input type="number" name="quantity" min="1" max="{{$product->quantity}}" value="1" class="form-control" style="width: 30px; height: 25px;" required>
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-shopping-basket basket-icon"></i>
+                Add to Basket
+            </button>
+        </div>
+    </div>
 </form>
       </div>
 </div>
