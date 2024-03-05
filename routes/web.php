@@ -53,7 +53,7 @@ Route::post('/product', [ProductController::class, 'store'])->name('product.stor
 Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit')->middleware(['auth', 'admin']);
 Route::put('/product/{product}/update', [ProductController::class, 'update'])->name('product.update')->middleware(['auth', 'admin']);
 Route::delete('/product/{product}/destroy', [ProductController::class, 'destroy'])->name('product.destroy')->middleware(['auth', 'admin']);
-Route::get('/product/{product}/show', [ProductController::class, 'show'])->name('product.show')->middleware('auth');
+Route::get('/product/{product}/show', [ProductController::class, 'show'])->name('product.show');
 
 Route::get('/tops', [ProductController::class, 'viewTops'])->name('tops');
 Route::get('/trousers', [ProductController::class, 'viewTrousers'])->name('trousers');
@@ -62,13 +62,13 @@ Route::get('/coats-and-jackets', [ProductController::class, 'viewCoatsAndJackets
 Route::get('/accessories', [ProductController::class, 'viewAccessories'])->name('accessories');
 
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
-Route::get('/product/{item}', [CartController::class, 'addToCart'])->name('add.to.cart')->middleware('auth');
-Route::post('/update-cart', [CartController::class, 'updateCart'])->name('update.cart')->middleware('auth');
-Route::get('/delete/{item}', [CartController::class, 'removeFromCart'])->name('remove.from.cart')->middleware('auth');
+Route::get('/product/{item}', [CartController::class, 'addToCart'])->name('add.to.cart');
+Route::post('/update-cart', [CartController::class, 'updateCart'])->name('update.cart');
+Route::get('/delete/{item}', [CartController::class, 'removeFromCart'])->name('remove.from.cart');
 
-Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout')->middleware('auth');
-Route::post('/checkout', [OrderController::class, 'confirmOrder'])->name('order')->middleware('auth');
-Route::get('/orders', [OrderController::class, 'order'])->name('orders')->middleware('auth');
+Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+Route::post('/checkout', [OrderController::class, 'confirmOrder'])->name('order');
+Route::get('/orders', [OrderController::class, 'order'])->name('orders');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index')->middleware('auth');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create')->middleware(['auth', 'admin']);

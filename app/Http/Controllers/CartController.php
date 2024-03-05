@@ -23,6 +23,7 @@ class CartController extends Controller
 
     public function addToCart($item)
     {
+    if (auth()->check()) {
     $user = auth()->user();
     $product=Product::find($item);
     $cart = Cart::where('user_id', auth()->user()->id)->first();
@@ -50,6 +51,23 @@ class CartController extends Controller
     }
 
     return redirect()->back()->with('success', 'Product added to cart!');
+        } else {
+            $cartSession = session('cart', []);
+        
+            if (isset($cartSession[$item])) {
+                $cartSession[$item]['quantity'] += request('quantity');
+            } else {
+                $cartSession[$item] = [
+                    'product_id' => $item,
+                    'quantity' => request('quantity'),
+                ];
+            }
+            
+            session(['cart' => $cartSession]);
+            session()->save();
+            
+            return redirect()->back()->with('success', 'Product added to cart!');
+        }
     }
 
     public function removeFromCart($item){

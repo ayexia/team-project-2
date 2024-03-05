@@ -5,10 +5,19 @@ use App\Models\Cart;
 use App\Models\Order;
 
 $user = auth()->user();
+if ($user) {
 $cart = Cart::where('user_id', optional($user)->id)->first();
 $count = 0;
 if($cart){
 $count = CartItem::where('cart_id', $cart->id)->sum('quantity');
+    }
+} else {
+    $cartSession = session('cart', []);
+    $count = 0;
+
+    foreach ($cartSession as $item) {
+        $count += $item['quantity'];
+    }
 }
 ?>
 <!DOCTYPE html>

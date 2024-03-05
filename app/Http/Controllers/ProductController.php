@@ -84,16 +84,9 @@ class ProductController extends Controller
     }
 
     public function show(Product $product){
-        $usertype=Auth()->user()->usertype;
-
-            if($usertype=='user')
-            {
-                return view('products.view', ['product' => $product]);
-            }
-            else if($usertype=='admin')
-            {
-                return view('products.show', ['product' => $product]);
-            }
+       
+        return view('products.view', ['product' => $product]);
+        
     }
 
     public function update(Product $product, Request $request){
