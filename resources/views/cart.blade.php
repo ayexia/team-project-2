@@ -4,6 +4,8 @@ use App\Models\User;
 use App\Models\CartItem;
 use App\Models\Cart;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 $user = auth()->user();
 if ($user) {
     $cart = Cart::where('user_id', optional($user)->id)->first();
@@ -14,6 +16,7 @@ if ($user) {
     } else {
         $cartSession = session('cart', []);
         $count = 0;
+        $totalPrice = 0;
     
         foreach ($cartSession as $item) {
             $count += $item['quantity'];
@@ -121,8 +124,34 @@ if ($user) {
             <td><td><td><td data-th="Total" class="text-center"><h4>Total Price:</h4> £{{$totalPrice}}</td>
         
         <br><br><a href="{{url('/checkout')}}"><button class="btn btn-success">Checkout</button></a>
-        @else    
+        @else
+        <?php  
+        $cartSession = session('cart', []);
+        ?>
+        @dump(session('cart'))
+        @if ($cartSession)
+            @foreach($cartSession as $item)
+                <div class="product">
+                    <img src="{{ $item['image_url'] }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
+                    <h3>{{ $item['name'] }}</h3>
+                    <p>£{{ $item['price'] }}</p>
+                    <form action="{{ route('update.cart') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="cart_item_id" value="{{ $item['id'] }}">
+                    <p>Quantity: <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="0" max="{{ $item['max_quantity'] }}">
+                    <button type="submit">Update</button></p>
+                    </form>
+                    <?php
+                    $subtotal = $item['price'] * $item['quantity'];
+                    $totalPrice += $subtotal;
+                    ?>
+                    <p><a class="btn btn-outline-danger" href="{{route('remove.from.cart', ['item' => $item['id']])}}">Delete</a></p>
+                    @endforeach
+                    <td><td><td><td data-th="Total" class="text-center"><h4>Total Price:</h4> £{{$totalPrice}}</td>
+                    <br><br><a href="{{url('/checkout')}}"><button class="btn btn-success">Checkout</button></a>
+        @else
         Cart is empty!
+        @endif
         @endif
     </div>
 

@@ -53,13 +53,17 @@ class CartController extends Controller
     return redirect()->back()->with('success', 'Product added to cart!');
         } else {
             $cartSession = session('cart', []);
-        
+            $product = Product::find($item);
             if (isset($cartSession[$item])) {
                 $cartSession[$item]['quantity'] += request('quantity');
             } else {
                 $cartSession[$item] = [
-                    'product_id' => $item,
+                    'id' => $product->id,
+                    'image_url' => $product->image_url,
+                    'name' => $product->name,
                     'quantity' => request('quantity'),
+                    'price' => $product->price,
+                    'max_quantity' => $product->quantity,
                 ];
             }
             
@@ -70,21 +74,31 @@ class CartController extends Controller
         }
     }
 
-    public function removeFromCart($item){
-
-        $product=CartItem::find($item);
-        $product->delete();
-        $cart = Cart::find($product->cart_id);
-
-        if ($cart) {
-            $cartItems = CartItem::where('cart_id', $cart->id)->get();
-                if ($cartItems->isEmpty()) {
-                $cart->delete();
+    public function removeFromCart($item)
+    {
+        if (auth()->check()) {
+            $product = CartItem::find($item);
+            if ($product) {
+                $product->delete();
+                $cart = Cart::find($product->cart_id);
+                if ($cart) {
+                    $cartItems = CartItem::where('cart_id', $cart->id)->get();
+                    if ($cartItems->isEmpty()) {
+                        $cart->delete();
+                    }
+                }
+                return redirect()->back()->with('success', 'Product deleted from cart!');
             }
+        } else {
+            $cartSession = session('cart', []);
+            if (isset($cartSession[$item])) {
+                unset($cartSession[$item]);
+                session(['cart' => $cartSession]);
+                session()->save();
+                return redirect()->back()->with('success', 'Product deleted from cart!');
         }
-    
-        return redirect()->back()->with('success', 'Product deleted from cart!');
     }
+}
 
     public function updateCart(Request $request)
 {
@@ -105,8 +119,25 @@ class CartController extends Controller
         }
 
         return redirect()->back()->with('success', 'Cart updated successfully!');
-    }
+    } else {
+        $cartSession = session('cart', []);
+        $item = $request->input('cart_item_id');
 
-    return redirect()->back()->with('error', 'Failed to update cart.');
+        if (isset($cartSession[$item])) {
+            $quantity = $request->input('quantity');
+
+            if ($quantity > 0) {
+                $cartSession[$item]['quantity'] = $quantity;
+                session(['cart' => $cartSession]);
+                session()->save();
+                return redirect()->back()->with('success', 'Cart updated successfully!');
+            } else {
+                unset($cartSession[$item]);
+                session(['cart' => $cartSession]);
+                session()->save();
+                return redirect()->back()->with('success', 'Product removed from cart!');
+                }
+            }
+        }
     }
 }
