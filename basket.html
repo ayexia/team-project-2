@@ -7,17 +7,335 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js" rel="javascript"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="websiteStyle.css">
     <title>Shopping Cart</title>
-    
+    <style>
+        body{
+            background-color:#f5eee7;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .shopping-cart{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        .product-list {
+            border-right: 1px solid gray
+        }
+        .product-block-wrapper {
+            max-height: 50%;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+        .product-block{
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .product-block img{
+            margin-top: 25px;
+            border: 1px gray;
+            border-radius: 20px;
+            height:100px;
+        }
+        .summary {
+            width: 40%;            
+        }
+        .footer {
+            background-color: gray; /* Footer background color */
+            padding: 20px;
+            text-align: center;
+        }
+        iframe[seamless] {
+            border: none;
+        }
+        .list {
+          position: relative;
+        }
+        .list h2 {
+          color: #000;
+          font-weight: 700;
+          letter-spacing: 1px;
+          margin-bottom: 10px;
+        }
+        .list ul {
+          position: relative;
+        }
+        .list ul li {
+          position: relative;
+          left: 0;
+          color: black;
+          list-style: none;
+          margin: 4px 0;
+          border-left: 2px solid lightseagreen;
+          transition: 0.5s;
+          cursor: pointer;
+          height: 25px;
+          max-width: 70%;
+          
+        }
+        .list ul li:hover {
+          left: 10px;
+        }
+        .list ul li span {
+          position: relative;
+          padding: 2px;
+          padding-left: 12px;
+          display: inline-block;
+          z-index: 1;
+          transition: 0.5s;
+        }
+        .list ul li:hover span {
+          color: white;
+        }
+        .list ul li:before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: lightskyblue;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: 0.5s;
+        }
+        .list ul li:hover:before {
+          transform: scaleX(1);
+        }
+        .btn-primary{
+          background-color: lightseagreen !important;
+          border-color: lightseagreen !important;
+        }
+        .input{
+            position: relative;
+        }
+        .input i{
+           position: absolute;
+            top: 10px;
+            left: 11px;
+            color: #989898;
+        }
+        .input input{
+        text-indent: 25px;
+        }
+        /*header,footer,nav styles */
+        body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+              background-color: #f0f0f0;
+              color: #333; /* Main text color */
+          }
+          
+          header {
+              background-color: #000;
+              color: #fff;
+              padding: 20px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+          }
+          
+          nav {
+              background-color: #333;
+              color: #fff;
+              padding: 10px;
+              text-align: center;
+              display: flex;
+              justify-content: center; /* Center the nav items */
+              align-items: center;
+              flex: 1;
+          }
+          
+          nav a {
+              color: #fff;
+              text-decoration: none;
+              padding: 10px;
+              margin-right: 20px;
+          }
+          
+          .content {
+              background-color: #fff;
+              padding: 20px;
+              margin-bottom: 20px;
+              width: 100%;
+          }
+          
+          footer {
+              background-color: #000;
+              color: #fff;
+              text-align: center;
+              padding: 20px;
+              position: fixed;
+              bottom: 0;
+              width: 100%;
+          }
+          /* Teal color for headers */
+          h1, h2 {
+              color: #008080;
+          }
+          
+          .teal {
+              color: #008080;
+          }
+          
+          /* Align search bar to the right */
+          .search-bar {
+              text-align: right;
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              flex: 1;
+          }
+          
+          .search-bar input[type="text"] {
+              margin-right: 10px;
+          }
+          
+          .user-icons {
+              display: flex;
+              align-items: center;
+          }
+          
+          .user-icons i {
+              margin-right: 10px;
+              color: #fff;
+              cursor: pointer;
+          }
+          
+          @media (max-width: 768px) {
+              nav {
+                  display: none;
+              }
+          }
+          #hamburger
+{
+  display: block;
+  position: relative;
+  top: -40px;
+  left: 50px;
+  
+  z-index: 1;
+  
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#hamburger a
+{
+  text-decoration: none;
+  color: #232323;
+  
+  transition: color 0.3s ease;
+}
+
+#hamburger a:hover
+{
+  color: tomato;
+}
+
+
+#hamburger input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 2;
+  -webkit-touch-callout: none;
+}
+#hamburger span
+{
+  display: block;
+  width: 20px;
+  height: 2px;
+  margin-bottom: 5px;
+  position: relative;
+  background: #cdcdcd;
+  border-radius: 3px;
+  z-index: 1;
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#hamburger span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#hamburger span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+#hamburger input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(1px, -1px);
+  background: #232323;
+}
+#hamburger input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.1, 0.1);
+}
+#hamburger input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(3px, -2px);
+}
+#menu
+{
+  position: absolute;
+  width: 300px;
+  height: 100vh;
+  margin: -45px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  background: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+#menu li
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+#hamburger input:checked ~ ul
+{
+  transform: none;
+}
+.menu-collapse {
+  background-color: #ededed;
+  cursor: pointer;
+  outline: none;
+  border: 0px!important;
+  margin-left: -5px;
+}
+
+.active, .menu-collapse:hover {
+  background-color: #ededed;
+}
+
+.content {
+  padding: 0 5px;
+  display: none;
+  overflow: hidden;
+  background-color: #ededed;
+}
+    </style>
 </head>
 <body>
     <!-- Header section -->
     <header>
       <div class="logo">
-        <a href="ML Homepage.html">
-            <img src="images/ML Menswear Logo.JPG" alt="ML Menswear Logo">
-        </a>
+        <img src="your-logo.png" width="70px" height="35px" alt="ML Menswear Logo">
       </div>
       <div class="search-bar">
           <input type="text" placeholder="Search">
@@ -25,35 +343,114 @@
       </div>
       <div class="user-icons">
           <i class="fas fa-heart"></i>
-          <a href="basket.html"><i class="fas fa-shopping-basket"></i></a>          
-          <a href="loginPage.html"><i class="fas fa-user"></i></a>
-        </div>
+          <i class="fas fa-shopping-basket"></i>
+          <i class="fas fa-user"></i>
+      </div>
   </header>
-  
+
   <!-- Navigation section -->
   <nav>
-    <a href="topsDisplayPage.html">Tops</a>
-    <a href="#">Coats & Jackets</a>
-    <a href="#">Trousers</a>
-    <a href="#">Shoes</a>
-    <a href="#">Accessories</a>
+      <a href="#"><i class="fas fa-home"></i>Home</a>
+      <a href="#">Tops</a>
+      <a href="#">Coats & Jackets</a>
+      <a href="#">Trousers</a>
+      <a href="#">Shoes</a>
+      <a href="#">Accessories</a>
   </nav>
+  <div id="hamburger">
+    <input type="checkbox" />
+    <span></span>
+    <span></span>
+    <span></span>
+    <ul id="menu">
+      <a href="#"><li>Home</li></a>
+      <a href="#"><li>About us</li></a>
+      <a href="#"><li>Contact us</li></a>
+      <a href="#"><li><button type="button" class="menu-collapse" id="menu-collapse">Clothing <i class="fas fa-plus" style="font-size: 0.7em;"></i></button>
+        <div class="content" id="content">
+          <ul>
+            <li><a href="#">Tops</a></li>
+            <li><a href="#">Coats & Jackets</a></li>
+            <li><a href="#">Trousers</a></li>
+            <li><a href="products.html#shoes">Shoes</a></li>
+            <li><a href="#">Accessories</a>
+        </ul>
+        </div></li></a>
+      <a href="basket.html"><li>Shopping Cart</li></a>
+      <a href="orderHistory.html"><li>My Orders</li></a>
+      <a href="AdminLogin.html"><li>Sign In</li></a>
+      <a href="#"><li></li></a>
+    </ul>
+  </div>
   
 <!-- Main content section -->
     <b><h2>Shopping Cart:</h2></b>
-    <div class="shopping-cart">
+    <div class="shopping-cart" style="margin-bottom: 75px;">
         <div class="product-block-wrapper">
-            <div class="product-list" id="product-list">
-                <!-- Product Blocks -->
+            <div class="product-list" id="product-list" style="padding-right: 10px;padding-bottom: 10px;">
+              <div class="card">
+                <div class="product-block">
+                <img src="placeholder.webp" alt="Product Image" style="margin-bottom: 10px;">
+                <div class="product-summary">
+                  <h3>Product Name</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <div style="display:flex;align-items:center;">Quantity: 
+                    <div style="display:flex;align-items:center;background-color:white;border:1px solid gray;border-radius:5px;">
+                    <button onclick="" class="btn btn-primary btn-xs"><i class='fas fa-minus' style='color:white'></i></button><h5 style="margin-top:5px">&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;</h5>
+                    <button onclick="" class="btn btn-primary btn-xs"><i class='fas fa-plus' style='color:white'></i></button>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="product-block">
+                <img src="placeholder.webp" alt="Product Image" style="margin-bottom: 10px;">
+                <div class="product-summary">
+                  <h3>Product Name</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <div style="display:flex;align-items:center;">Quantity: 
+                    <div style="display:flex;align-items:center;background-color:white;border:1px solid gray;border-radius:5px;">
+                    <button onclick="" class="btn btn-primary btn-xs"><i class='fas fa-minus' style='color:white'></i></button><h5 style="margin-top:5px">&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;</h5>
+                    <button onclick="" class="btn btn-primary btn-xs"><i class='fas fa-plus' style='color:white'></i></button>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="product-block">
+                <img src="placeholder.webp" alt="Product Image" style="margin-bottom: 10px;">
+                <div class="product-summary">
+                  <h3>Product Name</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <div style="display:flex;align-items:center;">Quantity: 
+                    <div style="display:flex;align-items:center;background-color:white;border:1px solid gray;border-radius:5px;">
+                    <button onclick="" class="btn btn-primary btn-xs"><i class='fas fa-minus' style='color:white'></i></button><h5 style="margin-top:5px">&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;</h5>
+                    <button onclick="" class="btn btn-primary btn-xs"><i class='fas fa-plus' style='color:white'></i></button>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+              <div class="card">
+              <div class="product-block">
+                <img src="placeholder.webp" alt="Product Image" style="margin-bottom: 10px;">
+                <div class="product-summary">
+                  <h3>Product Name</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <div style="display:flex;align-items:center;">Quantity: 
+                    <div style="display:flex;align-items:center;background-color:white;border:1px solid gray;border-radius:5px;">
+                    <button onclick="" class="btn btn-primary btn-xs"><i class='fas fa-minus' style='color:white'></i></button><h5 style="margin-top:5px">&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;</h5>
+                    <button onclick="" class="btn btn-primary btn-xs"><i class='fas fa-plus' style='color:white'></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             </div>
         </div>
         <div class="summary list">
-            <!-- Product Names and Prices List -->
-            <h2>Product List</h2>
-            <ul id="product-summary">
-            </ul>
-            <!-- Total Price -->
-            <h2><div id="totalPrice"></div></h2>
             <div class="col-md-10">  
               <div class="card">
                 <div class="accordion" id="accordionExample">
@@ -74,7 +471,7 @@
                             <span class="font-weight-normal card-text">Name</span>
                             <div class="input">
                               <i class="fas fa-user-circle"></i>
-                              <input type="text" class="form-control" placeholder="Full Name">
+                              <input type="text" class="form-control" placeholder="Receiver Name">
                             </div> 
                           </div>
                           <div class="col-md-6">
@@ -90,11 +487,11 @@
                             <span class="font-weight-normal card-text">City</span>
                             <div class="input">
                               <i class="fas fa-building"></i>
-                              <input type="text" class="form-control" placeholder="city">
+                              <input type="text" class="form-control" placeholder="Birmingham">
                             </div> 
                           </div>
                           <div class="col-md-6">
-                            <span class="font-weight-normal card-text">Post Code</span>
+                            <span class="font-weight-normal card-text">Postal Code</span>
                             <div class="input">
                               <i class="fas fa-address-card"></i>
                               <input type="text" class="form-control" placeholder="B4 7ET">
@@ -110,53 +507,23 @@
             <button type="submit" class="btn btn-primary" id="checkout-Btn" style="margin-top: 5px;" onclick="redirectPayments()">Checkout</button>
         </div>
     </div>
-    <!-- Footer section -->
     <footer>
-      <div class="business-details">
-          <p>Email: info@mlmenswear.com</p>
-          <p>Contact Number: +44 1234 567890</p>
-          <p>Address: 123 Fashion Street, London, UK</p>
-      </div>
       <p>&copy; 2024 ML Menswear. All rights reserved.</p>
-  </footer>
+    </footer>
     <script>
-        let x = Math.floor((Math.random() * 7) + 2);
-        var products = [];
-        for(let i=0;i<x;i++){
-            products.push({price:Math.floor((Math.random() * 50) + 50), quantity:1});
-        }
-        setProducts(products);
-        var addBtn = document.getElementById("addQuantity");
-        var removeBtn = document.getElementById("removeQuantity");
-        function addQuantity(i){
-          products[i].quantity +=1;
-          setProducts(products);
-        }
-
-        function removeQuantity(i){
-          if(products[i].quantity == 0)
-            return;
-          products[i].quantity -=1;
-          setProducts(products);
-        }
-
-        function setProducts(products){
-          let allProducts="";
-          let productSummary="";
-          let all=0;
-          for(let i=0;i<x;i++){
-            allProducts +=`<div class="product-block"><img src="placeholder.webp" alt="Product Image"><div class="product-summary"><h3>Product Name</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p>Price: £${products[i].price}</p><div style="display:flex;align-items:center;">Quantity: <div style="display:flex;align-items:center;background-color:white;border:1px solid gray;border-radius:5px;"><button onclick="removeQuantity(${i})" class="btn btn-primary btn-xs"><i class='fas fa-minus' style='color:white'></i></button><h5 style="margin-top:5px">&nbsp;&nbsp;&nbsp;${products[i].quantity}&nbsp;&nbsp;&nbsp;</h5><button onclick="addQuantity(${i})" class="btn btn-primary btn-xs"><i class='fas fa-plus' style='color:white'></i></button></div></div></div></div>`;
-            productSummary += `<li><span>Product ${(i+1)} - £${products[i].price * products[i].quantity}</span></li>`;
-            all+=products[i].price * products[i].quantity;
-          }
-          document.getElementById("product-list").innerHTML=allProducts;
-          document.getElementById("product-summary").innerHTML=productSummary;
-          document.getElementById("totalPrice").innerHTML = `Total - £${all}`;
-        }
-
         function redirectPayments(){
           window.location.href = window.location.href.substring(0, window.location.href.lastIndexOf('/'))+"/payment.html";
         }
+        var coll = document.getElementById("menu-collapse");
+        coll.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = document.getElementById("content");
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+        });
     </script>
 </body>
 </html>
