@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js" rel="javascript"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Admin Login</title>
+    <style>
+        body{
+            background-color:#f5eee7;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .shopping-cart{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        .product-list {
+            border-right: 1px solid gray
+        }
+        .product-block-wrapper {
+            max-height: 50%;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+        .product-block{
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .product-block img{
+            margin-top: 25px;
+            border: 1px gray;
+            border-radius: 20px;
+            height:100px;
+        }
+        .summary {
+            width: 40%;            
+        }
+        .footer {
+            background-color: gray; /* Footer background color */
+            padding: 20px;
+            text-align: center;
+        }
+        iframe[seamless] {
+            border: none;
+        }
+        .list {
+          position: relative;
+        }
+        .list h2 {
+          color: #000;
+          font-weight: 700;
+          letter-spacing: 1px;
+          margin-bottom: 10px;
+        }
+        .list ul {
+          position: relative;
+        }
+        .list ul li {
+          position: relative;
+          left: 0;
+          color: black;
+          list-style: none;
+          margin: 4px 0;
+          border-left: 2px solid lightseagreen;
+          transition: 0.5s;
+          cursor: pointer;
+          height: 25px;
+          max-width: 70%;
+          
+        }
+        .list ul li:hover {
+          left: 10px;
+        }
+        .list ul li span {
+          position: relative;
+          padding: 2px;
+          padding-left: 12px;
+          display: inline-block;
+          z-index: 1;
+          transition: 0.5s;
+        }
+        .list ul li:hover span {
+          color: white;
+        }
+        .list ul li:before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: lightskyblue;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: 0.5s;
+        }
+        .list ul li:hover:before {
+          transform: scaleX(1);
+        }
+        .btn-primary{
+          background-color: lightseagreen !important;
+          border-color: lightseagreen !important;
+        }
+        .input{
+            position: relative;
+        }
+        .input i{
+           position: absolute;
+            top: 10px;
+            left: 11px;
+            color: #989898;
+        }
+        .input input{
+        text-indent: 25px;
+        }
+        /*header,footer,nav styles */
+        body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+              background-color: #f0f0f0;
+              color: #333; /* Main text color */
+          }
+          
+          header {
+              background-color: #000;
+              color: #fff;
+              padding: 20px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+          }
+          
+          nav {
+              background-color: #333;
+              color: #fff;
+              padding: 10px;
+              text-align: center;
+              display: flex;
+              justify-content: center; /* Center the nav items */
+              align-items: center;
+              flex: 1;
+          }
+          
+          nav a {
+              color: #fff;
+              text-decoration: none;
+              padding: 10px;
+              margin-right: 20px;
+          }
+          
+          .content {
+              background-color: #fff;
+              padding: 20px;
+              margin-bottom: 20px;
+              width: 100%;
+          }
+          
+          footer {
+              background-color: #000;
+              color: #fff;
+              text-align: center;
+              padding: 20px;
+              position: fixed;
+              bottom: 0;
+              width: 100%;
+          }
+          /* Teal color for headers */
+          h1, h2 {
+              color: #008080;
+          }
+          
+          .teal {
+              color: #008080;
+          }
+          
+          /* Align search bar to the right */
+          .search-bar {
+              text-align: right;
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              flex: 1;
+          }
+          
+          .search-bar input[type="text"] {
+              margin-right: 10px;
+          }
+          
+          .user-icons {
+              display: flex;
+              align-items: center;
+          }
+          
+          .user-icons i {
+              margin-right: 10px;
+              color: #fff;
+              cursor: pointer;
+          }
+          
+          @media (max-width: 768px) {
+              nav {
+                  display: none;
+              }
+          }
+          #hamburger
+{
+  display: block;
+  position: relative;
+  top: -40px;
+  left: 50px;
+  
+  z-index: 1;
+  
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#hamburger a
+{
+  text-decoration: none;
+  color: #232323;
+  
+  transition: color 0.3s ease;
+}
+
+#hamburger a:hover
+{
+  color: tomato;
+}
+
+
+#hamburger input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 2;
+  -webkit-touch-callout: none;
+}
+#hamburger span
+{
+  display: block;
+  width: 20px;
+  height: 2px;
+  margin-bottom: 5px;
+  position: relative;
+  background: #cdcdcd;
+  border-radius: 3px;
+  z-index: 1;
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#hamburger span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#hamburger span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+#hamburger input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(1px, -1px);
+  background: #232323;
+}
+#hamburger input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.1, 0.1);
+}
+#hamburger input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(3px, -2px);
+}
+#menu
+{
+  position: absolute;
+  width: 300px;
+  height: max-content;
+  margin: -45px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  background: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+#menu li
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+#hamburger input:checked ~ ul
+{
+  transform: none;
+}
+.menu-collapse {
+  background-color: #ededed;
+  cursor: pointer;
+  outline: none;
+  border: 0px!important;
+  margin-left: -5px;
+}
+
+.active, .menu-collapse:hover {
+  background-color: #ededed;
+}
+
+.content {
+  padding: 0 5px;
+  display: none;
+  overflow: hidden;
+  background-color: #ededed;
+}
+    </style>
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+      <div class="logo">
+        <img src="your-logo.png" width="70px" height="35px" alt="ML Menswear Logo">
+      </div>
+      <div class="search-bar">
+          <input type="text" placeholder="Search">
+          <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="user-icons">
+          <i class="fas fa-heart"></i>
+          <i class="fas fa-shopping-basket"></i>
+          <i class="fas fa-user"></i>
+      </div>
+  </header>
+
+  <!-- Navigation section -->
+  <nav>
+      <a href="#"><i class="fas fa-home"></i>Home</a>
+      <a href="#">Tops</a>
+      <a href="#">Coats & Jackets</a>
+      <a href="#">Trousers</a>
+      <a href="#">Shoes</a>
+      <a href="#">Accessories</a>
+  </nav>
+  <div id="hamburger">
+    <input type="checkbox" />
+    <span></span>
+    <span></span>
+    <span></span>
+    <ul id="menu">
+      <a href="#"><li>Home</li></a>
+      <a href="#"><li>About us</li></a>
+      <a href="#"><li>Contact us</li></a>
+      <a href="#"><li><button type="button" class="menu-collapse" id="menu-collapse">Clothing <i class="fas fa-plus" style="font-size: 0.7em;"></i></button>
+        <div class="content" id="content">
+          <ul>
+            <li><a href="#">Tops</a></li>
+            <li><a href="#">Coats & Jackets</a></li>
+            <li><a href="#">Trousers</a></li>
+            <li><a href="products.html#shoes">Shoes</a></li>
+            <li><a href="#">Accessories</a>
+        </ul>
+        </div></li></a>
+        <a href="basket.html"><li>Shopping Cart</li></a>
+        <a href="orderHistory.html"><li>My Orders</li></a>
+        <a href="AdminLogin.html"><li>Sign In</li></a>
+      <a href="#"><li></li></a>
+    </ul>
+  </div>
+  
+<!-- Main content section -->
+    <div class="shopping-cart" style="margin-bottom: 75px;">
+        <div class="summary list">
+            <div class="col-md-10" style="margin-left: 80%;">  
+              <div class="card">
+                <div class="accordion" id="accordionExample">
+                  <div class="card">
+                    <div class="card-header p-0">
+                      <h2 class="mb-0">
+                        <button class="btn btn-light btn-block text-left p-3 rounded-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          <div class="d-flex align-items-center justify-content-between">
+                            <span>Admin Login</span> 
+                          </div>
+                        </button>
+                      </h2>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                      <div class="card-body payment-card-body">
+                        <div class="row mt-3 mb-3">
+                          <div class="col-md-12">
+                            <span class="font-weight-normal card-text">Username</span>
+                            <div class="input">
+                              <i class="fas fa-user-circle"></i>
+                              <input type="text" class="form-control" placeholder="Username or email">
+                            </div> 
+                          </div>
+                        </div>
+                        <div class="row mt-3 mb-3">
+                          <div class="col-md-12">
+                            <span class="font-weight-normal card-text">Password</span>
+                            <div class="input">
+                              <i class="fas fa-lock"></i>
+                              <input type="password" class="form-control" placeholder="********">
+                            </div> 
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="checkout-Btn" style="margin-top: 5px;margin-left: 115%;" onclick="redirectHome()">Login</button>
+        </div>
+    </div>
+    <footer>
+      <p>&copy; 2024 ML Menswear. All rights reserved.</p>
+    </footer>
+    <script>
+        var coll = document.getElementById("menu-collapse");
+        coll.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = document.getElementById("content");
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+        });
+        function redirectHome(){
+          window.location.href = window.location.href.substring(0, window.location.href.lastIndexOf('/'))+"/home.html";
+        }
+    </script>
+</body>
+</html>
