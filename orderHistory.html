@@ -7,17 +7,260 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js" rel="javascript"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="websiteStyle.css">
     <title>Order History</title>
-    
+    <style>
+        body{
+            background-color:#f5eee7;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .product-block-wrapper {
+            max-height: 60%;
+            min-height: 300px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+        .product-row{
+            display: flex;
+        }
+        .product-block{
+            display: flex;
+            justify-content: space-between;
+            padding-left: 25px;
+            width:42% !important;
+        }
+        .product-block img{
+            margin-top: 25px;
+            border: 1px gray;
+            border-radius: 20px;
+            height:100px;
+        }
+        /*header, footer, navbar styles */
+        body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+              background-color: #f0f0f0;
+              color: #333; /* Main text color */
+          }
+          
+          header {
+              background-color: #000;
+              color: #fff;
+              padding: 20px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+          }
+          
+          nav {
+              background-color: #333;
+              color: #fff;
+              padding: 10px;
+              text-align: center;
+              display: flex;
+              justify-content: center; /* Center the nav items */
+              align-items: center;
+              flex: 1;
+          }
+          
+          nav a {
+              color: #fff;
+              text-decoration: none;
+              padding: 10px;
+              margin-right: 20px;
+          }
+          
+          .content {
+              background-color: #fff;
+              padding: 20px;
+              margin-bottom: 20px;
+              width: 100%;
+          }
+          
+          footer {
+              background-color: #000;
+              color: #fff;
+              text-align: center;
+              padding: 20px;
+              position: fixed;
+              bottom: 0;
+              width: 100%;
+          }
+          /* Teal color for headers */
+          h1, h2 {
+              color: #008080;
+          }
+          
+          .teal {
+              color: #008080;
+          }
+          
+          /* Align search bar to the right */
+          .search-bar {
+              text-align: right;
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              flex: 1;
+          }
+          
+          .search-bar input[type="text"] {
+              margin-right: 10px;
+          }
+          
+          .user-icons {
+              display: flex;
+              align-items: center;
+          }
+          
+          .user-icons i {
+              margin-right: 10px;
+              color: #fff;
+              cursor: pointer;
+          }
+
+          .table-icons i {
+              margin-right: 10px;
+              color: lightblue;
+              height: 20px;
+          }
+          
+          @media (max-width: 768px) {
+              nav {
+                  display: none;
+              }
+          }
+          #hamburger
+{
+  display: block;
+  position: relative;
+  top: -40px;
+  left: 50px;
+  
+  z-index: 1;
+  
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#hamburger a
+{
+  text-decoration: none;
+  color: #232323;
+  
+  transition: color 0.3s ease;
+}
+
+#hamburger a:hover
+{
+  color: tomato;
+}
+
+
+#hamburger input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 2;
+  -webkit-touch-callout: none;
+}
+#hamburger span
+{
+  display: block;
+  width: 20px;
+  height: 2px;
+  margin-bottom: 5px;
+  position: relative;
+  background: #cdcdcd;
+  border-radius: 3px;
+  z-index: 1;
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#hamburger span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#hamburger span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+#hamburger input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(1px, -1px);
+  background: #232323;
+}
+#hamburger input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.1, 0.1);
+}
+#hamburger input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(3px, -2px);
+}
+#menu
+{
+  position: absolute;
+  width: 300px;
+  height: 100vh;
+  margin: -45px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  background: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+#menu li
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+#hamburger input:checked ~ ul
+{
+  transform: none;
+}
+.menu-collapse {
+  background-color: #ededed;
+  cursor: pointer;
+  outline: none;
+  border: 0px!important;
+  margin-left: -5px;
+}
+
+.active, .menu-collapse:hover {
+  background-color: #ededed;
+}
+
+.content {
+  padding: 0 5px;
+  display: none;
+  overflow: hidden;
+  background-color: #ededed;
+}
+    </style>
 </head>
 <body>
     <!-- Header section -->
     <header>
         <div class="logo">
-            <a href="ML Homepage.html">
-                <img src="images/ML Menswear Logo.JPG" alt="ML Menswear Logo">
-            </a> 
+            <img src="your-logo.png" width="70px" height="35px" alt="ML Menswear Logo">
         </div>
         <div class="search-bar">
             <input type="text" placeholder="Search">
@@ -25,60 +268,134 @@
         </div>
         <div class="user-icons">
             <i class="fas fa-heart"></i>
-            <a href="basket.html"><i class="fas fa-shopping-basket"></i></a>            
-            <a href="loginPage.html"><i class="fas fa-user"></i></a>
+            <i class="fas fa-shopping-basket"></i>
+            <i class="fas fa-user"></i>
         </div>
     </header>
     
     <!-- Navigation section -->
     <nav>
-        <a href="topsDisplayPage.html">Tops</a>
+        <a href="#"><i class="fas fa-home"></i>Home</a>
+        <a href="#">Tops</a>
         <a href="#">Coats & Jackets</a>
         <a href="#">Trousers</a>
         <a href="#">Shoes</a>
         <a href="#">Accessories</a>
     </nav>
+    <div id="hamburger">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu">
+          <a href="#"><li>Home</li></a>
+          <a href="#"><li>About us</li></a>
+          <a href="#"><li>Contact us</li></a>
+          <a href="#"><li><button type="button" class="menu-collapse" id="menu-collapse">Clothing <i class="fas fa-plus" style="font-size: 0.7em;"></i></button>
+            <div class="content" id="content">
+              <ul>
+                <li><a href="#">Tops</a></li>
+                <li><a href="#">Coats & Jackets</a></li>
+                <li><a href="#">Trousers</a></li>
+                <li><a href="products.html#shoes">Shoes</a></li>
+                <li><a href="#">Accessories</a>
+            </ul>
+            </div></li></a>
+            <a href="basket.html"><li>Shopping Cart</li></a>
+            <a href="orderHistory.html"><li>My Orders</li></a>
+            <a href="AdminLogin.html"><li>Sign In</li></a>
+          <a href="#"><li></li></a>
+        </ul>
+      </div>
 
     <div style="display: flex;justify-content: start;align-items: center;padding: 10px;">
         <b><h2>Order History&nbsp;&nbsp;</h2></b>
         <input class="search-bar" type="text" placeholder="&#xF002; Search Order History" style="font-family:Arial, FontAwesome" />
     </div>
-    <table class="table table-hover">
+    <table class="table table-hover" style="margin-bottom: 75px;">
         <thead>
           <tr>
             <th scope="col">Order no</th>
             <th scope="col">Your Reference</th>
             <th scope="col">Order Date</th>
-            <th scope="col">Status</th>
+            <th scope="col">Shipping Status</th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody id="product-list">
-
+            <tr>
+                <th scope="row"><a href="#">877431223</th>
+                <td>564854234</td>
+                <td>24-01-2024</td>
+                <td>Open</td>
+                <td><div class="table-icons"><i class="fas fa-shopping-basket"></i><i class="fas fa-download"></i></div></td>
+            </tr>
+            <tr>
+                <th scope="row"><a href="#">877431223</th>
+                <td>564854235</td>
+                <td>24-01-2024</td>
+                <td>Open</td>
+                <td><div class="table-icons"><i class="fas fa-shopping-basket"></i><i class="fas fa-download"></i></div></td>
+            </tr>
+            <tr>
+                <th scope="row"><a href="#">877431223</th>
+                <td>564854236</td>
+                <td>24-01-2024</td>
+                <td>Open</td>
+                <td><div class="table-icons"><i class="fas fa-shopping-basket"></i><i class="fas fa-download"></i></div></td>
+            </tr>
+            <tr>
+                <th scope="row"><a href="#">877431224</th>
+                <td>56485476</td>
+                <td>22-01-2024</td>
+                <td>Shipped</td>
+                <td><div class="table-icons"><i class="fas fa-shopping-basket"></i><i class="fas fa-download"></i></div></td>
+            </tr>
+            <tr>
+                <th scope="row"><a href="#">877431224</th>
+                <td>564854277</td>
+                <td>22-01-2024</td>
+                <td>Shipped</td>
+                <td><div class="table-icons"><i class="fas fa-shopping-basket"></i><i class="fas fa-download"></i></div></td>
+            </tr>
+            <tr>
+                <th scope="row"><a href="#">877431224</th>
+                <td>564854278</td>
+                <td>22-01-2024</td>
+                <td>Shipped</td>
+                <td><div class="table-icons"><i class="fas fa-shopping-basket"></i><i class="fas fa-download"></i></div></td>
+            </tr>
+            <tr>
+                <th scope="row"><a href="#">877431225</th>
+                <td>564854292</td>
+                <td>20-12-2023</td>
+                <td>Shipped</td>
+                <td><div class="table-icons"><i class="fas fa-shopping-basket"></i><i class="fas fa-download"></i></div></td>
+            </tr>
+            <tr>
+                <th scope="row"><a href="#">877431226</th>
+                <td>564854294</td>
+                <td>19-12-2023</td>
+                <td>Shipped</td>
+                <td><div class="table-icons"><i class="fas fa-shopping-basket"></i><i class="fas fa-download"></i></div></td>
+            </tr>
+            
         </tbody>
       </table>
 
-    <!-- Footer section -->
-    <footer class="orderHistory-footer">
-        <div class="business-details">
-            <p>Email: info@mlmenswear.com</p>
-            <p>Contact Number: +44 1234 567890</p>
-            <p>Address: 123 Fashion Street, London, UK</p>
-        </div>
+    <footer>
         <p>&copy; 2024 ML Menswear. All rights reserved.</p>
     </footer>
     <script>
-        let numProducts = Math.floor((Math.random() * 7) + 5);
-        let randomOrderNo = Math.floor((Math.random() * 1768539)+1);
-        let randomReferenceNo = Math.floor((Math.random() * 524581)+1);
-        let randomDate = "07-02-2024";
-        console.log(numProducts)
-        let allProducts='';
-        let icons = '<div class="table-icons"><i class="fas fa-shopping-basket"></i><i class="fas fa-download"></i></div>';
-        for(let i=0;i<numProducts;i++){
-            allProducts += `<tr><th scope="row"><a href="#">${randomOrderNo+i}</th><td>${randomReferenceNo+i}</td><td>${randomDate}</td><td>${Math.random()<0.5 ? "Processing" : "Shipped"}</td><td>${icons}</td></tr>`
-        }
-        allProducts+="</div>"
-        document.getElementById("product-list").innerHTML=allProducts;
+        var coll = document.getElementById("menu-collapse");
+        coll.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = document.getElementById("content");
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+        });
     </script>
 </body>
