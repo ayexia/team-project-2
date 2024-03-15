@@ -14,7 +14,8 @@ if ($user) {
     } else {
         $cartSession = session('cart', []);
         $count = 0;
-    
+        $totalPrice = 0;
+
         foreach ($cartSession as $item) {
             $count += $item['quantity'];
         }
@@ -107,7 +108,12 @@ if ($user) {
       <img src="{{ $cartItem->product->image_url }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
       <h3>{{$cartItem->product->name}}</h3>
         <p>£{{$cartItem->price}}</p>
-        <p>Quantity: {{$cartItem->quantity}}</p>
+        <form action="{{ route('update.cart') }}" method="POST">
+            @csrf
+            <input type="hidden" name="cart_item_id" value="{{ $cartItem->id }}">
+            <p>Quantity: <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="0" max="{{$cartItem->product->quantity}}">
+                <button type="submit">Update</button></p>
+        </form>
             <p><a class="btn btn-outline-danger" href="{{route('remove.from.cart', $cartItem->id)}}">Delete</a></p>
               
             @endforeach
@@ -115,9 +121,39 @@ if ($user) {
             <td><td><td><td data-th="Total" class="text-center"><h4>Total Price:</h4> £{{$totalPrice}}</td>
             
             <br>
-        <h3>Address</h3>
+            @else
+        <?php  
+        $cartSession = session('cart', []);
+        ?>
+        @dump(session('cart'))
+        @if ($cartSession)
+            @foreach($cartSession as $item)
+                <div class="product">
+                    <img src="{{ $item['image_url'] }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
+                    <h3>{{ $item['name'] }}</h3>
+                    <p>£{{ $item['price'] }}</p>
+                    <form action="{{ route('update.cart') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="cart_item_id" value="{{ $item['id'] }}">
+                    <p>Quantity: <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="0" max="{{ $item['max_quantity'] }}">
+                    <button type="submit">Update</button></p>
+                    </form>
+                    <?php
+                    $subtotal = $item['price'] * $item['quantity'];
+                    $totalPrice += $subtotal;
+                    ?>
+                    <p><a class="btn btn-outline-danger" href="{{route('remove.from.cart', ['item' => $item['id']])}}">Delete</a></p>
+                    @endforeach
+                    <td><td><td><td data-th="Total" class="text-center"><h4>Total Price:</h4> £{{$totalPrice}}</td>
+
+        <h3>Name</h3>
         <form action="{{ route('order') }}" method="POST">
         @csrf
+        <input type="text" name="name" placeholder="Name"><br><br>
+        <h3>Email Address</h3>
+        <input type="email" name="email" placeholder="Email Address"><br><br>
+
+        <h3>Address</h3>
         <input type="text" name="address" placeholder="Street"><br><br>
         <input type="text" name="address" placeholder="City"><br><br>
         <input type="text" name="address" placeholder="Postcode"><br><br>
@@ -129,6 +165,7 @@ if ($user) {
         <input type="text" placeholder="Name on Card">
         <br><br><button class="btn btn-success" style="margin-left:25%">Place Order</button></a>
         </form>
+        @endif
         @endif
     </div>
 </body>
