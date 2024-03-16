@@ -115,7 +115,16 @@ if ($user) {
         <p>
             <a href="{{route('product.show', ['product' => $product])}}">View</a>
         </p>
-</div>
+        <form action="{{ route('add.to.cart', $product->id) }}" method="GET" class="btn btn-outline-danger"> 
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                        <input type="number" name="quantity" min="1" max="{{$product->quantity}}" value="1" class="form-control" style="width: 30px; height: 25px;" required>
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-shopping-basket basket-icon"></i>
+                            Add to Basket
+                        </button>
+                    </form>
+        </div>
         @endif
             @endforeach
             @else

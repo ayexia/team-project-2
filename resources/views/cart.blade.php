@@ -154,7 +154,7 @@ if ($user) {
         @endif
         @endif
     </div>
-
+    <?php dd(session('guest_identifier')); ?><?php dd(session('guest_identifier')); ?>
     </main>
     <!-- Footer section -->
     <footer>

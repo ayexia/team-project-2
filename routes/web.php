@@ -69,6 +69,7 @@ Route::get('/delete/{item}', [CartController::class, 'removeFromCart'])->name('r
 Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
 Route::post('/checkout', [OrderController::class, 'confirmOrder'])->name('order');
 Route::get('/orders', [OrderController::class, 'order'])->name('orders');
+Route::post('/order/{order}/cancel', [OrderController::class, 'cancelOrder'])->name('order.cancel');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index')->middleware('auth');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create')->middleware(['auth', 'admin']);

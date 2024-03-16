@@ -38,12 +38,19 @@ class OrderController extends Controller
     if ($existingUser) {
         return redirect()->back()->with('error', 'An account with this email already exists. Please log in or use a different email address.');
     }
+    $guestIdentifier = null;
     $cart = null;
     if (auth()->check()) {
         $user = auth()->user();
         $user_id = $user->id;
         $cart = Cart::where('user_id', auth()->user()->id)->first();
+        $is_guest = false;
     } else {
+        $guestIdentifier = $request->session()->get('guest_identifier');
+        if (!$guestIdentifier) {
+            $guestIdentifier = Str::uuid()->toString();
+            $request->session()->put('guest_identifier', $guestIdentifier);
+        }
         $guestUser = new User();
         $guestUser->name = $request->input('name'); 
         $guestUser->email = $request->input('email'); 
@@ -51,6 +58,7 @@ class OrderController extends Controller
         $guestUser->save();
 
         $user_id = $guestUser->id;
+        $is_guest = true;
         $cartSession = session('cart', []);
     }
     $order = new Order();
@@ -58,6 +66,8 @@ class OrderController extends Controller
     $order->order_date = now();
     $order->total_price = 0;
     $order->user_id = $user_id;
+    $order->is_guest = $is_guest;
+    $order->guest_identifier = $guestIdentifier;
     $order->save();
 
     if ($cart) {
@@ -108,5 +118,21 @@ class OrderController extends Controller
     $order->save();
 
     return redirect()->back()->with('success', 'Order placed!');
+    }
+
+    public function cancelOrder(Order $order)
+    {
+        if ($order->status === 'Pending' || $order->status === 'Processing') {
+            $orderItems = OrderItem::where('order_id', $order->id)->get();
+            foreach ($orderItems as $orderItem) {
+            $product = Product::find($orderItem->product_id);
+                $product->quantity += $orderItem->quantity;
+                $product->save();
+            }
+            $order->status = 'Cancelled';
+            $order->save();
+
+            return redirect()->back()->with('success', 'Order has been cancelled successfully.');
+        }
     }
 }

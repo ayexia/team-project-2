@@ -94,9 +94,14 @@ if ($user) {
     <br>
         <div class= "productContainer">
         <?php
-         $user = auth()->user();
-         $orders = Order::where('user_id', optional($user)->id)->get();
-         ?>
+        $user = auth()->user();
+        if ($user) {
+            $orders = Order::where('user_id', $user->id)->get();
+        } else {
+            $guestIdentifier = session()->get('guest_identifier');
+            $orders = Order::where('guest_identifier', $guestIdentifier)->get();
+        }
+        ?>
          @if($orders->isNotEmpty())
          @foreach ($orders as $order) 
              <?php $orderItems = OrderItem::where('order_id', $order->id)->get(); ?>
@@ -122,6 +127,13 @@ if ($user) {
                 <tr>
                     <td colspan="5"><h4>Order Date:</h4> {{ $order->order_date }}</td>
                 </tr>
+                <br><br>
+                @if ($order->status === 'Pending' || $order->status === 'Processing')
+            <form method="POST" action="{{ route('order.cancel', ['order' => $order->id]) }}">
+                @csrf
+                <button type="submit">Cancel Order</button>
+            </form>
+        @endif
         @endforeach
         @else
         No orders placed

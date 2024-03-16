@@ -13,6 +13,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
@@ -21,7 +22,7 @@ class CartController extends Controller
         return view('cart');
     }
 
-    public function addToCart($item)
+    public function addToCart($item, Request $request)
     {
     if (auth()->check()) {
     $user = auth()->user();
@@ -52,6 +53,11 @@ class CartController extends Controller
 
     return redirect()->back()->with('success', 'Product added to cart!');
         } else {
+            $guestIdentifier = $request->session()->get('guest_identifier');
+            if (!$guestIdentifier) {
+                $guestIdentifier = Str::uuid()->toString();
+                $request->session()->put('guest_identifier', $guestIdentifier);
+            }
             $cartSession = session('cart', []);
             $product = Product::find($item);
             if (isset($cartSession[$item])) {

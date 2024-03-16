@@ -121,6 +121,20 @@ if ($user) {
             <td><td><td><td data-th="Total" class="text-center"><h4>Total Price:</h4> £{{$totalPrice}}</td>
             
             <br>
+            <h3>Address</h3>
+            <form action="{{ route('order') }}" method="POST">
+        @csrf
+        <input type="text" name="address" placeholder="Street"><br><br>
+        <input type="text" name="address" placeholder="City"><br><br>
+        <input type="text" name="address" placeholder="Postcode"><br><br>
+        
+        <h3>Payment Details</h3><br>
+        <input type="text" placeholder="Card Number"><br><br>
+        <input type="text" placeholder="Expiry Date">
+        <input type="text" placeholder="CVC"><br><br>
+        <input type="text" placeholder="Name on Card">
+        <br><br><button class="btn btn-success" style="margin-left:25%">Place Order</button></a>
+        </form>
             @else
         <?php  
         $cartSession = session('cart', []);
@@ -145,7 +159,7 @@ if ($user) {
                     <p><a class="btn btn-outline-danger" href="{{route('remove.from.cart', ['item' => $item['id']])}}">Delete</a></p>
                     @endforeach
                     <td><td><td><td data-th="Total" class="text-center"><h4>Total Price:</h4> £{{$totalPrice}}</td>
-
+        <br>
         <h3>Name</h3>
         <form action="{{ route('order') }}" method="POST">
         @csrf
