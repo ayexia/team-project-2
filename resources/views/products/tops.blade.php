@@ -73,13 +73,15 @@ if ($user) {
         <a href="#">About Us</a>
         <a href="#">Contact Us</a>
 
-        <select class="filter-select">
-            <option value="">Filter by</option>
-            <option value="price-low-high">Price: Low to High</option>
-            <option value="price-high-low">Price: High to Low</option>
-            <option value="name-a-z">Name: A-Z</option>
-            <option value="name-z-a">Name: Z-A</option>
-        </select>
+        <form action="{{ route('tops') }}" method="GET" id="sortForm">
+    <select name="sort_by" onchange="this.form.submit()">
+        <option value="">Filter by</option>
+        <option value="price-low-high">Price: Low to High</option>
+        <option value="price-high-low">Price: High to Low</option>
+        <option value="name-a-z">Name: A-Z</option>
+        <option value="name-z-a">Name: Z-A</option>
+    </select>
+</form>
 
         
     </nav>
@@ -99,9 +101,6 @@ if ($user) {
     </div>
         <br>
         <div class= "productContainer">
-    <?php
-            $products = Product::all();
-            ?>
             @if ($products->isNotEmpty())
             @foreach($products as $product)
             @if ($product->available === 'yes' && $product->category->name === 'Tops')
@@ -131,7 +130,6 @@ if ($user) {
             Records not found
         @endif
       </div>     
-
     </main>
     <!-- Footer section -->
     <footer>

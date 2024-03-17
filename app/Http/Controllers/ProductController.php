@@ -113,8 +113,30 @@ class ProductController extends Controller
         return redirect(route('product.index'))->with('success', 'Product deleted successfully');
     }
 
-    public function viewTops(){
-        return view('products.tops');
+    public function viewTops(Request $request){
+        $category = Category::where('name', 'Tops')->first();
+        $products = Product::where('category_id', $category->id);
+    
+        if ($request->has('sort_by')) {
+            $sort_by = $request->input('sort_by');
+            switch ($sort_by) {
+                case 'price-low-high':
+                    $products->orderBy('price', 'ASC');
+                    break;
+                case 'price-high-low':
+                    $products->orderBy('price', 'DESC');
+                    break;
+                case 'name-a-z':
+                    $products->orderBy('name', 'ASC');
+                    break;
+                case 'name-z-a':
+                    $products->orderBy('name', 'DESC');
+                    break;
+                }
+            }
+        
+        $products = $products->get();
+        return view('products.tops', compact('products'));
     }
 
     public function viewTrousers(){

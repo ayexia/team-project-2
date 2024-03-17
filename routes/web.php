@@ -54,7 +54,6 @@ Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name(
 Route::put('/product/{product}/update', [ProductController::class, 'update'])->name('product.update')->middleware(['auth', 'admin']);
 Route::delete('/product/{product}/destroy', [ProductController::class, 'destroy'])->name('product.destroy')->middleware(['auth', 'admin']);
 Route::get('/product/{product}/show', [ProductController::class, 'show'])->name('product.show');
-
 Route::get('/tops', [ProductController::class, 'viewTops'])->name('tops');
 Route::get('/trousers', [ProductController::class, 'viewTrousers'])->name('trousers');
 Route::get('/shoes', [ProductController::class, 'viewShoes'])->name('shoes');
