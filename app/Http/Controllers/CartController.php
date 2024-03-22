@@ -93,7 +93,7 @@ class CartController extends Controller
                         $cart->delete();
                     }
                 }
-                return redirect()->back()->with('success', 'Product deleted from cart!');
+                return redirect()->back()->with('success', 'Product removed from cart!');
             }
         } else {
             $cartSession = session('cart', []);
@@ -101,7 +101,7 @@ class CartController extends Controller
                 unset($cartSession[$item]);
                 session(['cart' => $cartSession]);
                 session()->save();
-                return redirect()->back()->with('success', 'Product deleted from cart!');
+                return redirect()->back()->with('success', 'Product removed from cart!');
         }
     }
 }

@@ -4,6 +4,8 @@ use App\Models\User;
 use App\Models\CartItem;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Review;
+
 $user = auth()->user();
 if ($user) {
     $cart = Cart::where('user_id', optional($user)->id)->first();
@@ -54,7 +56,7 @@ if ($user) {
         </form></div>
         @endif
         <div class="user-icons">
-            <i class="fas fa-heart"></i>
+        <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
             <a href="{{ url('/cart') }}"><i class="fas fa-shopping-basket"> ({{$count}}) </i></a>
             @if (Route::has('login'))
                     @auth
@@ -86,6 +88,10 @@ if ($user) {
            <div>
               {{session('success')}}
            </div>
+           @php
+            session()->forget('success');
+            session()->save();
+         @endphp
         @endif
     </div>
     <div class="product-container">
@@ -115,7 +121,43 @@ if ($user) {
         </div>
     </div>
 </form>
+</div>
+<br>
+<form action="{{ route('add.to.wishlist', $product->id) }}" class="btn btn-outline-danger"> 
+        @csrf
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-shopping-basket basket-icon"></i>
+                Add to Wishlist
+            </button>
+        </div>
+</form>
       </div>
+</div>
+
+<div class="product-container">
+<h3>Reviews</h3>
+    @foreach ($reviews as $review)
+            <p>User: {{ $review->user->name }}</p>
+            <p>Comment: {{ $review->comment }}</p>
+            <p>Rating: {{ $review->rating }}</p>
+    @endforeach
+
+    <br><br><h2>Add a Review</h2>
+    <form action="{{ route('reviews.store') }}" method="POST">
+        @csrf
+        <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <div><br>
+            <label for="comment">Comment:</label><br>
+            <textarea name="comment" id="comment" cols="30" rows="5"></textarea><br>
+        </div>
+        <div>
+            <label for="rating">Rating (1-5):</label><br>
+            <input type="number" name="rating" id="rating" min="1" max="5">
+        </div>
+        <button type="submit">Submit Review</button>
+    </form>
 </div>
 </main>
     <!-- Footer section -->

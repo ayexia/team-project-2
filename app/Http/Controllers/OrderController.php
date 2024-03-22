@@ -30,11 +30,13 @@ class OrderController extends Controller
     public function confirmOrder(Request $request)
 {
     $address = $request->validate([
-        'address' => 'required',
+            'door_number' => 'required|string|max:5',
+            'street' => 'required|string',
+            'city' => 'required|string',
+            'postcode' => 'required|string|max:8|regex:/^[A-Z]{1,2}\d[A-Z\d]? \d[A-Z]{2}$/i',
     ]);
     $guestEmail = $request->input('email');
     $existingUser = User::where('email', $guestEmail)->first();
-
     if ($existingUser) {
         return redirect()->back()->with('error', 'An account with this email already exists. Please log in or use a different email address.');
     }
@@ -61,8 +63,9 @@ class OrderController extends Controller
         $is_guest = true;
         $cartSession = session('cart', []);
     }
+    $fullAddress = $request->door_number . ', ' . $request->street . ', ' . $request->city . ', ' . $request->postcode;
     $order = new Order();
-    $order->address = $request->input('address');
+    $order->address = $fullAddress;
     $order->order_date = now();
     $order->total_price = 0;
     $order->user_id = $user_id;

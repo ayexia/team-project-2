@@ -52,7 +52,7 @@ if ($user) {
         </form></div>
         @endif
         <div class="user-icons">
-            <i class="fas fa-heart"></i>
+        <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
             <a href="{{ url('/cart') }}"><i class="fas fa-shopping-basket"> ({{$count}}) </i></a>
             @if (Route::has('login'))
                     @auth
@@ -81,7 +81,7 @@ if ($user) {
         <option value="name-a-z">Name: A-Z</option>
         <option value="name-z-a">Name: Z-A</option>
     </select>
-</form>
+        </form>
 
         
     </nav>
@@ -97,6 +97,10 @@ if ($user) {
            <div>
               {{session('success')}}
            </div>
+           @php
+            session()->forget('success');
+            session()->save();
+         @endphp
         @endif
     </div>
         <br>

@@ -84,8 +84,8 @@ class ProductController extends Controller
     }
 
     public function show(Product $product){
-       
-        return view('products.view', ['product' => $product]);
+        $reviews = $product->reviews;
+        return view('products.view', ['product' => $product, 'reviews' => $reviews]);
         
     }
 

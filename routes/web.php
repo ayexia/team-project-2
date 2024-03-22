@@ -5,6 +5,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -77,22 +79,14 @@ Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->
 Route::put('/categories/{category}/update', [CategoryController::class, 'update'])->name('categories.update')->middleware(['auth', 'admin']);
 Route::delete('/categories/{category}/destroy', [CategoryController::class, 'destroy'])->name('categories.destroy')->middleware(['auth', 'admin']);
 Route::get('/categories/{category}/show', [CategoryController::class, 'show'])->name('categories.show')->middleware('auth');
-Route::get('/getSlug', function(Request $request) {
-    $slug = '';
-    if (!empty($request->title)) {
-        $slug = Str::slug($request->title);
 
-        // Save the slug to the categories table
-        $category = new Category;
-        $category->name = $request->title;
-        $category->slug = $slug;
-        $category->save();
-    }
+Route::get('/wishlist', [WishlistController::class, 'wishlist'])->name('wishlist');
+Route::get('/wishlist/{item}', [WishlistController::class, 'addToWishlist'])->name('add.to.wishlist');
+Route::get('wishlist//{item}/delete', [WishlistController::class, 'removeFromWishlist'])->name('remove.from.wishlist');
 
-    return response()->json([
-        'status' => true,
-        'slug' => $slug
-    ]);
-})->name('getSlug')->middleware(['auth', 'admin']);
+Route::get('/products/{product}/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
+Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 
 require __DIR__.'/auth.php';

@@ -54,7 +54,7 @@ $count = CartItem::where('cart_id', $cart->id)->sum('quantity');
         </form></div>
         @endif
         <div class="user-icons">
-            <i class="fas fa-heart"></i>
+        <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
             <a href="{{ url('/cart') }}"><i class="fas fa-shopping-basket"> ({{$count}}) </i></a>
             @if (Route::has('login'))
                     @auth

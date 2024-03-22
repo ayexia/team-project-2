@@ -88,6 +88,10 @@ if ($user) {
            <div>
               {{session('success')}}
            </div>
+           @php
+            session()->forget('success');
+            session()->save();
+         @endphp
         @endif
     </div>
         <br>
@@ -123,16 +127,27 @@ if ($user) {
             <br>
             <h3>Address</h3>
             <form action="{{ route('order') }}" method="POST">
-        @csrf
-        <input type="text" name="address" placeholder="Street"><br><br>
-        <input type="text" name="address" placeholder="City"><br><br>
-        <input type="text" name="address" placeholder="Postcode"><br><br>
-        
-        <h3>Payment Details</h3><br>
-        <input type="text" placeholder="Card Number"><br><br>
-        <input type="text" placeholder="Expiry Date">
-        <input type="text" placeholder="CVC"><br><br>
-        <input type="text" placeholder="Name on Card">
+    @csrf
+    <input type="text" name="door_number" placeholder="Door number" maxlength="5" title="Please enter your door number" required><br><br>
+    <input type="text" name="street" placeholder="Street" title="Please enter your street" required><br><br>
+    <input type="text" name="city" placeholder="City" title="Please enter your city" required><br><br>
+    <input type="text" name="postcode" placeholder="Postcode" maxlength="8" title="Please enter your postcode" required><br><br>
+    
+    <h3>Payment Details</h3><br>
+    <label for="card_number">Card Number:</label>
+    <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" maxlength="16" pattern="[0-9]{16}" title="Please enter a 16-digit card number" required><br><br>
+    
+    <label for="expiry_date">Expiry Date:</label>
+    <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" maxlength="5" required><br><br>
+    
+    <label for="cvc">CVC:</label>
+    <input type="text" id="cvc" name="cvc" placeholder="123" maxlength="3" pattern="[0-9]{3}" title="Please enter a 3-digit CVC" required><br><br>
+    
+    <label for="name_on_card">Name on Card:</label>
+    <input type="text" id="name_on_card" name="name_on_card" placeholder="Name on Card" title="Please enter your name on your card" required><br><br>
+    
+    <button type="submit">Submit</button>
+</form>
         <br><br><button class="btn btn-success" style="margin-left:25%">Place Order</button></a>
         </form>
             @else
@@ -163,24 +178,71 @@ if ($user) {
         <h3>Name</h3>
         <form action="{{ route('order') }}" method="POST">
         @csrf
-        <input type="text" name="name" placeholder="Name"><br><br>
+        <input type="text" name="name" placeholder="Name" title="Please enter your name" required><br><br>
         <h3>Email Address</h3>
-        <input type="email" name="email" placeholder="Email Address"><br><br>
+        <input type="email" name="email" placeholder="Email Address" title="Please enter your email" required><br><br>
 
         <h3>Address</h3>
-        <input type="text" name="address" placeholder="Street"><br><br>
-        <input type="text" name="address" placeholder="City"><br><br>
-        <input type="text" name="address" placeholder="Postcode"><br><br>
-        
-        <h3>Payment Details</h3><br>
-        <input type="text" placeholder="Card Number"><br><br>
-        <input type="text" placeholder="Expiry Date">
-        <input type="text" placeholder="CVC"><br><br>
-        <input type="text" placeholder="Name on Card">
-        <br><br><button class="btn btn-success" style="margin-left:25%">Place Order</button></a>
-        </form>
+    <input type="text" name="door_number" placeholder="Door number" maxlength="5" title="Please enter your door number" required><br><br>
+    <input type="text" name="street" placeholder="Street" title="Please enter your street" required><br><br>
+    <input type="text" name="city" placeholder="City" title="Please enter your city" required><br><br>
+    <input type="text" name="postcode" placeholder="Postcode" maxlength="8" title="Please enter your postcode" required><br><br>
+    
+    <h3>Payment Details</h3><br>
+    <label for="card_number">Card Number:</label>
+    <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" maxlength="16" pattern="[0-9]{16}" title="Please enter a 16-digit card number" required><br><br>
+    
+    <label for="expiry_date">Expiry Date:</label>
+    <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" maxlength="5" required><br><br>
+    
+    <label for="cvc">CVC:</label>
+    <input type="text" id="cvc" name="cvc" placeholder="123" maxlength="3" pattern="[0-9]{3}" title="Please enter a 3-digit CVC" required><br><br>
+    
+    <label for="name_on_card">Name on Card:</label>
+    <input type="text" id="name_on_card" name="name_on_card" placeholder="Name on Card" title="Please enter your name on your card" required><br><br>
+    
+    <button type="submit">Submit</button>
+    </form>
         @endif
         @endif
     </div>
+    <script>
+    document.getElementById('card_number').addEventListener('input', function(event) {
+        this.value = this.value.replace(/\D/g, '');
+    });
+
+    document.getElementById('expiry_date').addEventListener('input', function(event) {
+            var input = this.value;
+            
+            input = input.replace(/\D/g, '');
+
+            if (input.length > 4) {
+                input = input.substr(0, 4);
+            }
+            
+            if (input.length > 2 && input.indexOf('/') === -1) {
+                input = input.substr(0, 2) + '/' + input.substr(2);
+            }
+            this.value = input;
+            var parts = input.split('/');
+            if (parts.length === 2) {
+                var month = parseInt(parts[0], 10);
+                var year = parseInt(parts[1], 10);
+                var currentDate = new Date();
+                var currentYear = currentDate.getFullYear() % 100;
+                if (month < 1 || month > 12 || year < currentYear || (year === currentYear && month < (currentDate.getMonth() + 1))) {
+                    this.setCustomValidity('Please enter a valid expiry date (MM/YY).');
+                } else {
+                    this.setCustomValidity('');
+                }
+            } else {
+                this.setCustomValidity('Please enter a valid expiry date (MM/YY).');
+            }
+        });
+
+    document.getElementById('cvc').addEventListener('input', function(event) {
+        this.value = this.value.replace(/\D/g, '');
+    });
+</script>
 </body>
 </html>

@@ -4,6 +4,7 @@ use App\Models\User;
 use App\Models\CartItem;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 $user = auth()->user();
@@ -15,8 +16,8 @@ if ($user) {
         }
     } else {
         $cartSession = session('cart', []);
+        $wishlistSession = session('wishlist', []);
         $count = 0;
-        $totalPrice = 0;
     
         foreach ($cartSession as $item) {
             $count += $item['quantity'];
@@ -28,7 +29,7 @@ if ($user) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ML Menswear - Cart</title>
+    <title>ML Menswear - Wishlist</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/websiteStyle.css">
     
@@ -85,15 +86,15 @@ if ($user) {
     </div>
          
     <main>
-    <h1>Cart</h1>
+    <h1>Wishlist</h1>
     <div>
         @if(session()->has('success'))
            <div>
               {{session('success')}}
            </div>
            @php
-            session()->forget('success');
-            session()->save();
+             session()->forget('success');
+             session()->save();
          @endphp
         @endif
     </div>
@@ -101,59 +102,36 @@ if ($user) {
         <div class= "productContainer">
         <?php
             $user = auth()->user();
-            $cart = Cart::where('user_id', optional($user)->id)->first();
-            $totalPrice = 0;
-            $cartItems = [];
-            if ($cart) {
-                $totalPrice = CartItem::where('cart_id', $cart->id)->sum(DB::raw('price * quantity'));
-                $cartItems = optional($cart)->cartItems()->with('product')->get();
+            $wishlist = Wishlist::where('user_id', auth()->id())->get();
+            $wishlistItems = [];
+            if ($user) {
+                $wishlistItems = Wishlist::where('user_id', $user->id)->with('product')->get();
             }
             ?>
-           @if ($user && $cartItems)
-            @foreach($cartItems as $cartItem) 
+            @if ($user && $wishlistItems)
+            @foreach($wishlistItems as $wishlistItem) 
       <div class="product">
-      <img src="{{ $cartItem->product->image_url }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
-      <h3>{{$cartItem->product->name}}</h3>
-        <p>£{{$cartItem->price}}</p>
-        <form action="{{ route('update.cart') }}" method="POST">
-            @csrf
-            <input type="hidden" name="cart_item_id" value="{{ $cartItem->id }}">
-            <p>Quantity: <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="0" max="{{$cartItem->product->quantity}}">
-                <button type="submit">Update</button></p>
-        </form>
-            <p><a class="btn btn-outline-danger" href="{{route('remove.from.cart', $cartItem->id)}}">Delete</a></p>
-              
+      <img src="{{ $wishlistItem->product->image_url }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
+      <h3>{{$wishlistItem->product->name}}</h3>
+        <p>£{{$wishlistItem->product->price}}</p>
+        <p><a class="btn btn-outline-danger" href="{{route('remove.from.wishlist', $wishlistItem->id)}}">Delete</a></p>
             @endforeach
-            
-            <td><td><td><td data-th="Total" class="text-center"><h4>Total Price:</h4> £{{$totalPrice}}</td>
-        
-        <br><br><a href="{{url('/checkout')}}"><button class="btn btn-success">Checkout</button></a>
+    
         <?php  
-        $cartSession = session('cart', []);
+        $wishlistSession = session('wishlist', []);
         ?>
-        @dump(session('cart'))
-        @elseif (!$user && $cartSession)
-            @foreach($cartSession as $item)
+        @dump(session('wishlist'))
+        @elseif (!$user && $wishlistSession)
+            @foreach($wishlistSession as $item)
                 <div class="product">
                     <img src="{{ $item['image_url'] }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
                     <h3>{{ $item['name'] }}</h3>
                     <p>£{{ $item['price'] }}</p>
-                    <form action="{{ route('update.cart') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="cart_item_id" value="{{ $item['id'] }}">
-                    <p>Quantity: <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="0" max="{{ $item['max_quantity'] }}">
-                    <button type="submit">Update</button></p>
-                    </form>
-                    <?php
-                    $subtotal = $item['price'] * $item['quantity'];
-                    $totalPrice += $subtotal;
-                    ?>
-                    <p><a class="btn btn-outline-danger" href="{{route('remove.from.cart', ['item' => $item['id']])}}">Delete</a></p>
+                    <p><a class="btn btn-outline-danger" href="{{route('remove.from.wishlist', ['item' => $item['id']])}}">Delete</a></p>
                     @endforeach
-                    <td><td><td><td data-th="Total" class="text-center"><h4>Total Price:</h4> £{{$totalPrice}}</td>
-                    <br><br><a href="{{url('/checkout')}}"><button class="btn btn-success">Checkout</button></a>
+                    
         @else
-        Cart is empty!
+        Wishlist is empty!
         @endif
     </div>
     <?php dd(session('guest_identifier')); ?><?php dd(session('guest_identifier')); ?>
