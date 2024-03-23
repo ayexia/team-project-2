@@ -124,20 +124,20 @@ if ($user) {
             <a href="{{route('product.show', ['product' => $product])}}">View</a>
         </p>
         @if ($product && $product->available === 'yes')
-        <form action="{{ route('add.to.cart', $product->id) }}" method="POST" class="btn btn-outline-danger">
-    @csrf
-    <input type="hidden" name="product_id" value="{{$product->id}}">
-    <div class="input-group">
-        <input type="number" name="quantity" min="1" max="{{$product->quantity}}" value="1" class="form-control" style="width: 30px; height: 25px;" required>
-        <div class="input-group-append">
-            <button class="btn btn-primary" type="submit">
-                <i class="fas fa-shopping-basket basket-icon"></i>
-                Add to Basket
-            </button>
+    <form action="{{ route('add.to.cart', $product->id) }}" method="POST" class="btn btn-outline-danger">
+        @csrf
+        <input type="hidden" name="product_id" value="{{$product->id}}">
+        <div class="input-group">
+            <input type="number" name="quantity" min="1" max="{{$product->quantity}}" value="1" class="form-control" style="width: 20px; height: 20px;" required>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-shopping-basket basket-icon"></i>
+                    Add to Basket
+                </button>
+            </div>
         </div>
-    </div>
-</form>
-                @endif
+    </form>
+@endif
             </div>
         @endforeach
         @else

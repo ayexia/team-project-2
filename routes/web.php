@@ -26,7 +26,8 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $categories = Category::all();
+    return view('welcome', compact('categories'));
 });
 
 // Route::get('/dashboard', function () {

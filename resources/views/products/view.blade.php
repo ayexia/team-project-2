@@ -141,59 +141,103 @@ if ($user) {
       </div>
 </div>
 
-<div class="product-container">
-    <h3>Reviews</h3><br>
-    @foreach ($reviews as $review)
-        <div class="review">
-            <p>User: {{ $review->user->name }}</p>
-            <p>Comment: {{ $review->comment }}</p>
-            <p>Rating: {{ $review->rating }}</p>
-            @if(auth()->check() && auth()->id() === $review->user_id)
-                <form action="{{ route('reviews.update', $review->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <div>
-                        <label for="comment">Update Comment:</label><br>
-                        <textarea name="comment" id="comment" cols="30" rows="2">{{ $review->comment }}</textarea><br>
-                    </div>
-                    <div>
-                        <label for="rating">Update Rating (1-5):</label><br>
-                        <input type="number" name="rating" id="rating" min="1" max="5" value="{{ $review->rating }}">
-                    </div>
-                    <button type="submit">Update Review</button>
-                </form>
+<div class="review">
+  <h3>Reviews</h3><br>
+  @foreach ($reviews as $review)
+      <div class="review">
+          <p>User: {{ $review->user->name }}</p>
+          <p>Comment: {{ $review->comment }}</p>
+          <p>Rating: {{ $review->rating }}</p>
+          @if(auth()->check() && auth()->id() === $review->user_id)
+              <form action="{{ route('reviews.update', $review->id) }}" method="POST">
+                  @csrf
+                  @method('PUT')
+                  <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                  <input type="hidden" name="product_id" value="{{ $product->id }}">
+                  <div>
+                      <label for="comment">Update Comment:</label><br>
+                      <textarea name="comment" id="comment" cols="30" rows="2">{{ $review->comment }}</textarea><br>
+                  </div>
+                  <div>
+                      <label for="rating">Update Rating (1-5):</label><br>
+                      <input type="number" name="rating" id="rating" min="1" max="5" value="{{ $review->rating }}">
+                  </div>
+                  <button type="submit">Update Review</button>
+              </form>
 
-                <form action="{{ route('reviews.destroy', $review->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Delete Review</button>
-                </form>
-            @endif
+              <form action="{{ route('reviews.destroy', $review->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Delete Review</button>
+            </form>
+        @endif
+    </div>
+@endforeach
+
+<br><br>
+@if(auth()->check())
+    <h2>Add a Review</h2><br>
+    <form action="{{ route('reviews.store') }}" method="POST">
+        @csrf
+        <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <div>
+            <label for="comment">Comment:</label><br>
+            <textarea name="comment" id="comment" cols="30" rows="5"></textarea><br>
         </div>
-    @endforeach
+        <div>
+            <label for="rating">Rating (1-5):</label><br>
+            <input type="number" name="rating" id="rating" min="1" max="5">
+        </div>
+        <button type="submit">Submit Review</button>
+      </form>
+      @endif
+  </div>
+  </main>
+  
 
-    <br><br>
-    @if(auth()->check())
-        <h2>Add a Review</h2><br>
-        <form action="{{ route('reviews.store') }}" method="POST">
-            @csrf
-            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-            <input type="hidden" name="product_id" value="{{ $product->id }}">
-            <div>
-                <label for="comment">Comment:</label><br>
-                <textarea name="comment" id="comment" cols="30" rows="5"></textarea><br>
-            </div>
-            <div>
-                <label for="rating">Rating (1-5):</label><br>
-                <input type="number" name="rating" id="rating" min="1" max="5">
-            </div>
-            <button type="submit">Submit Review</button>
-        </form>
-    @endif
-</div>
-</main>
+<style>
+  /* Review section styles */
+.review {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.review p {
+    margin: 5px 0;
+}
+
+.review form {
+    margin-top: 10px;
+}
+
+.review form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.review form textarea,
+.review form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.review form button {
+    background-color: #008080;
+    color: #fff;
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.review form button:hover {
+    background-color: #005353;
+}
+
+</style>
 <!-- Footer section -->
 <footer>
     <div class="business-details">
