@@ -117,19 +117,23 @@ if ($user) {
       <h3>{{$wishlistItem->product->name}}</h3>
         <p>£{{$wishlistItem->product->price}}</p>
         <p><a class="btn btn-outline-danger" href="{{route('remove.from.wishlist', $wishlistItem->id)}}">Delete</a></p>
-        <form action="{{ route('add.to.cart', $product->id) }}" class="btn btn-outline-danger"> 
+        @if ($wishlistItem->product->available === 'yes')
+    <form action="{{ route('add.to.cart', $wishlistItem->product->id) }}" method="POST" class="btn btn-outline-danger">
         @csrf
+        <input type="hidden" name="product_id" value="{{ $wishlistItem->product->id }}">
         <div class="input-group">
-        <input type="number" name="quantity" min="1" max="{{$product->quantity}}" value="1" class="form-control" style="width: 30px; height: 25px;" required>
-        <div class="input-group-append">
-            <br><button class="btn btn-primary" type="submit">
-                <i class="fas fa-shopping-basket basket-icon"></i>
-                Add to Basket
-            </button>
+            <input type="number" name="quantity" min="1" max="{{ $wishlistItem->product->quantity }}" value="1" class="form-control" style="width: 20px; height: 20px;" required>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-shopping-basket basket-icon"></i>
+                    Add to Basket
+                </button>
+            </div>
         </div>
-    </div>
-</form>
-            @endforeach
+    </form>
+    @endif
+</div>
+@endforeach
     
         <?php  
         $wishlistSession = session('wishlist', []);
@@ -142,7 +146,23 @@ if ($user) {
                     <h3>{{ $item['name'] }}</h3>
                     <p>£{{ $item['price'] }}</p>
                     <p><a class="btn btn-outline-danger" href="{{route('remove.from.wishlist', ['item' => $item['id']])}}">Delete</a></p>
-                    @endforeach
+                    @if ($wishlistItem->product->available === 'yes')
+    <form action="{{ route('add.to.cart', $wishlistItem->product->id) }}" method="POST" class="btn btn-outline-danger">
+        @csrf
+        <input type="hidden" name="product_id" value="{{ $wishlistItem->product->id }}">
+        <div class="input-group">
+            <input type="number" name="quantity" min="1" max="{{ $wishlistItem->product->quantity }}" value="1" class="form-control" style="width: 20px; height: 20px;" required>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-shopping-basket basket-icon"></i>
+                    Add to Basket
+                </button>
+            </div>
+        </div>
+    </form>
+    @endif
+</div>
+@endforeach
                     
         @else
         Wishlist is empty!
