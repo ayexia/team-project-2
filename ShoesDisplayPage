@@ -52,27 +52,27 @@
     <main>
       <div class= "productContainer">
       <div class="product">
-        <img src="Images/Running shoes image.jpg" alt="running shoes" class="prodImg" />
+        <img src="images/Running shoes image.jpg" alt="running shoes" class="prodImg" />
         <h3>Running shoes</h3>
         <p>£80</p>
       </div>
       <div class="product">
-        <img src="Images/Canvas images.jpg" alt="canvas" class="prodImg" />
+        <img src="images/Canvas images.jpg" alt="canvas" class="prodImg" />
         <h3>Canvas</h3>
         <p>£60</p>
       </div>
       <div class="product">
-        <img src="Images/Loafers image.jpg" alt="Loafers" class="prodImg" />
+        <img src="images/Loafers image.jpg" alt="Loafers" class="prodImg" />
         <h3>Loafers</h3>
         <p>£40</p>
       </div>
       <div class="product">
-        <img src="Images/Boots image.jpg" alt="Boots" class="prodImg" />
+        <img src="images/Boots image.jpg" alt="Boots" class="prodImg" />
         <h3>Boots</h3>
         <p>£40</p>
       </div>
       <div class="product">
-        <img src="Images/Trainers images.jpg" alt="trainers" class="prodImg" /></a>
+        <img src="images/Trainers images.jpg" alt="trainers" class="prodImg" /></a>
         <h3>Trainers</h3>
         <p>£90</p>
       </div>
