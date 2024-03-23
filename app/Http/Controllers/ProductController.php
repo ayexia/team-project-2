@@ -38,7 +38,7 @@ class ProductController extends Controller
     public function indexForUser(Request $request)
     {
         $products = Product::orderBy('created_at', 'DESC');
-    
+        $categories = Category::all();
         if ($request->has('keyword')) {
             $keyword = $request->input('keyword');
             $products->where('name', 'like', '%' . $keyword . '%');
@@ -46,7 +46,7 @@ class ProductController extends Controller
     
         $products = $products->get();
 
-        return view('products.search', compact('products'));
+        return view('products.search', compact('products', 'categories'));
     }
     
     public function create(){

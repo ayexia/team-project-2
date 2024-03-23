@@ -110,19 +110,17 @@ if ($user) {
         @endif
     </div>
         <br>
-        <div class= "productContainer">
+       <div class= "productContainer">
             @if ($products->isNotEmpty())
-            @foreach($products as $product)
+            @foreach($products  as $product)
       <div class="product">
-      <img src="{{$product->image_url}}" alt="Product Image" style="width: 200px; height: 200px;" class="prodImg" />                  
+      <a href="{{route('product.show', ['product' => $product])}}"><img src="{{$product->image_url}}" alt="Product Image" style="width: 200px; height: 200px;" class="prodImg" /></a>            
         <h3>{{$product->name}}</h3>
-        <p>£{{$product->price}}</p>
-        <p>Colour: {{$product->colour}}</p>
-        <p>Brand: {{$product->brand}}</p>
-        <p>Size: {{$product->size}}</p>
-        <p>
-            <a href="{{route('product.show', ['product' => $product])}}">View</a>
-        </p>
+        <p>£{{$product->price}}<br>
+        Colour: {{$product->colour}}<br>
+        Brand: {{$product->brand}}<br>
+        Size: {{$product->size}}</p>
+        
         @if ($product && $product->available === 'yes')
     <form action="{{ route('add.to.cart', $product->id) }}" method="POST" class="btn btn-outline-danger">
         @csrf

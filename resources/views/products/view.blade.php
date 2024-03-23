@@ -128,10 +128,17 @@ if ($user) {
             <button class="btn btn-primary" type="submit">
                 <i class="fas fa-shopping-basket basket-icon"></i>
                 Add to Basket
+<<<<<<< HEAD
                         </button>
                     </div>
                 </div>
             </form>
+=======
+            </button>
+        </div>
+    </div>
+
+>>>>>>> 160c58bc13713cf33351a1ea58c07839e3596969
                 @endif
             </div>
             <br>
