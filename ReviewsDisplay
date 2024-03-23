@@ -1,0 +1,346 @@
+<div class="reviews-container">
+  <h2 class="review-title">Customer Reviews</h2>
+  <div class="review-form">
+    <form id="reviewForm" class="contact-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="review">Review:</label>
+      <textarea id="review" name="review" rows="5" required></textarea>
+
+      <input type="submit" value="Submit Review">
+    </form>
+  </div>
+
+  <div class="review-list">
+    <div class="review-item">
+      <div class="user-info">
+        <h3>John Doe</h3>
+        <p>★★★★☆</p>
+      </div>
+      <p class="review-text">Great product! I highly recommend it to anyone.</p>
+    </div>
+    <div class="review-item">
+      <div class="user-info">
+        <h3>Jane Doe</h3>
+        <p>★★★☆☆</p>
+      </div>
+      <p class="review-text">It was okay, but not great. I've had better experiences.</p>
+    </div>
+    <!-- Add more reviews here -->
+  </div>
+</div>
+
+<script>
+  document.getElementById("reviewForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    var name = document.getElementById("name").value;
+    var review = document.getElementById("review").value;
+
+    // Add the new review to the review list
+    var reviewList = document.querySelector(".review-list");
+    var newReviewItem = document.createElement("div");
+    newReviewItem.classList.add("review-item");
+    newReviewItem.innerHTML = `
+      <div class="user-info">
+        <h3>${name}</h3>
+        <!-- You might add functionality to dynamically generate stars based on user input -->
+        <p>★★★★★</p>
+      </div>
+      <p class="review-text">${review}</p>
+    `;
+    reviewList.prepend(newReviewItem);
+
+    // Reset the form fields
+    document.getElementById("name").value = "";
+    document.getElementById("review").value = "";
+  });
+</script>
+
+<style>
+  /*page, header, nav bar, promo banner, footer styles*/
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #000;
+    color: #fff;
+    height: 70px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.container {
+    width: 100%;
+    margin: 0 ;
+    padding: 0px;
+    text-align: center;
+}
+
+.content {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.promo-banner {
+    background-color: #008080;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    
+    bottom: 0;
+    width: 100%;
+    height: fit-content;
+}
+
+.teal {
+    color: #008080;
+}
+
+ /* Homepage styles */
+ .homepage-image {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    max-width: 100%; /* Set maximum width to 100% */
+    height: auto; /* Ensure the aspect ratio is maintained */
+}
+
+.slogan {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    position: relative;
+    bottom: 80px;
+}
+.text-container {
+    color: #fff;
+    animation: slideText 12s linear infinite;
+    white-space: nowrap; /* Prevent text from wrapping */
+    display: inline-block; /* Make container only as wide as the text */
+}
+
+@keyframes slideText {
+    0% {
+    transform: translateX(100%);
+    }
+    100% {
+    transform: translateX(-100%);
+    }
+}
+
+.search-bar {
+    text-align: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+}
+
+.search-bar input[type="text"] {
+    margin-right: 10px;
+}
+
+.user-icons {
+    display: flex;
+    align-items: center;
+}
+
+.user-icons i {
+    margin: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    bottom: 50px;
+}
+
+.homepage-image {
+margin-top: 50px;
+margin-bottom: 50px;
+max-width: 100%;
+height: auto;
+position: relative;
+top: 0;
+left: 0;
+object-fit: cover;
+transition: opacity 0.5s ease-in-out;
+}
+
+.shop-now-btn {
+    position: absolute;
+    top: 160px; 
+    left: 30px; 
+    background-color: #008080;
+    color: #fff;
+    padding: 20px 50px; 
+    border: none;
+    border-radius: 10px; 
+    text-decoration: none;
+    font-size: 20px; 
+    transition: background-color 0.3s ease;
+}
+
+.shop-now-btn:hover {
+    background-color: #006666;
+}
+
+.subscribe-button {
+    color: #008080;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto;
+    padding: 15px 20px;
+    background: white;
+    border: 1px solid #008080;
+    border-radius: 30px;
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.2);
+    transition: all 200ms ease-in-out;
+}
+
+.subscribe-button:hover {
+    background-color: #008080;
+    color: white;
+    cursor: pointer;
+}
+
+.logo img{
+    width: 120px;
+    height: 70px;
+}
+
+/*hamburger menu styles*/
+@media (max-width: 768px) {
+    nav {
+        display: none;
+    }
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+    .login-form {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+/* Reviews section styles */
+.reviews-container {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.review-title {
+    font-size: 24px;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.review-form {
+    margin-bottom: 20px;
+}
+
+.review-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.review-form input[type="text"],
+.review-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.review-form textarea {
+    height: 100px;
+}
+
+.review-form input[type="submit"] {
+    background-color: #008080;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.review-form input[type="submit"]:hover {
+    background-color: #006666;
+}
+
+.review-list {
+    text-align: left;
+}
+
+.review-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.user-info h3 {
+    margin: 0;
+    color: #333;
+}
+
+.user-info p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.review-text {
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .review-form input[type="text"],
+    .review-form textarea {
+        width: calc(100% - 20px);
+    }
+}
+
+</style>
