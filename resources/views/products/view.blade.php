@@ -125,7 +125,7 @@ if ($user) {
             </button>
         </div>
     </div>
-</form>
+
                 @endif
 </div>
 <br>
