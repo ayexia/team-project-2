@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
 
 class Product extends Model
 {
@@ -30,5 +32,17 @@ class Product extends Model
     public function reviews()
     {
     return $this->hasMany(Review::class);
+    }
+
+    
+    public function getAvailableSizes()
+    {
+        $sizes = DB::table('products')
+                    ->select('size')
+                    ->where('id', $this->id)
+                    ->distinct()
+                    ->pluck('size');
+
+        return $sizes;
     }
 }

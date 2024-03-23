@@ -109,7 +109,13 @@ if ($user) {
             <p>{!! nl2br(e($product->description)) !!}</p><br>
             <p>Colour: {{$product->colour}}<br>
                Brand: {{$product->brand}}<br>
-               Size: {{$product->size}}<br>
+               Size:  <div class="size-buttons">
+               @if($availableSizes)
+               @foreach($product->getAvailableSizes() as $size)
+    <button class="size-button">{{ $size }}</button>
+@endforeach
+            @endif
+        </div>
                In: {{ $product->category->name }}</p><br>
         </div>
         @if ($product && $product->available === 'yes')
@@ -122,13 +128,13 @@ if ($user) {
             <button class="btn btn-primary" type="submit">
                 <i class="fas fa-shopping-basket basket-icon"></i>
                 Add to Basket
-            </button>
-        </div>
-    </div>
-</form>
+                        </button>
+                    </div>
+                </div>
+            </form>
                 @endif
-</div>
-<br>
+            </div>
+            <br>
 <form action="{{ route('add.to.wishlist', $product->id) }}" class="btn btn-outline-danger"> 
         @csrf
         <div class="input-group-append">

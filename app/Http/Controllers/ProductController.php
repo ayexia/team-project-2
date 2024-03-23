@@ -86,8 +86,8 @@ class ProductController extends Controller
     public function show(Product $product){
         $reviews = $product->reviews;
         $categories = Category::all();
-        return view('products.view', ['product' => $product, 'reviews' => $reviews, 'categories' => $categories]);
-        
+        $availableSizes = $product->getAvailableSizes();
+        return view('products.view', ['product' => $product, 'reviews' => $reviews, 'categories' => $categories, 'availableSizes' => $availableSizes]);
     }
 
     public function update(Product $product, Request $request){

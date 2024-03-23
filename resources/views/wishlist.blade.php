@@ -46,17 +46,10 @@ if ($user) {
         $user = auth()->user();
         ?>
         <div class="search-bar">
-        @if ($user && $user->usertype === 'admin') 
-        <form action="/product" method="GET">
-            <input value="{{ Request::get('keyword') }}" type="text" name="keyword" placeholder="Search">
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </form></div>
-        @else
         <form action="/products" method="GET">
             <input value="{{ Request::get('keyword') }}" type="text" name="keyword" placeholder="Search">
             <button type="submit"><i class="fas fa-search"></i></button>
         </form></div>
-        @endif
         <div class="user-icons">
         <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
             <a href="{{ url('/cart') }}"><i class="fas fa-shopping-basket"> ({{$count}}) </i></a>
@@ -103,7 +96,7 @@ if ($user) {
         <br>
         <div class= "productContainer">
         <?php
-            $user = auth()->user();
+ $user = auth()->user();
             $wishlist = Wishlist::where('user_id', auth()->id())->get();
             $wishlistItems = [];
             if ($user) {
@@ -139,7 +132,7 @@ if ($user) {
         $wishlistSession = session('wishlist', []);
         ?>
         @dump(session('wishlist'))
-        @elseif (!$user && $wishlistSession)
+ @elseif (!$user && $wishlistSession)
             @foreach($wishlistSession as $item)
                 <div class="product">
                     <img src="{{ $item['image_url'] }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
@@ -170,6 +163,86 @@ if ($user) {
     </div>
     <?php dd(session('guest_identifier')); ?><?php dd(session('guest_identifier')); ?>
     </main>
+
+
+    <style>
+    /* Wishlist page styles */
+
+main {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.productContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+.product {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.product h3 {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.product p {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+    padding: 5px 10px;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.input-group {
+    margin-top: 10px;
+}
+
+.input-group input[type="number"] {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-group-append {
+    display: flex;
+    align-items: center;
+}
+
+.basket-icon {
+    margin-right: 5px;
+}
+</style>
     <!-- Footer section -->
     <footer>
       <div class="business-details">
