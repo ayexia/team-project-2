@@ -85,7 +85,8 @@ class ProductController extends Controller
 
     public function show(Product $product){
         $reviews = $product->reviews;
-        return view('products.view', ['product' => $product, 'reviews' => $reviews]);
+        $categories = Category::all();
+        return view('products.view', ['product' => $product, 'reviews' => $reviews, 'categories' => $categories]);
         
     }
 
@@ -113,10 +114,13 @@ class ProductController extends Controller
         return redirect(route('product.index'))->with('success', 'Product deleted successfully');
     }
 
-    public function viewTops(Request $request){
-        $category = Category::where('name', 'Tops')->first();
+    public function viewCategory(Request $request, $categoryName){
+        $category = Category::where('name', $categoryName)->first();
+        $products = Product::query();
+        if ($category) {
         $products = Product::where('category_id', $category->id);
-    
+        }
+        $categories = Category::all();
         if ($request->has('sort_by')) {
             $sort_by = $request->input('sort_by');
             switch ($sort_by) {
@@ -136,22 +140,6 @@ class ProductController extends Controller
             }
         
         $products = $products->get();
-        return view('products.tops', compact('products'));
-    }
-
-    public function viewTrousers(){
-        return view('products.trousers');
-    }
-
-    public function viewShoes(){
-        return view('products.shoes');
-    }
-
-    public function viewCoatsAndJackets(){
-        return view('products.coats-and-jackets');
-    }
-
-    public function viewAccessories(){
-        return view('products.accessories');
+        return view('products.tops', compact('products', 'category', 'categories'));
     }
 }

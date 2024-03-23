@@ -33,7 +33,7 @@ Route::get('/', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Route::get('post', [HomeController::class, 'post'])->middleware(['auth', 'admin']); - used for test
 
@@ -56,14 +56,15 @@ Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name(
 Route::put('/product/{product}/update', [ProductController::class, 'update'])->name('product.update')->middleware(['auth', 'admin']);
 Route::delete('/product/{product}/destroy', [ProductController::class, 'destroy'])->name('product.destroy')->middleware(['auth', 'admin']);
 Route::get('/product/{product}/show', [ProductController::class, 'show'])->name('product.show');
-Route::get('/tops', [ProductController::class, 'viewTops'])->name('tops');
+// Route::get('/tops', [ProductController::class, 'viewTops'])->name('tops');
 Route::get('/trousers', [ProductController::class, 'viewTrousers'])->name('trousers');
 Route::get('/shoes', [ProductController::class, 'viewShoes'])->name('shoes');
 Route::get('/coats-and-jackets', [ProductController::class, 'viewCoatsAndJackets'])->name('coats-and-jackets');
 Route::get('/accessories', [ProductController::class, 'viewAccessories'])->name('accessories');
+Route::get('/product/{category}', [ProductController::class, 'viewCategory'])->name('view.category');
 
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
-Route::get('/product/{item}', [CartController::class, 'addToCart'])->name('add.to.cart');
+Route::post('/product/{item}', [CartController::class, 'addToCart'])->name('add.to.cart');
 Route::post('/update-cart', [CartController::class, 'updateCart'])->name('update.cart');
 Route::get('/delete/{item}', [CartController::class, 'removeFromCart'])->name('remove.from.cart');
 

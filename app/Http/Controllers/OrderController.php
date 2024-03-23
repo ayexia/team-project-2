@@ -19,12 +19,14 @@ class OrderController extends Controller
 {
     public function checkout()
     {
-        return view('checkout');
+        $categories = Category::all();
+        return view('checkout', compact('categories'));
     }
 
     public function order()
     {
-        return view('orders');
+        $categories = Category::all();
+        return view('orders', compact('categories'));
     }
 
     public function confirmOrder(Request $request)

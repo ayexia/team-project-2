@@ -1,4 +1,5 @@
 <?php
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\CartItem;
@@ -68,12 +69,14 @@ if ($user) {
     </div>
     </header>
     <nav>
-        <a href="{{ route('tops') }}">Tops</a>
-        <a href="{{ route('coats-and-jackets') }}">Coats & Jackets</a>
-        <a href="{{ route('trousers') }}">Trousers</a>
-        <a href="{{ route('shoes') }}">Shoes</a>
-        <a href="{{ route('accessories') }}">Accessories</a>
-        <a href="{{route('orders')}}">Orders</a>
+    @if (!empty($categories))
+    @foreach($categories as $category)
+    @if ($loop->iteration <= 5)
+        <a href="{{ route('view.category', ['category' => $category->name]) }}">{{ $category->name }}</a>
+    @endif
+    @endforeach
+    @endif
+        <a href="{{route('orders')}}">Orders</a> 
         <a href="#">About Us</a>
         <a href="#">Contact Us</a>
         
@@ -109,9 +112,11 @@ if ($user) {
                Size: {{$product->size}}<br>
                In: {{ $product->category->name }}</p><br>
         </div>
-        <form action="{{ route('add.to.cart', $product->id) }}" class="btn btn-outline-danger"> 
-        @csrf
-        <div class="input-group">
+        @if ($product && $product->available === 'yes')
+        <form action="{{ route('add.to.cart', $product->id) }}" method="POST" class="btn btn-outline-danger">
+    @csrf
+    <input type="hidden" name="product_id" value="{{$product->id}}">
+    <div class="input-group">
         <input type="number" name="quantity" min="1" max="{{$product->quantity}}" value="1" class="form-control" style="width: 30px; height: 25px;" required>
         <div class="input-group-append">
             <button class="btn btn-primary" type="submit">
@@ -121,6 +126,7 @@ if ($user) {
         </div>
     </div>
 </form>
+                @endif
 </div>
 <br>
 <form action="{{ route('add.to.wishlist', $product->id) }}" class="btn btn-outline-danger"> 
@@ -136,38 +142,66 @@ if ($user) {
 </div>
 
 <div class="product-container">
-<h3>Reviews</h3>
+    <h3>Reviews</h3><br>
     @foreach ($reviews as $review)
+        <div class="review">
             <p>User: {{ $review->user->name }}</p>
             <p>Comment: {{ $review->comment }}</p>
             <p>Rating: {{ $review->rating }}</p>
+            @if(auth()->check() && auth()->id() === $review->user_id)
+                <form action="{{ route('reviews.update', $review->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <div>
+                        <label for="comment">Update Comment:</label><br>
+                        <textarea name="comment" id="comment" cols="30" rows="2">{{ $review->comment }}</textarea><br>
+                    </div>
+                    <div>
+                        <label for="rating">Update Rating (1-5):</label><br>
+                        <input type="number" name="rating" id="rating" min="1" max="5" value="{{ $review->rating }}">
+                    </div>
+                    <button type="submit">Update Review</button>
+                </form>
+
+                <form action="{{ route('reviews.destroy', $review->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Delete Review</button>
+                </form>
+            @endif
+        </div>
     @endforeach
 
-    <br><br><h2>Add a Review</h2>
-    <form action="{{ route('reviews.store') }}" method="POST">
-        @csrf
-        <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-        <input type="hidden" name="product_id" value="{{ $product->id }}">
-        <div><br>
-            <label for="comment">Comment:</label><br>
-            <textarea name="comment" id="comment" cols="30" rows="5"></textarea><br>
-        </div>
-        <div>
-            <label for="rating">Rating (1-5):</label><br>
-            <input type="number" name="rating" id="rating" min="1" max="5">
-        </div>
-        <button type="submit">Submit Review</button>
-    </form>
+    <br><br>
+    @if(auth()->check())
+        <h2>Add a Review</h2><br>
+        <form action="{{ route('reviews.store') }}" method="POST">
+            @csrf
+            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
+            <div>
+                <label for="comment">Comment:</label><br>
+                <textarea name="comment" id="comment" cols="30" rows="5"></textarea><br>
+            </div>
+            <div>
+                <label for="rating">Rating (1-5):</label><br>
+                <input type="number" name="rating" id="rating" min="1" max="5">
+            </div>
+            <button type="submit">Submit Review</button>
+        </form>
+    @endif
 </div>
 </main>
-    <!-- Footer section -->
-    <footer>
-      <div class="business-details">
-          <p>Email: info@mlmenswear.com</p>
-          <p>Contact Number: +44 1234 567890</p>
-          <p>Address: 123 Fashion Street, London, UK</p>
-      </div>
-      <p>&copy; 2024 ML Menswear. All rights reserved.</p>
-  </footer>
-  </body>
+<!-- Footer section -->
+<footer>
+    <div class="business-details">
+        <p>Email: info@mlmenswear.com</p>
+        <p>Contact Number: +44 1234 567890</p>
+        <p>Address: 123 Fashion Street, London, UK</p>
+    </div>
+    <p>&copy; 2024 ML Menswear. All rights reserved.</p>
+</footer>
+</body>
 </html>

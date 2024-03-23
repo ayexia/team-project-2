@@ -20,7 +20,8 @@ class WishlistController extends Controller
 {
     public function wishlist()
     {
-        return view('wishlist');
+        $categories = Category::all();
+        return view('wishlist', compact('categories'));
     }
 
     public function addToWishlist($item, Request $request)

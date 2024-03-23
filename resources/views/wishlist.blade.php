@@ -70,11 +70,13 @@ if ($user) {
     </div>
     </header>
     <nav>
-        <a href="{{ route('tops') }}">Tops</a>
-        <a href="{{ route('coats-and-jackets') }}">Coats & Jackets</a>
-        <a href="{{ route('trousers') }}">Trousers</a>
-        <a href="{{ route('shoes') }}">Shoes</a>
-        <a href="{{ route('accessories') }}">Accessories</a>
+        @if (!empty($categories))
+        @foreach($categories as $category)
+        @if ($loop->iteration <= 5)
+            <a href="{{ route('view.category', ['category' => $category->name]) }}">{{ $category->name }}</a>
+        @endif
+        @endforeach
+        @endif
         <a href="{{route('orders')}}">Orders</a>
         <a href="#">About Us</a>
         <a href="#">Contact Us</a>
@@ -115,6 +117,18 @@ if ($user) {
       <h3>{{$wishlistItem->product->name}}</h3>
         <p>£{{$wishlistItem->product->price}}</p>
         <p><a class="btn btn-outline-danger" href="{{route('remove.from.wishlist', $wishlistItem->id)}}">Delete</a></p>
+        <form action="{{ route('add.to.cart', $product->id) }}" class="btn btn-outline-danger"> 
+        @csrf
+        <div class="input-group">
+        <input type="number" name="quantity" min="1" max="{{$product->quantity}}" value="1" class="form-control" style="width: 30px; height: 25px;" required>
+        <div class="input-group-append">
+            <br><button class="btn btn-primary" type="submit">
+                <i class="fas fa-shopping-basket basket-icon"></i>
+                Add to Basket
+            </button>
+        </div>
+    </div>
+</form>
             @endforeach
     
         <?php  

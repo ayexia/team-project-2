@@ -74,6 +74,7 @@ form.example button:hover {
   color: #FF7F50;
   -webkit-text-stroke: 2px rgb(210, 180, 140);
   text-shadow: 0 0 3px rgb(210, 180, 140);
+}
 </style>
 </head>
 <body>

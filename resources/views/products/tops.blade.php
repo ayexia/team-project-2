@@ -1,5 +1,6 @@
 <?php
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\User;
 use App\Models\CartItem;
 use App\Models\Cart;
@@ -23,9 +24,11 @@ if ($user) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ML Menswear - Tops</title>
+    @if ($category)
+    <title>ML Menswear - {{ $category->name }}</title>
+    @endif
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/websiteStyle.css">
+    <link rel="stylesheet" href="{{ asset('css/websiteStyle.css') }}">
     
 </head>
 
@@ -33,7 +36,7 @@ if ($user) {
     <header>
         <div class="logo">
             <a href="{{ url('/') }}">
-                <img src="images\ML Menswear Logo.JPG" alt="ML Menswear Logo">
+                <img src="{{ asset('images/ML Menswear Logo.JPG') }}" alt="ML Menswear Logo">
             </a>
         </div>
         <?php
@@ -64,16 +67,18 @@ if ($user) {
     </div>
     </header>
     <nav>
-        <a href="{{ route('tops') }}">Tops</a>
-        <a href="{{ route('coats-and-jackets') }}">Coats & Jackets</a>
-        <a href="{{ route('trousers') }}">Trousers</a>
-        <a href="{{ route('shoes') }}">Shoes</a>
-        <a href="{{ route('accessories') }}">Accessories</a>
+    @if (!empty($categories))
+    @foreach($categories as $category)
+    @if ($loop->iteration <= 5)
+        <a href="{{ route('view.category', ['category' => $category->name]) }}">{{ $category->name }}</a>
+    @endif
+    @endforeach
+    @endif
         <a href="{{route('orders')}}">Orders</a>
         <a href="#">About Us</a>
         <a href="#">Contact Us</a>
 
-        <form action="{{ route('tops') }}" method="GET" id="sortForm">
+        <form action="{{ route('view.category', ['category' => $category->name]) }}" method="GET" id="sortForm">
     <select name="sort_by" onchange="this.form.submit()">
         <option value="">Filter by</option>
         <option value="price-low-high">Price: Low to High</option>
@@ -90,8 +95,9 @@ if ($user) {
             Free Express Shipping on First Orders | Free Same Day Click and Collect | Free Standard Delivery
     </div>
          
-    <main>
-    <h1>Tops</h1>
+    <main>@if ($category)
+    <h1>{{ $category->name }}</h1>
+    @endif
     <div>
         @if(session()->has('success'))
            <div>
@@ -107,7 +113,6 @@ if ($user) {
         <div class= "productContainer">
             @if ($products->isNotEmpty())
             @foreach($products as $product)
-            @if ($product->available === 'yes' && $product->category->name === 'Tops')
       <div class="product">
       <img src="{{$product->image_url}}" alt="Product Image" style="width: 200px; height: 200px;" class="prodImg" />                  
         <h3>{{$product->name}}</h3>
@@ -118,23 +123,28 @@ if ($user) {
         <p>
             <a href="{{route('product.show', ['product' => $product])}}">View</a>
         </p>
-        <form action="{{ route('add.to.cart', $product->id) }}" method="GET" class="btn btn-outline-danger"> 
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{$product->id}}">
-                        <input type="number" name="quantity" min="1" max="{{$product->quantity}}" value="1" class="form-control" style="width: 30px; height: 25px;" required>
-                        <button class="btn btn-primary" type="submit">
-                            <i class="fas fa-shopping-basket basket-icon"></i>
-                            Add to Basket
-                        </button>
-                    </form>
+        @if ($product && $product->available === 'yes')
+        <form action="{{ route('add.to.cart', $product->id) }}" method="POST" class="btn btn-outline-danger">
+    @csrf
+    <input type="hidden" name="product_id" value="{{$product->id}}">
+    <div class="input-group">
+        <input type="number" name="quantity" min="1" max="{{$product->quantity}}" value="1" class="form-control" style="width: 30px; height: 25px;" required>
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-shopping-basket basket-icon"></i>
+                Add to Basket
+            </button>
         </div>
+    </div>
+</form>
+                @endif
+            </div>
+        @endforeach
+        @else
+        Records not found
         @endif
-            @endforeach
-            @else
-            Records not found
-        @endif
-      </div>     
-    </main>
+        </div>
+        </main>
     <!-- Footer section -->
     <footer>
       <div class="business-details">

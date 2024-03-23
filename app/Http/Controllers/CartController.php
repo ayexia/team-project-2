@@ -19,7 +19,8 @@ class CartController extends Controller
 {
     public function cart()
     {
-        return view('cart');
+        $categories = Category::all();
+        return view('cart', compact('categories'));
     }
 
     public function addToCart($item, Request $request)

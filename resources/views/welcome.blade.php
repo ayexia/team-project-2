@@ -66,11 +66,13 @@ $count = CartItem::where('cart_id', $cart->id)->sum('quantity');
     </div>
     </header>
     <nav>
-        <a href="{{ route('tops') }}">Tops</a>
-        <a href="{{ route('coats-and-jackets') }}">Coats & Jackets</a>
-        <a href="{{ route('trousers') }}">Trousers</a>
-        <a href="{{ route('shoes') }}">Shoes</a>
-        <a href="{{ route('accessories') }}">Accessories</a>
+        @if (!empty($categories))
+        @foreach($categories as $category)
+        @if ($loop->iteration <= 5)
+            <a href="{{ route('view.category', ['category' => $category->name]) }}">{{ $category->name }}</a>
+        @endif
+        @endforeach
+        @endif
         <a href="{{route('orders')}}">Orders</a>
         <a href="#">About Us</a>
         <a href="#">Contact Us</a>
