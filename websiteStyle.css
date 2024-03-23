@@ -267,6 +267,63 @@ transition: opacity 0.5s ease-in-out;
     color: teal;
 }
 
+.review-and-basket {
+    display: flex;
+    flex-direction: column;
+}
+.review-box {
+    margin-bottom: 20px;
+}
+.review-box {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 700px;
+    }
+  
+  .review-box h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .review-box form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .review-box form input[type="text"],
+  .review-box form textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1.5;
+    width: 100px;
+  }
+  
+  .review-box form textarea {
+    height: 70px;
+  }
+  
+  .review-box form button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .review-box form button:hover {
+    background-color: #3e8e41;
+  }
 /*filter styles*/
 .filter-select {
     margin-left: 1rem;
