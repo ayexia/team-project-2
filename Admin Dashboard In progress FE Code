@@ -1,0 +1,150 @@
+
+<!-- resources/views/admin/dashboard.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Menswear Admin Dashboard</title>
+    <!-- Tailwind CSS for styling (adjust the colors as needed) -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #E5E7EB; } /* Grey background */
+        .header { background-color: #008080; } /* Teal header */
+        .sidebar { background-color: #1F2937; } /* Black sidebar */
+        .card { background-color: #FFFFFF; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,.1); }
+    </style>
+</head>
+<body>
+
+<div class="flex">
+    <!-- Sidebar -->
+    <div class="sidebar p-5 text-white">
+        <h2 class="text-lg font-bold mb-5">ML Menswear Dashboard</h2>
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Stock Management</a></li>
+            <li><a href="#">User Accounts</a></li>
+            <li><a href="#">Admin Accounts</a></li>
+            <li><a href="#">Sales Tracking</a></li>
+            <li><a href="#">Order Management</a></li>
+        </ul>
+    </div>
+
+    <!-- Main content -->
+    <div class="flex-1 p-10">
+        <div class="header p-5 text-white">
+            <h1 class="text-xl">Welcome to ML Menswear Admin Dashboard</h1>
+        </div>
+
+        <!-- Dashboard Widgets -->
+        <div class="grid grid-cols-3 gap-4 mt-5">
+            <!-- Stock Alert Widget -->
+            <div class="card p-5">
+                <h2 class="font-bold text-lg">Stock Alerts</h2>
+                <!-- Dynamic content here -->
+            </div>
+
+            <!-- Sales Tracking Widget -->
+            <div class="card p-5">
+                <h2 class="font-bold text-lg">Sales Overview</h2>
+                <!-- Dynamic content here -->
+            </div>
+
+            <!-- Profit Widget -->
+            <div class="card p-5">
+                <h2 class="font-bold text-lg">Profit</h2>
+                <!-- Dynamic content here -->
+            </div>
+        </div>
+
+        <!-- More widgets as needed... -->
+    </div>
+</div>
+
+</body>
+<!-- Further content within the Main content area -->
+        <!-- Additional Dashboard Widgets -->
+        <div class="grid grid-cols-3 gap-4 mt-5">
+            <!-- Monthly Sales Widget -->
+            <div class="card p-5">
+                <h2 class="font-bold text-lg">Monthly Sales</h2>
+                <!-- Placeholder for dynamic content (e.g., charts, figures) -->
+                <p>Dynamic sales data for the current month.</p>
+            </div>
+
+            <!-- Weekly Sales Widget -->
+            <div class="card p-5">
+                <h2 class="font-bold text-lg">Weekly Sales</h2>
+                <!-- Placeholder for dynamic content -->
+                <p>Dynamic sales data for the current week.</p>
+            </div>
+
+            <!-- Daily Sales Widget -->
+            <div class="card p-5">
+                <h2 class="font-bold text-lg">Daily Sales</h2>
+                <!-- Placeholder for dynamic content -->
+                <p>Dynamic sales data for today.</p>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h2 class="font-bold text-lg mb-3">Order Management</h2>
+            <div class="flex flex-wrap">
+                <!-- Order Status Update Widget -->
+                <div class="card p-5 flex-1">
+                    <h3 class="font-bold text-md">Update Order Status</h3>
+                    <form action="/update-order-status" method="POST">
+                        @csrf <!-- Ensure CSRF token is included for form security -->
+                        <label for="orderNumber" class="block">Order Number:</label>
+                        <input type="text" id="orderNumber" name="orderNumber" class="border-2 border-gray-200 rounded mt-1 mb-3 p-2 w-full">
+
+                        <label for="status" class="block">Status:</label>
+                        <select id="status" name="status" class="border-2 border-gray-200 rounded mt-1 mb-3 p-2 w-full">
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="delivered">Delivered</option>
+                        </select>
+
+                        <button type="submit" class="bg-teal-500 text-white rounded p-2">Update Status</button>
+                    </form>
+                </div>
+
+                <!-- Custom Date Sales Widget -->
+                <div class="card p-5 flex-1 ml-4">
+                    <h3 class="font-bold text-md">Sales by Custom Date</h3>
+                    <!-- Placeholder for custom date selection and sales data display -->
+                    <p>Select a custom date range to display sales data.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Account Creation Widget -->
+        <div class="mt-5">
+            <div class="card p-5">
+                <h2 class="font-bold text-lg">Create Admin Account</h2>
+                <form action="/create-admin-account" method="POST">
+                    @csrf <!-- Ensure CSRF token is included for form security -->
+                    <label for="adminName" class="block">Name:</label>
+                    <input type="text" id="adminName" name="adminName" class="border-2 border-gray-200 rounded mt-1 mb-3 p-2 w-full">
+
+                    <label for="adminEmail" class="block">Email:</label>
+                    <input type="email" id="adminEmail" name="adminEmail" class="border-2 border-gray-200 rounded mt-1 mb-3 p-2 w-full">
+
+                    <label for="adminPassword" class="block">Password:</label>
+                    <input type="password" id="adminPassword" name="adminPassword" class="border-2 border-gray-200 rounded mt-1 mb-3 p-2 w-full">
+
+                    <button type="submit" class="bg-teal-500 text-white rounded p-2">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Placeholder for JavaScript to enhance UI interactions, validation, etc.
+</script>
+
+</body>
+</html>
