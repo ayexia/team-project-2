@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ML Menswear Admin Dashboard</title>
-    <!-- Tailwind CSS for styling (adjust the colors as needed) -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body { background-color: #E5E7EB; } /* Grey background */
@@ -29,8 +28,9 @@
         <div class="header p-5 text-white">
             <h1 class="text-xl">Welcome to ML Menswear Admin Dashboard</h1>
         </div>
- <!-- Dashboard Widgets -->
- <div class="grid gap-4 mt-5">
+        
+        <!-- Dashboard Widgets -->
+        <div class="grid gap-4 mt-5">
             <!-- Stock Alert Widget -->
             <div class="card p-5">
                 <h2 class="font-bold text-lg">Stock Alerts</h2>
@@ -47,8 +47,9 @@
                     <p>No products have low stock.</p>
                 @endif
             </div>
- <!-- User Management Widget -->
- <div class="card p-5">
+            
+            <!-- User Management Widget -->
+            <div class="card p-5">
                 <h2 class="font-bold text-lg mb-3">User Management</h2>
                 <table class="table-auto w-full">
                     <thead>
@@ -69,7 +70,7 @@
                                     <form action="{{ route('admin.changeUserType', $user) }}" method="POST">
                                         @csrf
                                         @method('POST')
-                                        <button type="submit" class="bg-teal-500 text-white rounded p-2">
+                                        <button type="submit" class="bg-teal-500 text-black rounded p-2">
                                             @if ($user->usertype === 'admin')
                                                 Make User
                                             @else
@@ -93,84 +94,79 @@
                         <option value="monthly" {{ $selectedPeriod === 'monthly' ? 'selected' : '' }}>Monthly</option>
                         <option value="weekly" {{ $selectedPeriod === 'weekly' ? 'selected' : '' }}>Weekly</option>
                     </select>
-                    <button type="submit" class="bg-teal-500 text-white rounded p-2 mt-2">View Sales</button>
+                    <button type="submit" class="bg-teal-500 text-black rounded p-2 mt-2">View Sales</button>
 </form>
 @if ($orders->count() > 0)
-                        <table class="table-auto w-full mt-4">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2">Order ID</th>
-                                    <th class="px-4 py-2">Total Amount</th>
-                                    <th class="px-4 py-2">Order Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($orders as $order)
-                                    <tr>
-                                        <td class="border px-4 py-2">{{ $order->id }}</td>
-                                        <td class="border px-4 py-2">{{ $order->total_price }}</td>
-                                        <td class="border px-4 py-2">{{ $order->created_at->format('Y-m-d') }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    @else
-                        <p class="mt-4">No orders found for the selected period.</p>
-                    @endif
-                </div>
+    <table class="table-auto w-full mt-4">
+        <thead>
+            <tr>
+                <th class="px-4 py-2">Order ID</th>
+                <th class="px-4 py-2">Total Amount</th>
+                <th class="px-4 py-2">Order Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($orders as $order)
+                <tr>
+                    <td class="border px-4 py-2">{{ $order->id }}</td>
+                    <td class="border px-4 py-2">{{ $order->total_price }}</td>
+                    <td class="border px-4 py-2">{{ $order->created_at->format('Y-m-d') }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@else
+    <p class="mt-4">No orders found for the selected period.</p>
+@endif
+</div>
 
-            <!-- Order Management -->
-            <div class="card p-5">
-                    <h2 class="font-bold text-lg mb-3">Order Management</h2>
-                    <table class="table-auto w-full">
-                        <thead>
-                            <tr>
-                                <th class="px-4 py-2">Order ID</th>
-                                <th class="px-4 py-2">Total Amount</th>
-                                <th class="px-4 py-2">Order Date</th>
-                                <th class="px-4 py-2">Status</th>
-                                <th class="px-4 py-2">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($allOrders as $order)
-                                <tr>
-                                    <td class="border px-4 py-2">{{ $order->id }}</td>
-                                    <td class="border px-4 py-2">{{ $order->total_price }}</td>
-                                    <td class="border px-4 py-2">{{ $order->created_at->format('Y-m-d') }}</td>
-                                    <td class="border px-4 py-2">{{ $order->status }}</td>
-                                    <td class="border px-4 py-2">
-                                        <div class="flex">
-                                            @if ($order->status === 'Ordered')
-                                                <form action="{{ route('admin.pendingOrder', $order) }}" method="POST">
-                                                    @csrf
-                                                    @method('POST')
-                                                    <button type="submit" class="bg-teal-500 text-white rounded p-2 mr-2">Mark as Pending</button>
-                                                </form>
-                                            @elseif ($order->status === 'Pending')
-                                                <form action="{{ route('admin.dispatchedOrder', $order) }}" method="POST">
-                                                    @csrf
-                                                    @method('POST')
-                                                    <button type="submit" class="bg-teal-500 text-white rounded p-2 mr-2">Mark as Dispatched</button>
-                                                </form>
-                                            @elseif ($order->status === 'Dispatched')
-                                                <form action="{{ route('admin.deliveredOrder', $order) }}" method="POST">
-                                                    @csrf
-                                                    @method('POST')
-                                                    <button type="submit" class="bg-teal-500 text-white rounded p-2 mr-2">Mark as Delivered</button>
-                                                </form>
-                                            @endif
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Order Management -->
+<div class="card p-5">
+    <h2 class="font-bold text-lg mb-3">Order Management</h2>
+    <table class="table-auto w-full">
+        <thead>
+            <tr>
+                <th class="px-4 py-2">Order ID</th>
+                <th class="px-4 py-2">Total Amount</th>
+                <th class="px-4 py-2">Order Date</th>
+                <th class="px-4 py-2">Status</th>
+                <th class="px-4 py-2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($allOrders as $order)
+                <tr>
+                    <td class="border px-4 py-2">{{ $order->id }}</td>
+                    <td class="border px-4 py-2">{{ $order->total_price }}</td>
+                    <td class="border px-4 py-2">{{ $order->created_at->format('Y-m-d') }}</td>
+                    <td class="border px-4 py-2">{{ $order->status }}</td>
+                    <td class="border px-4 py-2">
+                        <div class="flex">
+                            @if ($order->status === 'Pending')
+                                <form action="{{ route('admin.processingOrder', $order) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="bg-teal-500 text-black rounded p-2 mr-2">Mark as Processing</button>
+                                </form>
+                            @elseif ($order->status === 'Processing')
+                                <form action="{{ route('admin.shippedOrder', $order) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="bg-teal-500 text-black rounded p-2 mr-2">Mark as Shipped</button>
+                                </form>
+                            @elseif ($order->status === 'Shipped')
+                                <form action="{{ route('admin.deliveredOrder', $order) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="bg-teal-500 text-black rounded p-2 mr-2">Mark as Delivered</button>
+                                </form>
+                            @endif
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
 </div>
 </body>
 </html>
-

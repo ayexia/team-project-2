@@ -167,21 +167,20 @@ class OrderController extends Controller
         }
     }    
 
-    public function pendingOrder(Order $order)
+    public function processingOrder(Order $order)
     {
-        if ($order->status === 'Ordered') {
-            $order->status = 'Pending';
+        if ($order->status === 'Pending') {
+            $order->status = 'Processing';
             $order->save();
-    
             return redirect()->back()->with('success', 'Order is now pending.');
         } else {
             return redirect()->back()->with('error', 'Order could not be changed.');
         }
     } 
-    public function dispatchedOrder(Order $order)
+    public function shippedOrder(Order $order)
     {
-        if ($order->status === 'Pending') {
-            $order->status = 'Dispatched';
+        if ($order->status === 'Processing') {
+            $order->status = 'Shipped';
             $order->save();
     
             return redirect()->back()->with('success', 'Order has dispatched.');
@@ -191,7 +190,7 @@ class OrderController extends Controller
     } 
     public function deliveredOrder(Order $order)
     {
-        if ($order->status === 'Dispatched') {
+        if ($order->status === 'Shipped') {
             $order->status = 'Delivered';
             $order->save();
     

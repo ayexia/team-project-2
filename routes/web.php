@@ -48,8 +48,8 @@ Route::get('/profile', function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::post('/admin/change-user-type/{user}', [AdminController::class, 'changeUserType'])->name('admin.changeUserType');
-    Route::post('/admin/pending-order/{order}', [OrderController::class, 'pendingOrder'])->name('admin.pendingOrder');
-    Route::post('/admin/dispatched-order/{order}', [OrderController::class, 'dispatchedOrder'])->name('admin.dispatchedOrder');
+    Route::post('/admin/processing-order/{order}', [OrderController::class, 'processingOrder'])->name('admin.processingOrder');
+    Route::post('/admin/shipped-order/{order}', [OrderController::class, 'shippedOrder'])->name('admin.shippedOrder');
     Route::post('/admin/delivered-order/{order}', [OrderController::class, 'deliveredOrder'])->name('admin.deliveredOrder');
 });
 

@@ -36,9 +36,13 @@ class AdminController extends Controller
 
     public function changeUserType(User $user)
     {
-        $user->usertype = 'admin';
+        if ($user->usertype === 'admin') {
+            $user->usertype = 'user';
+        } else {
+            $user->usertype = 'admin';
+        }
         $user->save();
-        return redirect()->back()->with('success', 'User type changed to admin successfully.');
+        return redirect()->back()->with('success', 'User type changed successfully.');
     }
-}
+}    
 
