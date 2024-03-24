@@ -33,217 +33,7 @@ if ($user) {
     <link rel="stylesheet" href="css/websiteStyle.css">
     
 </head>
-<style>
-.product {
-    display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center-align the items */
-    margin-bottom: 20px; /* Space between items */
-}
 
-.product img {
-    margin-bottom: 10px; /* Space between image and text */
-}
-
-/* Container adjustments for cart items and pricing */
-.productContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-/* Individual cart item style adjustments */
-.productContainer .product {
-    width: calc(50% - 20px); /* Adjust based on layout preference */
-    margin: 10px;
-    text-align: center;
-}
-
-/* Styles for the subtotal and total price section */
-.total-price {
-    flex-basis: 100%; /* Ensure it spans the full width */
-    text-align: right; /* Align the text to the right */
-    margin-top: 20px; /* Space it out from the products */
-}
-
-/* Ensuring responsive behavior */
-@media (max-width: 768px) {
-    .productContainer {
-        flex-direction: column;
-    }
-
-    .productContainer .product {
-        width: 100%; /* Full width for smaller screens */
-    }
-
-    .total-price {
-        text-align: center; /* Center-align for readability on small screens */
-    }
-}
-
-/* Additional styling for form elements inside products for consistency */
-.product form input[type="number"],
-.product form button {
-    padding: 5px 10px;
-    margin: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.product form button {
-    background-color: #008080;
-    color: white;
-    cursor: pointer;
-}
-
-.product form button:hover {
-    background-color: #006666; /* Darker on hover */
-}
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
-
-a {
-    color: #008080;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Header */
-header {
-    background-color: #000;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    align-items: center;
-}
-
-.logo img {
-    width: 120px;
-    height: auto;
-}
-
-/* Search and User Icons */
-.search-bar form {
-    display: flex;
-    align-items: center;
-}
-
-.search-bar input[type="text"] {
-    padding: 10px;
-    margin-right: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.user-icons i {
-    margin: 0 10px;
-    cursor: pointer;
-}
-
-/* Navigation */
-nav {
-    background-color: #333;
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-}
-
-nav a {
-    color: #fff;
-    margin: 0 15px;
-    padding: 10px 15px;
-}
-
-/* Promo Banner */
-.promo-banner {
-    background-color: #008080;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-}
-
-/* Main Content and Cart Items */
-.container {
-    padding: 20px;
-    background-color: #fff;
-}
-
-.productContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.product {
-    border: 1px solid #ddd;
-    margin: 10px;
-    padding: 10px;
-    width: calc(33.333% - 20px);
-    box-sizing: border-box;
-    background-color: #f9f9f9;
-}
-
-.product img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.product h3 {
-    margin: 10px 0;
-    color: #333;
-}
-
-/* Update and Delete Buttons */
-button {
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 5px;
-}
-
-.btn-outline-danger {
-    background-color: #fff;
-    color: #d9534f;
-    border: 1px solid #d9534f;
-}
-
-.btn-outline-danger:hover {
-    background-color: #d9534f;
-    color: #fff;
-}
-
-.btn-success {
-    background-color: #5cb85c;
-    color: #fff;
-}
-
-.btn-success:hover {
-    background-color: #4cae4c;
-}
-
-/* Footer */
-footer {
-    background-color: #000;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    margin-top: 20px;
-}
-
-.business-details p {
-    margin: 5px 0;
-}</style>
 <body>
     <header>
         <div class="logo">
@@ -279,7 +69,7 @@ footer {
     </div>
     </header>
     <nav>
-    @if (!empty($categories))
+         @if (!empty($categories))
         @foreach($categories as $category)
         @if ($loop->iteration <= 5)
             <a href="{{ route('view.category', ['category' => $category->name]) }}">{{ $category->name }}</a>
@@ -326,6 +116,7 @@ footer {
       <div class="product">
       <img src="{{ $cartItem->product->image_url }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
       <h3>{{$cartItem->product->name}}</h3>
+      <p>Size: {{$cartItem->size}}</p>
         <p>£{{$cartItem->price}}</p>
         <form action="{{ route('update.cart') }}" method="POST">
             @csrf
@@ -349,6 +140,7 @@ footer {
                 <div class="product">
                     <img src="{{ $item['image_url'] }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
                     <h3>{{ $item['name'] }}</h3>
+                    <p>Size: {{ $item['size'] }}</p>
                     <p>£{{ $item['price'] }}</p>
                     <form action="{{ route('update.cart') }}" method="POST">
                     @csrf

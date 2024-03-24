@@ -19,7 +19,7 @@ class Product extends Model
         'image_url',
         'colour',
         'brand',
-        'size',
+        'sizes',
         'category_id',
         'available',
     ];
@@ -37,12 +37,7 @@ class Product extends Model
     
     public function getAvailableSizes()
     {
-        $sizes = DB::table('products')
-                    ->select('size')
-                    ->where('id', $this->id)
-                    ->distinct()
-                    ->pluck('size');
-
-        return $sizes;
+        return json_decode($this->sizes);
     }
+
 }

@@ -13,6 +13,7 @@ class CartItem extends Model
         'product_id',
         'price',
         'quantity',
+        'size',
     ];
 
     public function cart()

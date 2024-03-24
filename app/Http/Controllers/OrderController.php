@@ -85,6 +85,7 @@ class OrderController extends Controller
             $orderItem->product_id = $product->id;
             $orderItem->price = $product->price;
             $orderItem->quantity = $cartItem->quantity;
+            $orderItem->size = $cartItem->size;
             $orderItem->save();
 
             $order->total_price += ($product->price * $cartItem->quantity);
@@ -108,6 +109,7 @@ class OrderController extends Controller
             $orderItem->product_id = $product->id;
             $orderItem->price = $product->price;
             $orderItem->quantity = $item['quantity'];
+            $orderItem->size = $item['size'];
             $orderItem->save();
 
             $order->total_price += ($product->price * $item['quantity']);

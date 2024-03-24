@@ -48,9 +48,12 @@
             <label>Brand</label>
             <input type="text" name="brand" placeholder="Brand" />
         </div><br>
-        <div>
-            <label>Size</label>
-            <input type="text" name="size" placeholder="Size" />
+        <div id="sizeInputs">
+            <label>Sizes</label>
+            <div>
+                <input type="text" name="sizes[]" placeholder="Size" />
+                <button type="button" onclick="addSizeField()">Add Size</button>
+            </div>
         </div><br>
         <div>
           <select name="category_id" id="category_id" class="form-control">
@@ -73,5 +76,17 @@
             <input type="submit" value="Save a New Product" />
         </div>
     </form>
+    <script>
+        function addSizeField() {
+            const sizeInputs = document.getElementById('sizeInputs');
+            const div = document.createElement('div');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'sizes[]';
+            input.placeholder = 'Size';
+            div.appendChild(input);
+            sizeInputs.appendChild(div);
+        }
+    </script>
 </body>
 </html>

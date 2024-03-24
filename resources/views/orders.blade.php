@@ -118,6 +118,7 @@ if ($user) {
         <div class="product">
         <img src="{{ $item->product->image_url }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
         <h3>{{$item->product->name}}</h3>
+        <p>Size: {{ $item->size }}</p>
         <p>£{{$item->product->price}}</p>
         <p>Quantity: {{ $item->quantity }}</p>
                 @endforeach

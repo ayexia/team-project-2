@@ -65,11 +65,13 @@ class ProductController extends Controller
             'image_url' => 'required|url',
             'colour' => 'nullable',
             'brand' => 'nullable',
-            'size' => 'required',
+            'sizes' => 'required|array|min:1',
+            'sizes.*' => 'required|string',
             'category_id' => 'required|numeric',
             'available' => 'required|in:yes,no',
         ]);
 
+        $data['sizes'] = json_encode($data['sizes']);
         $newProduct = Product::create($data);
 
         return redirect(route('product.index'));
@@ -99,11 +101,13 @@ class ProductController extends Controller
             'image_url' => 'required|url',
             'colour' => 'nullable',
             'brand' => 'nullable',
-            'size' => 'required',
+            'sizes' => 'required|array|min:1',
+            'sizes.*' => 'required|string',
             'category_id' => 'required|numeric',
             'available' => 'required|in:yes,no',
         ]);
 
+        $data['sizes'] = json_encode($data['sizes']);
         $product->update($data);
 
         return redirect(route('product.index'))->with('success', 'Product updated successfully');
@@ -140,6 +144,13 @@ class ProductController extends Controller
             }
         
         $products = $products->get();
-        return view('products.tops', compact('products', 'category', 'categories'));
+        
+    $availableSizes = [];
+    
+    foreach ($products as $product) {
+        $availableSizes[$product->id] = $product->getAvailableSizes();
+    }
+    
+    return view('products.tops', compact('products', 'category', 'categories', 'availableSizes'));
     }
 }
