@@ -44,7 +44,7 @@
                 <th>Image URL</th>
                 <th>Colour</th>
                 <th>Brand</th>
-                <th>Size</th>
+                <th>Sizes</th>
                 <th>Category</th>
                 <th>Available?</th>
                 <th>View</th>
@@ -62,7 +62,13 @@
                     <td>{{$product->image_url}}</td>
                     <td>{{$product->colour}}</td>
                     <td>{{$product->brand}}</td>
-                    <td>{{$product->size}}</td>
+                    <td>
+                    @if ($product->sizes)
+                @foreach(json_decode($product->sizes) as $size)
+                    {{$size}},
+                @endforeach
+                @endif
+                    </td>
                     <td>{{ $product->category->name }}</td>
                     <td>{{$product->available}}</td>
                     <td>

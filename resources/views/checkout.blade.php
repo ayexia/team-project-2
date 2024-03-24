@@ -113,10 +113,12 @@ if ($user) {
       <div class="product">
       <img src="{{ $cartItem->product->image_url }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
       <h3>{{$cartItem->product->name}}</h3>
+      <p>Size: {{ $cartItem->size }}</p>
         <p>£{{$cartItem->price}}</p>
         <form action="{{ route('update.cart') }}" method="POST">
             @csrf
             <input type="hidden" name="cart_item_id" value="{{ $cartItem->id }}">
+            <input type="hidden" name="size" value="{{ $cartItem->size }}">
             <p>Quantity: <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="0" max="{{$cartItem->product->quantity}}">
                 <button type="submit">Update</button></p>
         </form>
@@ -162,6 +164,7 @@ if ($user) {
                 <div class="product">
                     <img src="{{ $item['image_url'] }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
                     <h3>{{ $item['name'] }}</h3>
+                    <p>Size: {{ $item['size'] }}</p>
                     <p>£{{ $item['price'] }}</p>
                     <form action="{{ route('update.cart') }}" method="POST">
                     @csrf

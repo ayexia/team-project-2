@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
 
 class Product extends Model
 {
@@ -17,7 +19,7 @@ class Product extends Model
         'image_url',
         'colour',
         'brand',
-        'size',
+        'sizes',
         'category_id',
         'available',
     ];
@@ -31,4 +33,11 @@ class Product extends Model
     {
     return $this->hasMany(Review::class);
     }
+
+    
+    public function getAvailableSizes()
+    {
+        return json_decode($this->sizes);
+    }
+
 }

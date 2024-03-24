@@ -69,7 +69,7 @@ if ($user) {
     </div>
     </header>
     <nav>
-    @if (!empty($categories))
+         @if (!empty($categories))
         @foreach($categories as $category)
         @if ($loop->iteration <= 5)
             <a href="{{ route('view.category', ['category' => $category->name]) }}">{{ $category->name }}</a>
@@ -116,6 +116,7 @@ if ($user) {
       <div class="product">
       <img src="{{ $cartItem->product->image_url }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
       <h3>{{$cartItem->product->name}}</h3>
+      <p>Size: {{$cartItem->size}}</p>
         <p>£{{$cartItem->price}}</p>
         <form action="{{ route('update.cart') }}" method="POST">
             @csrf
@@ -139,6 +140,7 @@ if ($user) {
                 <div class="product">
                     <img src="{{ $item['image_url'] }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
                     <h3>{{ $item['name'] }}</h3>
+                    <p>Size: {{ $item['size'] }}</p>
                     <p>£{{ $item['price'] }}</p>
                     <form action="{{ route('update.cart') }}" method="POST">
                     @csrf

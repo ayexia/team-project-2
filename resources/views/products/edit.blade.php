@@ -48,9 +48,14 @@
             <label>Brand</label>
             <input type="text" name="brand" placeholder="Brand" value="{{$product->brand}}"/>
         </div><br>
-        <div>
-            <label>Size</label>
-            <input type="text" name="size" placeholder="Size" value="{{$product->size}}"/>
+        <div id="sizeInputs">
+            <label>Sizes</label><br>
+            @if ($product->sizes)
+            @foreach(json_decode($product->sizes) as $size)
+                <input type="text" name="sizes[]" placeholder="Size" value="{{ $size }}" /><br>
+            @endforeach
+            <button type="button" onclick="addSizeField()">Add Size</button>
+            @endif
         </div><br>
         <div>
           <select name="category_id" id="category_id" class="form-control">
@@ -73,5 +78,16 @@
             <input type="submit" value="Update" />
         </div>
     </form>
+    <script>
+        function addSizeField() {
+            const sizeInputs = document.getElementById('sizeInputs');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'sizes[]';
+            input.placeholder = 'Size';
+            sizeInputs.appendChild(input);
+            sizeInputs.appendChild(document.createElement('br'));
+        }
+    </script>
 </body>
 </html>

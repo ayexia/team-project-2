@@ -109,26 +109,37 @@ if ($user) {
             <p>{!! nl2br(e($product->description)) !!}</p><br>
             <p>Colour: {{$product->colour}}<br>
                Brand: {{$product->brand}}<br>
-               Size: {{$product->size}}<br>
+               Size:
+        <div class="size-buttons">
+            @if($availableSizes)
+                @foreach($availableSizes as $size)
+                    <button class="size-button">{{ $size }}</button>
+                @endforeach
+            @endif
+        </div>
                In: {{ $product->category->name }}</p><br>
         </div>
         @if ($product && $product->available === 'yes')
-        <form action="{{ route('add.to.cart', $product->id) }}" method="POST" class="btn btn-outline-danger">
-    @csrf
-    <input type="hidden" name="product_id" value="{{$product->id}}">
-    <div class="input-group">
-        <input type="number" name="quantity" min="1" max="{{$product->quantity}}" value="1" class="form-control" style="width: 30px; height: 25px;" required>
-        <div class="input-group-append">
-            <button class="btn btn-primary" type="submit">
-                <i class="fas fa-shopping-basket basket-icon"></i>
-                Add to Basket
-            </button>
-        </div>
-    </div>
-</form>
-                @endif
-</div>
-<br>
+    <form action="{{ route('add.to.cart', $product->id) }}" method="POST" class="btn btn-outline-danger">
+        @csrf
+        <input type="hidden" name="product_id" value="{{$product->id}}">
+        <input type="hidden" id="selectedSize" name="size" value="">
+        <div class="input-group">
+            <input type="number" name="quantity" min="1" max="{{$product->quantity}}" value="1" class="form-control" style="width: 30px; height: 25px;" required>
+            <div class="input-group-append">
+                <button id="addToCartBtn" class="btn btn-primary" type="submit" disabled>
+                    <i class="fas fa-shopping-basket basket-icon"></i>
+                    Add to Basket
+                        </button>
+                    </div>
+                </div>
+            </form>
+        @else
+            <p class="sold-out-text">Sold Out</p>
+        @endif
+
+            </div>
+            <br>
 <form action="{{ route('add.to.wishlist', $product->id) }}" class="btn btn-outline-danger"> 
         @csrf
         <div class="input-group-append">
@@ -236,7 +247,14 @@ if ($user) {
 .review form button:hover {
     background-color: #005353;
 }
-
+    .size-button {
+        background-color: #fff; 
+        color: #000; 
+    }
+    .size-button.selected {
+        background-color: #20b2aa; 
+        color: #fff; 
+    }
 </style>
 <!-- Footer section -->
 <footer>
@@ -248,4 +266,28 @@ if ($user) {
     <p>&copy; 2024 ML Menswear. All rights reserved.</p>
 </footer>
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const sizeButtons = document.querySelectorAll('.size-button');
+        const addToCartBtn = document.getElementById('addToCartBtn');
+
+        if (sizeButtons.length === 0) {
+            addToCartBtn.disabled = false;
+        } else {
+            addToCartBtn.disabled = true;
+
+            sizeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    sizeButtons.forEach(btn => {
+                        btn.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    document.getElementById('selectedSize').value = this.textContent.trim();
+                    addToCartBtn.disabled = false;
+                });
+            });
+        }
+    });
+</script>
 </html>

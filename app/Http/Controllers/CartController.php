@@ -38,8 +38,10 @@ class CartController extends Controller
         $cart->user_id = auth()->user()->id;
         $cart->save();
     }
+    $size = $request->input('size'); 
     if ($cartItem) {
         $cartItem->quantity += request('quantity');
+        $cartItem->size = $size; 
         $cartItem->save();
 
     } else {
@@ -48,6 +50,7 @@ class CartController extends Controller
             'product_id' => $product->id,
             'quantity' => request('quantity'),
             'price' => $product->price,
+            'size' => $size, 
         ]);
         $cartItem->save();
     }
@@ -61,8 +64,10 @@ class CartController extends Controller
             }
             $cartSession = session('cart', []);
             $product = Product::find($item);
+            $size = $request->input('size');
             if (isset($cartSession[$item])) {
                 $cartSession[$item]['quantity'] += request('quantity');
+                $cartSession[$item]['size'] = $size;
             } else {
                 $cartSession[$item] = [
                     'id' => $product->id,
@@ -71,6 +76,7 @@ class CartController extends Controller
                     'quantity' => request('quantity'),
                     'price' => $product->price,
                     'max_quantity' => $product->quantity,
+                    'size' => $size,
                 ];
             }
             
