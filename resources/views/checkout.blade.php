@@ -150,9 +150,8 @@ if ($user) {
     <label for="name_on_card">Name on Card:</label>
     <input type="text" id="name_on_card" name="name_on_card" placeholder="Name on Card" title="Please enter your name on your card" required><br><br>
     
-    <button type="submit">Submit</button>
+    <button type="submit" style="margin-left:25%">Place Order</button>
 </form>
-        <br><br><button class="btn btn-success" style="margin-left:25%">Place Order</button></a>
         </form>
             @else
         <?php  
@@ -206,7 +205,7 @@ if ($user) {
     <label for="name_on_card">Name on Card:</label>
     <input type="text" id="name_on_card" name="name_on_card" placeholder="Name on Card" title="Please enter your name on your card" required><br><br>
     
-    <button type="submit">Submit</button>
+    <button type="submit">Place Order</button>
     </form>
         @endif
         @endif

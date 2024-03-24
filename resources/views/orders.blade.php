@@ -140,6 +140,12 @@ if ($user) {
                 @csrf
                 <button type="submit">Cancel Order</button>
             </form>
+                @endif
+                @if ($order->status === 'Delivered')
+            <form method="POST" action="{{ route('order.return', ['order' => $order->id]) }}">
+                @csrf
+                <button type="submit">Return Order</button>
+            </form>
         @endif
         @endforeach
         @else

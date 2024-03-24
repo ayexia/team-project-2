@@ -57,11 +57,6 @@ Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name(
 Route::put('/product/{product}/update', [ProductController::class, 'update'])->name('product.update')->middleware(['auth', 'admin']);
 Route::delete('/product/{product}/destroy', [ProductController::class, 'destroy'])->name('product.destroy')->middleware(['auth', 'admin']);
 Route::get('/product/{product}/show', [ProductController::class, 'show'])->name('product.show');
-// Route::get('/tops', [ProductController::class, 'viewTops'])->name('tops');
-Route::get('/trousers', [ProductController::class, 'viewTrousers'])->name('trousers');
-Route::get('/shoes', [ProductController::class, 'viewShoes'])->name('shoes');
-Route::get('/coats-and-jackets', [ProductController::class, 'viewCoatsAndJackets'])->name('coats-and-jackets');
-Route::get('/accessories', [ProductController::class, 'viewAccessories'])->name('accessories');
 Route::get('/product/{category}', [ProductController::class, 'viewCategory'])->name('view.category');
 
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
@@ -73,6 +68,7 @@ Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
 Route::post('/checkout', [OrderController::class, 'confirmOrder'])->name('order');
 Route::get('/orders', [OrderController::class, 'order'])->name('orders');
 Route::post('/order/{order}/cancel', [OrderController::class, 'cancelOrder'])->name('order.cancel');
+Route::post('/order/{order}/return', [OrderController::class, 'returnOrder'])->name('order.return');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index')->middleware('auth');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create')->middleware(['auth', 'admin']);

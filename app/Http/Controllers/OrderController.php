@@ -132,14 +132,38 @@ class OrderController extends Controller
         if ($order->status === 'Pending' || $order->status === 'Processing') {
             $orderItems = OrderItem::where('order_id', $order->id)->get();
             foreach ($orderItems as $orderItem) {
-            $product = Product::find($orderItem->product_id);
+                $product = Product::find($orderItem->product_id);
                 $product->quantity += $orderItem->quantity;
+                if ($product->quantity > 0) {
+                    $product->available = 'yes';
+                }
                 $product->save();
             }
             $order->status = 'Cancelled';
             $order->save();
-
+    
             return redirect()->back()->with('success', 'Order has been cancelled successfully.');
         }
     }
+    
+    public function returnOrder(Order $order)
+    {
+        if ($order->status === 'Delivered') {
+            $orderItems = OrderItem::where('order_id', $order->id)->get();
+            foreach ($orderItems as $orderItem) {
+                $product = Product::find($orderItem->product_id);
+                $product->quantity += $orderItem->quantity;
+                if ($product->quantity > 0) {
+                    $product->available = 'yes';
+                }
+                $product->save();
+            }
+            $order->status = 'Returned';
+            $order->save();
+    
+            return redirect()->back()->with('success', 'Order has been returned successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Order cannot be returned as it is not delivered yet.');
+        }
+    }    
 }
