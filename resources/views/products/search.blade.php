@@ -19,6 +19,7 @@ if ($user) {
         }
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,34 +111,18 @@ if ($user) {
                         <p>Colour: {{$product->colour}}</p>
                         <p>Brand: {{$product->brand}}</p>
                         <p>Sizes:</p>
-                        <div class="size-buttons">
-                            @if ($product->sizes)
-                                @foreach(json_decode($product->sizes) as $size)
-                                    <button class="size-button">{{$size}}</button>
-                                @endforeach
-                            @endif
-                        </div>
+                        @if ($product->sizes)
+                            @foreach(json_decode($product->sizes) as $size)
+                                {{$size}}
+                                @unless ($loop->last)
+                                    ,
+                                @endunless
+                            @endforeach
+                        @endif
+
                         <p>
                             <a href="{{route('product.show', ['product' => $product])}}">View</a>
                         </p>
-                        @if ($product && $product->available === 'yes')
-    <form action="{{ route('add.to.cart', $product->id) }}" method="POST" class="btn btn-outline-danger">
-        @csrf
-        <input type="hidden" name="product_id" value="{{$product->id}}">
-        <input type="hidden" id="selectedSize" name="size" value="">
-        <div class="input-group">
-            <input type="number" name="quantity" min="1" max="{{$product->quantity}}" value="1" class="form-control" style="width: 30px; height: 25px;" required>
-            <div class="input-group-append">
-                <button id="addToCartBtn" class="btn btn-primary" type="submit" disabled>
-                    <i class="fas fa-shopping-basket basket-icon"></i>
-                    Add to Basket
-                        </button>
-                    </div>
-                </div>
-            </form>
-        @else
-            <p class="sold-out-text">Sold Out</p>
-        @endif
                     </div>
                 @endforeach
             @else
@@ -155,32 +140,5 @@ if ($user) {
         </div>
         <p>&copy; 2024 ML Menswear. All rights reserved.</p>
     </footer>
-
-    <script>
-    document.querySelectorAll('.product').forEach(product => {
-        const addToCartBtn = product.querySelector('.add-to-cart-btn');
-        const sizeButtons = product.querySelectorAll('.size-button');
-
-        const handleSizeButtonClick = function() {
-            const selectedSize = this.textContent.trim();
-            sizeButtons.forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            this.classList.add('selected');
-            addToCartBtn.disabled = false;
-            const selectedSizeInput = product.querySelector('.selected-size');
-            selectedSizeInput.value = selectedSize;
-        };
-
-        if (sizeButtons.length > 0) {
-            sizeButtons.forEach(button => {
-                button.addEventListener('click', handleSizeButtonClick);
-            });
-            addToCartBtn.disabled = true;
-        } else {
-            addToCartBtn.disabled = false;
-        }
-    });
-</script>
 </body>
 </html>

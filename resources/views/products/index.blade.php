@@ -62,12 +62,15 @@
                     <td>{{$product->image_url}}</td>
                     <td>{{$product->colour}}</td>
                     <td>{{$product->brand}}</td>
-                    <td>
+                    <td>                    
                     @if ($product->sizes)
-                @foreach(json_decode($product->sizes) as $size)
-                    {{$size}},
-                @endforeach
-                @endif
+                            @foreach(json_decode($product->sizes) as $size)
+                                {{$size}}
+                                @unless ($loop->last)
+                                    ,
+                                @endunless
+                            @endforeach
+                        @endif
                     </td>
                     <td>{{ $product->category->name }}</td>
                     <td>{{$product->available}}</td>
