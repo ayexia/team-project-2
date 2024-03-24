@@ -89,72 +89,142 @@ if ($user) {
     <div>
         @if(session()->has('success'))
            <div>
-              {{session('success')}}
+              {{ session('success') }}
            </div>
            @php
             session()->forget('success');
             session()->save();
-         @endphp
+           @endphp
         @endif
     </div>
     <br>
-        <div class= "productContainer">
+    <div class="productContainer">
         <?php
-        $user = auth()->user();
-        if ($user) {
-            $orders = Order::where('user_id', $user->id)->get();
-        } else {
-            $guestIdentifier = session()->get('guest_identifier');
-            $orders = Order::where('guest_identifier', $guestIdentifier)->get();
-        }
+            $user = auth()->user();
+            if ($user) {
+                $orders = Order::where('user_id', $user->id)->get();
+            } else {
+                $guestIdentifier = session()->get('guest_identifier');
+                $orders = Order::where('guest_identifier', $guestIdentifier)->get();
+            }
         ?>
-         @if($orders->isNotEmpty())
-         @foreach ($orders as $order) 
-             <?php $orderItems = OrderItem::where('order_id', $order->id)->get(); ?>
-
-             <h2>Order Number: {{ $order->id }}</h2>
-            
-        @foreach ($orderItems as $item)
-        <div class="product">
-        <img src="{{ $item->product->image_url }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
-        <h3>{{$item->product->name}}</h3>
-        <p>Size: {{ $item->size }}</p>
-        <p>£{{$item->product->price}}</p>
-        <p>Quantity: {{ $item->quantity }}</p>
-                @endforeach
-                <tr>
-                    <td colspan="5"><h4>Address:</h4> {{ $order->address }}</td>
-                </tr>
-                <tr>
-                    <td colspan="5"><h4>Status:</h4> {{ $order->status }}</td>
-                </tr>
-                <tr>
-                    <td colspan="5"><h4>Total Price:</h4> £{{ $order->total_price }}</td>
-                </tr>
-                <tr>
-                    <td colspan="5"><h4>Order Date:</h4> {{ $order->order_date }}</td>
-                </tr>
-                <br><br>
-                @if ($order->status === 'Pending' || $order->status === 'Processing')
-            <form method="POST" action="{{ route('order.cancel', ['order' => $order->id]) }}">
-                @csrf
-                <button type="submit">Cancel Order</button>
-            </form>
-        @endif
-        @endforeach
+        @if($orders->isNotEmpty())
+            @foreach($orders as $order) 
+                <?php $orderItems = OrderItem::where('order_id', $order->id)->get(); ?>
+                <div class="order">
+                    <h2>Order Number: {{ $order->id }}</h2>
+                    @foreach ($orderItems as $item)
+                        <div class="order-item">
+                            <img src="{{ $item->product->image_url }}" class="prodImg"/>
+                            <div class="order-item-details">
+                                <h3>{{ $item->product->name }}</h3>
+                                <p>Size: {{ $item->size }}</p>
+                                <p>£{{ $item->product->price }}</p>
+                                <p>Quantity: {{ $item->quantity }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                    <div class="order-details">
+                        <p><span class="teal">Address:</span> {{ $order->address }}</p>
+                        <p><span class="teal">Status:</span> {{ $order->status }}</p>
+                        <p><span class="teal">Total Price:</span> £{{ $order->total_price }}</p>
+                        <p><span class="teal">Order Date:</span> {{ $order->order_date }}</p>
+                        @if ($order->status === 'Pending' || $order->status === 'Processing')
+                            <form method="POST" action="{{ route('order.cancel', ['order' => $order->id]) }}">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-danger">Cancel Order</button>
+                            </form>
+                        @elseif ($order->status === 'Delivered')
+                            <form method="POST" action="{{ route('order.return', ['order' => $order->id]) }}">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-danger">Return Order</button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
         @else
-        No orders placed
+            <p>No orders placed</p>
         @endif
     </div>
-    </main>
-    <!-- Footer section -->
-    <footer>
-      <div class="business-details">
-          <p>Email: info@mlmenswear.com</p>
-          <p>Contact Number: +44 1234 567890</p>
-          <p>Address: 123 Fashion Street, London, UK</p>
-      </div>
-      <p>&copy; 2024 ML Menswear. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+</main>
+
+<style>
+/* Order History page styles */
+.order {
+    width: calc(33.33% - 40px); /* Adjust the width as per your preference */
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px; /* Add margin between each order */
+    margin-bottom: 20px; /* Add margin between each row */
+}
+
+.order h2 {
+    color: #008080;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.order-item {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.order-item img {
+    width: 120px;
+    height: 120px;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.order-item-details h3 {
+    color: #008080;
+    font-size: 18px;
+    margin: 0;
+}
+
+.order-details {
+    margin-top: 20px;
+}
+
+.order-details p {
+    margin: 5px 0;
+}
+
+.order-details .teal {
+    color: #008080;
+}
+
+/* Common styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.teal {
+    color: #008080;
+}
+
+.btn {
+    color: #fff;
+    background-color: #008080;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #006666;
+}
+
+</style>
