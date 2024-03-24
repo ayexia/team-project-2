@@ -147,7 +147,16 @@ if ($user) {
             <p>No orders placed</p>
         @endif
     </div>
-</main>
+    <!-- Footer section -->
+    <footer>
+        <div class="business-details">
+        <p>Email: info@mlmenswear.com</p>
+        <p>Contact Number: +44 1234 567890</p>
+        <p>Address: 123 Fashion Street, London, UK</p>
+    </div>
+    <p>&copy; 2024 ML Menswear. All rights reserved.</p>
+    </footer>
+    </main>
 
 <style>
 /* Order History page styles */
