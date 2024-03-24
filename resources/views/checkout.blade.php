@@ -110,10 +110,10 @@ if ($user) {
             ?>
             @if ($cartItems)
             @foreach($cartItems as $cartItem) 
-      <div class="product">
-      <img src="{{ $cartItem->product->image_url }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
-      <h3>{{$cartItem->product->name}}</h3>
-      <p>Size: {{ $cartItem->size }}</p>
+        <div class="product">
+        <img src="{{ $cartItem->product->image_url }}" style="width: 200px; height: 200px;" class="prodImg"/></div>
+        <h3>{{$cartItem->product->name}}</h3>
+        <p>Size: {{ $cartItem->size }}</p>
         <p>£{{$cartItem->price}}</p>
         <form action="{{ route('update.cart') }}" method="POST">
             @csrf
@@ -131,27 +131,27 @@ if ($user) {
             <br>
             <h3>Address</h3>
             <form action="{{ route('order') }}" method="POST">
-    @csrf
-    <input type="text" name="door_number" placeholder="Door number" maxlength="5" title="Please enter your door number" required><br><br>
-    <input type="text" name="street" placeholder="Street" title="Please enter your street" required><br><br>
-    <input type="text" name="city" placeholder="City" title="Please enter your city" required><br><br>
-    <input type="text" name="postcode" placeholder="Postcode" maxlength="8" title="Please enter your postcode" required><br><br>
+        @csrf
+        <input type="text" name="door_number" placeholder="Door number" maxlength="5" title="Please enter your door number" required><br><br>
+        <input type="text" name="street" placeholder="Street" title="Please enter your street" required><br><br>
+        <input type="text" name="city" placeholder="City" title="Please enter your city" required><br><br>
+        <input type="text" name="postcode" placeholder="Postcode" maxlength="8" title="Please enter your postcode" required><br><br>
     
-    <h3>Payment Details</h3><br>
-    <label for="card_number">Card Number:</label>
-    <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" maxlength="16" pattern="[0-9]{16}" title="Please enter a 16-digit card number" required><br><br>
+        <h3>Payment Details</h3><br>
+        <label for="card_number">Card Number:</label>
+        <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" maxlength="16" pattern="[0-9]{16}" title="Please enter a 16-digit card number" required><br><br>
     
-    <label for="expiry_date">Expiry Date:</label>
-    <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" maxlength="5" required><br><br>
+        <label for="expiry_date">Expiry Date:</label>
+        <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" maxlength="5" required><br><br>
     
-    <label for="cvc">CVC:</label>
-    <input type="text" id="cvc" name="cvc" placeholder="123" maxlength="3" pattern="[0-9]{3}" title="Please enter a 3-digit CVC" required><br><br>
+        <label for="cvc">CVC:</label>
+        <input type="text" id="cvc" name="cvc" placeholder="123" maxlength="3" pattern="[0-9]{3}" title="Please enter a 3-digit CVC" required><br><br>
     
-    <label for="name_on_card">Name on Card:</label>
-    <input type="text" id="name_on_card" name="name_on_card" placeholder="Name on Card" title="Please enter your name on your card" required><br><br>
+        <label for="name_on_card">Name on Card:</label>
+        <input type="text" id="name_on_card" name="name_on_card" placeholder="Name on Card" title="Please enter your name on your card" required><br><br>
     
-    <button type="submit" style="margin-left:25%">Place Order</button>
-</form>
+        <button type="submit" style="margin-left:25%">Place Order</button>
+    </form>
         </form>
             @else
         <?php  
@@ -187,29 +187,38 @@ if ($user) {
         <input type="email" name="email" placeholder="Email Address" title="Please enter your email" required><br><br>
 
         <h3>Address</h3>
-    <input type="text" name="door_number" placeholder="Door number" maxlength="5" title="Please enter your door number" required><br><br>
-    <input type="text" name="street" placeholder="Street" title="Please enter your street" required><br><br>
-    <input type="text" name="city" placeholder="City" title="Please enter your city" required><br><br>
-    <input type="text" name="postcode" placeholder="Postcode" maxlength="8" title="Please enter your postcode" required><br><br>
+        <input type="text" name="door_number" placeholder="Door number" maxlength="5" title="Please enter your door number" required><br><br>
+        <input type="text" name="street" placeholder="Street" title="Please enter your street" required><br><br>
+        <input type="text" name="city" placeholder="City" title="Please enter your city" required><br><br>
+        <input type="text" name="postcode" placeholder="Postcode" maxlength="8" title="Please enter your postcode" required><br><br>
     
-    <h3>Payment Details</h3><br>
-    <label for="card_number">Card Number:</label>
-    <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" maxlength="16" pattern="[0-9]{16}" title="Please enter a 16-digit card number" required><br><br>
+        <h3>Payment Details</h3><br>
+        <label for="card_number">Card Number:</label>
+        <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" maxlength="16" pattern="[0-9]{16}" title="Please enter a 16-digit card number" required><br><br>
     
-    <label for="expiry_date">Expiry Date:</label>
-    <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" maxlength="5" required><br><br>
+        <label for="expiry_date">Expiry Date:</label>
+        <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" maxlength="5" required><br><br>
     
-    <label for="cvc">CVC:</label>
-    <input type="text" id="cvc" name="cvc" placeholder="123" maxlength="3" pattern="[0-9]{3}" title="Please enter a 3-digit CVC" required><br><br>
+        <label for="cvc">CVC:</label>
+        <input type="text" id="cvc" name="cvc" placeholder="123" maxlength="3" pattern="[0-9]{3}" title="Please enter a 3-digit CVC" required><br><br>
     
-    <label for="name_on_card">Name on Card:</label>
-    <input type="text" id="name_on_card" name="name_on_card" placeholder="Name on Card" title="Please enter your name on your card" required><br><br>
-    
-    <button type="submit">Place Order</button>
+        <label for="name_on_card">Name on Card:</label>
+        <input type="text" id="name_on_card" name="name_on_card" placeholder="Name on Card" title="Please enter your name on your card" required><br><br>
+        <button type="submit" class="btn btn-outline-danger" >Place Order</button>
     </form>
         @endif
         @endif
     </div>
+   
+    <!-- Footer section -->
+    <footer>
+        <div class="business-details">
+        <p>Email: info@mlmenswear.com</p>
+        <p>Contact Number: +44 1234 567890</p>
+        <p>Address: 123 Fashion Street, London, UK</p>
+    </div>
+    <p>&copy; 2024 ML Menswear. All rights reserved.</p>
+    </footer>
     <script>
     document.getElementById('card_number').addEventListener('input', function(event) {
         this.value = this.value.replace(/\D/g, '');
