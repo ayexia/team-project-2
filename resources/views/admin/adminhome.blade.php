@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ML Menswear Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/websiteStyle.css') }}">   
+
     <style>
         body { background-color: #E5E7EB; } /* Grey background */
         .header { background-color: #008080; } /* Teal header */
@@ -17,9 +19,12 @@
 <div class="flex">
     <!-- Sidebar -->
     <div class="sidebar p-5 text-white w-1/4">
-        <h2 class="text-lg font-bold mb-5">ML Menswear Dashboard</h2>
+        <h2 class="text-lg font-bold mb-5">ML Admin Dashboard</h2>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="{{route('home')}}">Home</a></li>
+            <li><a href="{{route('product.index')}}">Products</a></li>
+            <li><a href="{{route('categories.index')}}">Categories</a></li>
+            
         </ul>
     </div>
 
