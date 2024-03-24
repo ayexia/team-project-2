@@ -79,99 +79,86 @@ if ($user) {
                  </tr>
         </table>
     </div>
+ 
+    <!-- Product Image with Zoom -->
+    <div class="product-image" id="productImage">
+        <img src="{{$product->image_url}}" alt="Product Image" id="zoomImage">
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i> Top</button>
+
     <script>
-    //zoom in feature
-    const productImage = document.getElementById('productImage');
-    const zoomImage = document.getElementById('zoomImage');
-    productImage.addEventListener('mousemove', function(e) {
-       const { left, top, width, height } = productImage.getBoundingClientRect();
-        const mouseX = e.pageX - left;
-        const mouseY = e.pageY - top;
+        // Zoom in feature
+        const productImage = document.getElementById('productImage');
+        const zoomImage = document.getElementById('zoomImage');
 
-  
-    const percentX = (mouseX / width) * 100;
-    const percentY = (mouseY / height) * 100;
+        productImage.addEventListener('mousemove', function(e) {
+            const { left, top, width, height } = productImage.getBoundingClientRect();
+            const mouseX = e.pageX - left;
+            const mouseY = e.pageY - top;
 
+            const percentX = (mouseX / width) * 100;
+            const percentY = (mouseY / height) * 100;
 
-    zoomImage.style.transformOrigin = `${percentX}% ${percentY}%`;
-    zoomImage.style.transform = 'scale(3.0)'; 
-    });
-
-
-    productImage.addEventListener('mouseleave', function() {
-    zoomImage.style.transform = 'scale(1)';
-    });
-
-    //scroll to top button feature
-    const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-
-    window.onscroll = function() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        scrollToTopBtn.style.display = "block";
-        } else {
-        scrollToTopBtn.style.display = "none";
-        }
-    };
-
-    scrollToTopBtn.addEventListener("click", function() {
-        window.scrollTo({
-            top: 0,
-        behavior: "smooth"
+            zoomImage.style.transformOrigin = `${percentX}% ${percentY}%`;
+            zoomImage.style.transform = 'scale(1.5)'; // Adjust the scale factor as needed
         });
-    }); 
 
-    //scroll to top button feature
-const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        productImage.addEventListener('mouseleave', function() {
+            zoomImage.style.transform = 'scale(1)';
+        });
 
+        // Scroll to top button function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+        </script>
 
-window.onscroll = function() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    scrollToTopBtn.style.display = "block";
-  } else {
-    scrollToTopBtn.style.display = "none";
-  }
-};
+<style>
+    .product-image {
+      position: relative;
+      width: 50%;
+      margin-right: 20px;
+      overflow: hidden;
+    }
 
-scrollToTopBtn.addEventListener("click", function() {
-  
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-});
-    </script>
+    #productImage {
+      width: 100%;
+      height: auto;
+    }
 
-    <style>
-        /*  zoom feature */
-   .product-image {
-    width: 50%; /* Adjust as needed */
-    margin-right: 20px;
-    overflow: hidden;
-  }
-  
-  #zoomImage {
-    width: 100%; /* Make sure the image fills its container */
-    transition: transform 0.5s; /* Smooth transition for zoom effect */
-  }
-  /*scroll*/
-  #scrollToTopBtn {
-    position: fixed;
-    bottom: 210px;
-    left: 100px;
-    z-index: 99;
-    display: none; 
-    /*  button styles */
-    background-color: #008080;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 15px;
-    cursor: pointer;
-  }
-  
-  #scrollToTopBtn:hover {
-    background-color: #006666;
-  }
-    </style>
+    #zoomImage {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
+      width: 200%;
+      height: 200%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    #scrollToTopBtn {
+      position: fixed;
+      bottom: 210px;
+      left: 100px;
+      z-index: 99;
+      display: none;
+      background-color: #008080;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      cursor: pointer;
+    }
+
+    #scrollToTopBtn:hover {
+      background-color: #006666;
+    }
+  </style>
 </body>
 </html>

@@ -86,12 +86,7 @@
                         <x-application-logo class="block h-9 w-auto fill-current text-teal-600 dark:text-teal-600" />
                     </a>
                 </div>
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                  <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                    {{ __('Home') }}
-                  </x-nav-link>
-            </div>
+                
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">

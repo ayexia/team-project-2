@@ -12,7 +12,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- CSS -->
-    <link rel="stylesheet" href="build\app-k0N8vCw9.css">
+    <link rel="stylesheet" href="build\app-QcgAuoUZ.css">
 
 <!-- Scripts -->
 <script src="build\app-JzZ5dANH.js" defer></script>
