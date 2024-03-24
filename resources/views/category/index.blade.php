@@ -43,7 +43,11 @@ if ($user) {
                 <button type="submit"><i class="fas fa-search"></i></button>
             </form></div>
             <div class="user-icons">
+            @if (Auth::check())
             <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
+        @else
+            <a href="{{ route('login') }}"><i class="fas fa-heart"></i></a>
+        @endif
                 <a href="{{ url('/cart') }}"><i class="fas fa-shopping-basket"> ({{$count}}) </i></a>
             @if (Route::has('login'))
                 @auth
@@ -86,7 +90,6 @@ if ($user) {
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Slug</th>
                 <th>Status</th>
                 <th>View</th>
                 <th>Edit</th>
@@ -97,7 +100,6 @@ if ($user) {
                  <tr>
                     <td>{{$category->id}}</td>
                     <td>{{$category->name}}</td>
-                    <td>{{$category->slug}}</td>
                     <td>
                     @if ($category->status==1)
                     <svg class="text-success-500 h-6 w-6 text-success" xmlns="http://www.w3.org/2000/svg" fill="green" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">

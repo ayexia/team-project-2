@@ -43,7 +43,11 @@ if ($user) {
                 <button type="submit"><i class="fas fa-search"></i></button>
             </form></div>
             <div class="user-icons">
+            @if (Auth::check())
             <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
+        @else
+            <a href="{{ route('login') }}"><i class="fas fa-heart"></i></a>
+        @endif
                 <a href="{{ url('/cart') }}"><i class="fas fa-shopping-basket"> ({{$count}}) </i></a>
             @if (Route::has('login'))
                 @auth
@@ -72,10 +76,6 @@ if ($user) {
             <div>
                 <label>Name</label>
                 <input type="text" name="name" placeholder="Name" value="{{$category->name}}"/>
-            </div><br>
-            <div>
-                <label>Slug</label>
-                <input type="text" name="slug" placeholder="Slug" value="{{$category->slug}}"/>
             </div><br>
             <div>
                 <label>Status</label>

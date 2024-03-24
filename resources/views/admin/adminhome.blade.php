@@ -6,12 +6,18 @@
     <title>ML Menswear Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/websiteStyle.css') }}">   
-
     <style>
         body { background-color: #E5E7EB; } /* Grey background */
         .header { background-color: #008080; } /* Teal header */
         .sidebar { background-color: #1F2937; } /* Black sidebar */
         .card { background-color: #FFFFFF; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,.1); }
+        .sidebar ul li {
+            margin-bottom: 5px; 
+        }
+        .sidebar ul li a {
+            display: block; 
+            padding: 8px 0; 
+        }    
     </style>
 </head>
 <body>
@@ -24,20 +30,23 @@
             <li><a href="{{route('home')}}">Home</a></li>
             <li><a href="{{route('product.index')}}">Products</a></li>
             <li><a href="{{route('categories.index')}}">Categories</a></li>
-            
+            <li><a href="#stock-alerts">Stock Alerts</a></li>
+            <li><a href="#user-management">User Management</a></li>
+            <li><a href="#sales-by-period">Sales by Period</a></li>
+            <li><a href="#order-management">Order Management</a></li>
         </ul>
     </div>
 
     <!-- Main content -->
     <div class="flex-1 p-10">
         <div class="header p-5 text-white">
-            <h1 class="text-xl">Welcome to ML Menswear Admin Dashboard</h1>
+            <h1 class="text-xl"></h1>
         </div>
         
         <!-- Dashboard Widgets -->
         <div class="grid gap-4 mt-5">
             <!-- Stock Alert Widget -->
-            <div class="card p-5">
+            <div id="stock-alerts" class="card p-5">
                 <h2 class="font-bold text-lg">Stock Alerts</h2>
                 @if ($lowStockProducts->count() > 0)
                     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
@@ -54,7 +63,7 @@
             </div>
             
             <!-- User Management Widget -->
-            <div class="card p-5">
+            <div id="user-management" class="card p-5">
                 <h2 class="font-bold text-lg mb-3">User Management</h2>
                 <table class="table-auto w-full">
                     <thead>
@@ -91,7 +100,7 @@
             </div>
 
             <!-- Sales by Period Widget -->
-            <div class="card p-5">
+            <div id="sales-by-period" class="card p-5">
                 <h2 class="font-bold text-lg mb-3">Sales by Period</h2>
                 <form action="{{ route('admin.dashboard') }}" method="GET">
                     <label for="period" class="block mb-2">Select Period:</label>
@@ -126,7 +135,7 @@
 </div>
 
 <!-- Order Management -->
-<div class="card p-5">
+<div id="order-management" class="card p-5">
     <h2 class="font-bold text-lg mb-3">Order Management</h2>
     <table class="table-auto w-full">
         <thead>

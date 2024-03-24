@@ -32,15 +32,8 @@ Route::get('/', function () {
     return view('welcome', compact('categories'));
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// Route::get('post', [HomeController::class, 'post'])->middleware(['auth', 'admin']); - used for test
-
-//links to profile page for verified users only, redirects to login page otherwise
 Route::get('/profile', function () {
     return '<h1>Your profile</h1>';
 })->middleware('auth');

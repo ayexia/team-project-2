@@ -39,52 +39,25 @@ class WishlistController extends Controller
             'user_id' => $user->id,
             'product_id' => $product->id,
         ]);
-
-        return redirect()->back()->with('success', 'Product added to wishlist!');
-    } else {
-        $guestIdentifier = $request->session()->get('guest_identifier');
-        if (!$guestIdentifier) {
-            $guestIdentifier = Str::uuid()->toString();
-            $request->session()->put('guest_identifier', $guestIdentifier);
-        }
-        $wishlistSession = session('wishlist', []);
-        $product = Product::find($item);
-        
-        if (isset($wishlistSession[$item])) { 
-            return redirect()->back()->with('error', 'Product already in wishlist!');
-        } else {
-            $wishlistSession[$item] = [
-                'id' => $product->id,
-                'image_url' => $product->image_url,
-                'name' => $product->name,
-                'price' => $product->price,
-            ];
-        }
-
-        session(['wishlist' => $wishlistSession]); 
-        session()->save();
-
+    
         return redirect()->back()->with('success', 'Product added to wishlist!');
         }   
     }
 
     public function removeFromWishlist($item)
-    {
-        if (auth()->check()) {
-            $product = Wishlist::find($item);
-            if ($product) {
-                $product->delete();
-                }
-                return redirect()->back()->with('success', 'Product removed from wishlist!');
-        } else {
-            $wishlistSession = session('wishlist', []);
-            if (isset($wishlistSession[$item])) {
-                unset($wishlistSession[$item]);
-                session(['wishlist' => $wishlistSession]);
-                session()->save();
-                return redirect()->back()->with('success', 'Product removed from wishlist!');
+{
+    if (auth()->check()) {
+        $user = auth()->user();
+        $wishlistItem = Wishlist::find($item);
+        
+        if ($wishlistItem && $wishlistItem->user_id === $user->id) {
+            $wishlistItem->delete();
+            if ($user->wishlist->isEmpty()) {
+                $user->wishlist()->delete(); 
+             }
+            
+            return redirect()->back()->with('success', 'Product removed from wishlist!');
             }
         }
-        return redirect()->back();
     }
 }

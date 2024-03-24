@@ -17,7 +17,6 @@ if ($user) {
     }
 } else {
     $cartSession = session('cart', []);
-    $wishlistSession = session('wishlist', []);
     $count = 0;
 
     foreach ($cartSession as $item) {
@@ -62,7 +61,11 @@ if ($user) {
         </form>
     </div>
     <div class="user-icons">
-        <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
+    @if (Auth::check())
+            <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
+        @else
+            <a href="{{ route('login') }}"><i class="fas fa-heart"></i></a>
+        @endif
         <a href="{{ url('/cart') }}"><i class="fas fa-shopping-basket"> ({{$count}}) </i></a>
         @if (Route::has('login'))
             @auth
@@ -109,12 +112,13 @@ if ($user) {
         <div class= "productContainer">
             <?php
             $user = auth()->user();
-            $wishlistItems = [];
             if ($user) {
                 $wishlistItems = Wishlist::where('user_id', $user->id)->with('product')->get();
             }
             ?>
-            @if ($user && $wishlistItems)
+            @if ($wishlistItems->isEmpty())
+            <p>Wishlist is empty!</p>
+            @else
             @foreach($wishlistItems as $wishlistItem)
                 <div class="product">
                     <img src="{{ $wishlistItem->product->image_url }}" style="width: 200px; height: 200px;" class="prodImg"/>
@@ -141,24 +145,13 @@ if ($user) {
                                 </div>
                             </div>
                         </form>
-                    @else
+                           @else
                         <p class="sold-out-text">Sold Out</p>
                     @endif
-                </div>
+                <p><a class="btn btn-outline-danger" href="{{route('remove.from.wishlist', $wishlistItem->id)}}">Delete</a></p>
             @endforeach
-        @elseif (!$user && $wishlistSession)
-            @foreach($wishlistSession as $item)
-                <div class="product">
-                    <img src="{{ $item['image_url'] }}" style="width: 200px; height: 200px;" class="prodImg"/>
-                    <h3>{{ $item['name'] }}</h3>
-                    <p>£{{ $item['price'] }}</p>
-                    <p><a class="btn btn-outline-danger" href="{{route('remove.from.wishlist', ['item' => $item['id']])}}">Delete</a></p>
-                </div>
-            @endforeach
-        @else
-            Wishlist is empty!
         @endif
-
+        </div>
         </div>
     </main>
 </div>

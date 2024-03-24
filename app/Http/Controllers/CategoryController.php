@@ -46,7 +46,6 @@ class CategoryController extends Controller
     public function store(Request $request){
         $data = $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:categories',
             'status' => 'required|numeric',
         ]);
 
@@ -78,7 +77,6 @@ class CategoryController extends Controller
         
         $data = $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:categories,slug,' . $category->id,
             'status' => 'required|numeric',
         ]);
 

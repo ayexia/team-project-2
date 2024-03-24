@@ -42,9 +42,13 @@ if ($user) {
                 <input value="{{ Request::get('keyword') }}" type="text" name="keyword" placeholder="Search">
                 <button type="submit"><i class="fas fa-search"></i></button>
             </form></div>
-            
+
             <div class="user-icons">
+             @if (Auth::check())
             <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
+        @else
+            <a href="{{ route('login') }}"><i class="fas fa-heart"></i></a>
+        @endif
                 <a href="{{ url('/cart') }}"><i class="fas fa-shopping-basket"> ({{$count}}) </i></a>
             @if (Route::has('login'))
                 @auth

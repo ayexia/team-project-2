@@ -42,19 +42,16 @@ $count = CartItem::where('cart_id', $cart->id)->sum('quantity');
         $user = auth()->user();
         ?>
         <div class="search-bar">
-        @if ($user && $user->usertype === 'admin') 
-        <form action="/product" method="GET">
-            <input value="{{ Request::get('keyword') }}" type="text" name="keyword" placeholder="Search">
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </form></div>
-        @else
         <form action="/products" method="GET">
             <input value="{{ Request::get('keyword') }}" type="text" name="keyword" placeholder="Search">
             <button type="submit"><i class="fas fa-search"></i></button>
         </form></div>
-        @endif
         <div class="user-icons">
-        <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
+        @if (Auth::check())
+            <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
+        @else
+            <a href="{{ route('login') }}"><i class="fas fa-heart"></i></a>
+        @endif
             <a href="{{ url('/cart') }}"><i class="fas fa-shopping-basket"> ({{$count}}) </i></a>
             @if (Route::has('login'))
                     @auth
@@ -88,11 +85,6 @@ $count = CartItem::where('cart_id', $cart->id)->sum('quantity');
             <div class="image-container">
                 <img id="homepageImage" src="images\Image 1.jpeg" alt="Homepage Image" class="homepage-image">
             </div>
-            @if ($user && $user->usertype === 'admin') 
-             <a href="{{route('product.index')}}" class="shop-now-btn">Shop Now</a>
-             @else
-             <a href="{{route('products')}}" class="shop-now-btn">Shop Now</a>
-            @endif
              <p class="slogan">Elevate Your Style with Our Premium Collection</p>
              <button class="subscribe-button" onclick="subscribe()">Subscribe Now</button>
         </div>

@@ -151,6 +151,6 @@ class ProductController extends Controller
         $availableSizes[$product->id] = $product->getAvailableSizes();
     }
     
-    return view('products.tops', compact('products', 'category', 'categories', 'availableSizes'));
+    return view('products.category', compact('products', 'category', 'categories', 'availableSizes'));
     }
 }
