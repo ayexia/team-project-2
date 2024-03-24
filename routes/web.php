@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ContactUsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -86,5 +87,16 @@ Route::get('/products/{product}/reviews', [ReviewController::class, 'index'])->n
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
 Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+
+Route::post('/contact-us', [ContactUsController::class, 'store'])->name('contactus.store');
+Route::get('/contact-us', function () {
+    $categories = Category::all();
+    return view('contact-us', compact('categories'));
+})->name('contact-us');
+
+Route::get('/about-us', function () {
+    $categories = Category::all();
+    return view('about-us', compact('categories'));
+})->name('about-us');
 
 require __DIR__.'/auth.php';

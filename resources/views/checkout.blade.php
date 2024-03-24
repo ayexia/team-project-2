@@ -75,8 +75,8 @@ if ($user) {
         @endforeach
         @endif
         <a href="{{route('orders')}}">Orders</a>
-        <a href="#">About Us</a>
-        <a href="#">Contact Us</a>
+        <a href="{{ route('about-us') }}">About Us</a>
+        <a href="{{ route('contact-us') }}">Contact Us</a>
         
     </nav>
     <div class="container">

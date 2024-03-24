@@ -84,8 +84,8 @@ if ($user) {
     @endforeach
     @endif
         <a href="{{route('orders')}}">Orders</a>
-        <a href="#">About Us</a>
-        <a href="#">Contact Us</a>
+        <a href="{{ route('about-us') }}">About Us</a>
+        <a href="{{ route('contact-us') }}">Contact Us</a>
 
         <form action="{{ route('view.category', ['category' => $category->name]) }}" method="GET" id="sortForm">
     <select name="sort_by" onchange="this.form.submit()">

@@ -193,6 +193,16 @@ if ($user) {
     </div>
     </header>
     <nav>
+         @if (!empty($categories))
+        @foreach($categories as $category)
+        @if ($loop->iteration <= 5)
+            <a href="{{ route('view.category', ['category' => $category->name]) }}">{{ $category->name }}</a>
+        @endif
+        @endforeach
+        @endif
+        <a href="{{route('orders')}}">Orders</a>
+        <a href="{{ route('about-us') }}">About Us</a>
+        <a href="{{ route('contact-us') }}">Contact Us</a>
     @if (!empty($categories))
     @foreach($categories as $category)
     @if ($loop->iteration <= 5)
