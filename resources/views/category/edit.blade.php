@@ -38,17 +38,10 @@ if ($user) {
             $user = auth()->user();
         ?>
         <div class="search-bar">
-        @if ($user && $user->usertype === 'admin') 
             <form action="/product" method="GET">
                 <input value="{{ Request::get('keyword') }}" type="text" name="keyword" placeholder="Search">
                 <button type="submit"><i class="fas fa-search"></i></button>
             </form></div>
-        @else
-            <form action="/products" method="GET">
-                <input value="{{ Request::get('keyword') }}" type="text" name="keyword" placeholder="Search">
-                <button type="submit"><i class="fas fa-search"></i></button>
-            </form></div>
-        @endif
             <div class="user-icons">
             <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
                 <a href="{{ url('/cart') }}"><i class="fas fa-shopping-basket"> ({{$count}}) </i></a>
