@@ -1,96 +1,176 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-4xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Admin Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div style="background: linear-gradient(to right, rgb(68, 67, 122), rgb(218, 200, 164)); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">    <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <p class="text-lg font-bold">{{ __("You're logged in as Admin!") }}</p>
-                    <html>
-<style>
-body {
-  background: linear-gradient(rgb(0, 0, 128), rgb(210, 180, 140));
-}
-.right {
-  position: absolute;
-  top: 100px;
-  right: 80px;
-  width: 300px;
-  border: none;
-  padding: 5px;
-}
-.center {
-  padding: 70px 0;
-  text-align: center;
-}
-* {
-  box-sizing: border-box;
-}
-
-form.example input[type=text] {
-  padding: 10px;
-  font-size: 12px;
-  border: 1px solid grey;
-  float: left;
-  width: 75%;
-  background: #f5f2d0;
-  color: #918151;
-  border-radius: 12px;
-}
-form.example button {
-  float: left;
-  width: 25%;
-  padding: 10px;
-  background: tan;
-  color: white;
-  font-size: 12px;
-  border: 1px solid grey;
-  border-left: none;
-  cursor: pointer;
-  border-radius: 12px;
-}
-form.example button:hover {
-  background: #918151;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-  border-radius: 12px;
-}
-
-.heading {
-  font-size: 50px;
-  font-family: Garamond;
-  animation: color-change 5s infinite;
-}
-
-@keyframes color-change {
-  0% { color: white; }
-  50% { color: grey; }
-  100% { color: white; }
-}
-.outline-glow {
-  font-size: 48px;
-  color: #FF7F50;
-  -webkit-text-stroke: 2px rgb(210, 180, 140);
-  text-shadow: 0 0 3px rgb(210, 180, 140);
-}
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Menswear Admin Dashboard</title>
+    <!-- Tailwind CSS for styling (adjust the colors as needed) -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #E5E7EB; } /* Grey background */
+        .header { background-color: #008080; } /* Teal header */
+        .sidebar { background-color: #1F2937; } /* Black sidebar */
+        .card { background-color: #FFFFFF; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,.1); }
+    </style>
 </head>
 <body>
-<div class = "center heading outline-glow">
-<?php
 
-   echo "HELLO WORLD <br><br><font size ='5'> Work in progress";
- 
+<div class="flex">
+    <!-- Sidebar -->
+    <div class="sidebar p-5 text-white w-1/4">
+        <h2 class="text-lg font-bold mb-5">ML Menswear Dashboard</h2>
+        <ul>
+            <li><a href="#">Home</a></li>
+        </ul>
+    </div>
 
-?>
+    <!-- Main content -->
+    <div class="flex-1 p-10">
+        <div class="header p-5 text-white">
+            <h1 class="text-xl">Welcome to ML Menswear Admin Dashboard</h1>
+        </div>
+ <!-- Dashboard Widgets -->
+ <div class="grid gap-4 mt-5">
+            <!-- Stock Alert Widget -->
+            <div class="card p-5">
+                <h2 class="font-bold text-lg">Stock Alerts</h2>
+                @if ($lowStockProducts->count() > 0)
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        <p>The following products have low stock:</p>
+                        <ul>
+                            @foreach ($lowStockProducts as $product)
+                                <li>{{ $product->name }} ({{ $product->quantity }} left)</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @else
+                    <p>No products have low stock.</p>
+                @endif
+            </div>
+ <!-- User Management Widget -->
+ <div class="card p-5">
+                <h2 class="font-bold text-lg mb-3">User Management</h2>
+                <table class="table-auto w-full">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">Name</th>
+                            <th class="px-4 py-2">Email</th>
+                            <th class="px-4 py-2">User Type</th>
+                            <th class="px-4 py-2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($users as $user)
+                            <tr>
+                                <td class="border px-4 py-2">{{ $user->name }}</td>
+                                <td class="border px-4 py-2">{{ $user->email }}</td>
+                                <td class="border px-4 py-2">{{ $user->usertype }}</td>
+                                <td class="border px-4 py-2">
+                                    <form action="{{ route('admin.changeUserType', $user) }}" method="POST">
+                                        @csrf
+                                        @method('POST')
+                                        <button type="submit" class="bg-teal-500 text-white rounded p-2">
+                                            @if ($user->usertype === 'admin')
+                                                Make User
+                                            @else
+                                                Make Admin
+                                            @endif
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-</div>
-</body>
-</html>
+            <!-- Sales by Period Widget -->
+            <div class="card p-5">
+                <h2 class="font-bold text-lg mb-3">Sales by Period</h2>
+                <form action="{{ route('admin.dashboard') }}" method="GET">
+                    <label for="period" class="block mb-2">Select Period:</label>
+                    <select id="period" name="period" class="border-2 border-gray-200 rounded p-2">
+                        <option value="monthly" {{ $selectedPeriod === 'monthly' ? 'selected' : '' }}>Monthly</option>
+                        <option value="weekly" {{ $selectedPeriod === 'weekly' ? 'selected' : '' }}>Weekly</option>
+                    </select>
+                    <button type="submit" class="bg-teal-500 text-white rounded p-2 mt-2">View Sales</button>
+</form>
+@if ($orders->count() > 0)
+                        <table class="table-auto w-full mt-4">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-2">Order ID</th>
+                                    <th class="px-4 py-2">Total Amount</th>
+                                    <th class="px-4 py-2">Order Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($orders as $order)
+                                    <tr>
+                                        <td class="border px-4 py-2">{{ $order->id }}</td>
+                                        <td class="border px-4 py-2">{{ $order->total_price }}</td>
+                                        <td class="border px-4 py-2">{{ $order->created_at->format('Y-m-d') }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                        <p class="mt-4">No orders found for the selected period.</p>
+                    @endif
+                </div>
+
+            <!-- Order Management -->
+            <div class="card p-5">
+                    <h2 class="font-bold text-lg mb-3">Order Management</h2>
+                    <table class="table-auto w-full">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-2">Order ID</th>
+                                <th class="px-4 py-2">Total Amount</th>
+                                <th class="px-4 py-2">Order Date</th>
+                                <th class="px-4 py-2">Status</th>
+                                <th class="px-4 py-2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($allOrders as $order)
+                                <tr>
+                                    <td class="border px-4 py-2">{{ $order->id }}</td>
+                                    <td class="border px-4 py-2">{{ $order->total_price }}</td>
+                                    <td class="border px-4 py-2">{{ $order->created_at->format('Y-m-d') }}</td>
+                                    <td class="border px-4 py-2">{{ $order->status }}</td>
+                                    <td class="border px-4 py-2">
+                                        <div class="flex">
+                                            @if ($order->status === 'Ordered')
+                                                <form action="{{ route('admin.pendingOrder', $order) }}" method="POST">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <button type="submit" class="bg-teal-500 text-white rounded p-2 mr-2">Mark as Pending</button>
+                                                </form>
+                                            @elseif ($order->status === 'Pending')
+                                                <form action="{{ route('admin.dispatchedOrder', $order) }}" method="POST">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <button type="submit" class="bg-teal-500 text-white rounded p-2 mr-2">Mark as Dispatched</button>
+                                                </form>
+                                            @elseif ($order->status === 'Dispatched')
+                                                <form action="{{ route('admin.deliveredOrder', $order) }}" method="POST">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <button type="submit" class="bg-teal-500 text-white rounded p-2 mr-2">Mark as Delivered</button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+</div>
+</body>
+</html>
+

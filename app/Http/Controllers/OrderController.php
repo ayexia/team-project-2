@@ -166,4 +166,38 @@ class OrderController extends Controller
             return redirect()->back()->with('error', 'Order cannot be returned as it is not delivered yet.');
         }
     }    
+
+    public function pendingOrder(Order $order)
+    {
+        if ($order->status === 'Ordered') {
+            $order->status = 'Pending';
+            $order->save();
+    
+            return redirect()->back()->with('success', 'Order is now pending.');
+        } else {
+            return redirect()->back()->with('error', 'Order could not be changed.');
+        }
+    } 
+    public function dispatchedOrder(Order $order)
+    {
+        if ($order->status === 'Pending') {
+            $order->status = 'Dispatched';
+            $order->save();
+    
+            return redirect()->back()->with('success', 'Order has dispatched.');
+        } else {
+            return redirect()->back()->with('error', 'Order could not be dispatched.');
+        }
+    } 
+    public function deliveredOrder(Order $order)
+    {
+        if ($order->status === 'Dispatched') {
+            $order->status = 'Delivered';
+            $order->save();
+    
+            return redirect()->back()->with('success', 'Order has been delivered.');
+        } else {
+            return redirect()->back()->with('error', 'Order could not be delivered.');
+        }
+    } 
 }

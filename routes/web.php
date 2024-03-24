@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
@@ -43,6 +44,14 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/profile', function () {
     return '<h1>Your profile</h1>';
 })->middleware('auth');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::post('/admin/change-user-type/{user}', [AdminController::class, 'changeUserType'])->name('admin.changeUserType');
+    Route::post('/admin/pending-order/{order}', [OrderController::class, 'pendingOrder'])->name('admin.pendingOrder');
+    Route::post('/admin/dispatched-order/{order}', [OrderController::class, 'dispatchedOrder'])->name('admin.dispatchedOrder');
+    Route::post('/admin/delivered-order/{order}', [OrderController::class, 'deliveredOrder'])->name('admin.deliveredOrder');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
