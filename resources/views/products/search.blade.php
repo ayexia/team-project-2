@@ -105,8 +105,7 @@ if ($user) {
             @if ($products->isNotEmpty())
                 @foreach($products as $product)
                     <div class="product">
-                        <img src="{{$product->image_url}}" alt="Product Image" style="width: 200px; height: 200px;" class="prodImg" />                  
-                        <h3>{{$product->name}}</h3>
+                    <a href="{{ route('product.show', ['product' => $product]) }}"><img src="{{ $product->image_url }}" alt="Product Image" style="width: 200px; height: 200px;" class="prodImg" /></a>            
                         <p>£{{$product->price}}</p>
                         <p>Colour: {{$product->colour}}</p>
                         <p>Brand: {{$product->brand}}</p>
@@ -119,10 +118,6 @@ if ($user) {
                                 @endunless
                             @endforeach
                         @endif
-
-                        <p>
-                            <a href="{{route('product.show', ['product' => $product])}}">View</a>
-                        </p>
                     </div>
                 @endforeach
             @else
