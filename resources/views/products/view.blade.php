@@ -204,6 +204,7 @@ if ($user) {
       </form>
       @endif
   </div>
+    <button id="scrollToTopBtn" title="Go to top">Scroll Up</button>
   </main>
   
 
@@ -290,4 +291,35 @@ if ($user) {
         }
     });
 </script>
+/*  zoom feature */
+
+   .product-image {
+    width: 50%; /* Adjust as needed */
+    margin-right: 20px;
+    overflow: hidden;
+  }
+  
+  #zoomImage {
+    width: 100%; /* Make sure the image fills its container */
+    transition: transform 0.5s; /* Smooth transition for zoom effect */
+  }
+  /*scroll*/
+  #scrollToTopBtn {
+    position: fixed;
+    bottom: 210px;
+    left: 100px;
+    z-index: 99;
+    display: none; 
+    /*  button styles */
+    background-color: #008080;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+  }
+  
+  #scrollToTopBtn:hover {
+    background-color: #006666;
+  }
 </html>
