@@ -63,10 +63,7 @@
 
             <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-            <a href="{{route('product.index')}}">Products</a>
-            <a href="{{route('categories.index')}}">Categories</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="{{ route('admin.dashboard') }}">For Admin</a>
             </div>
 
             <div id="main">
