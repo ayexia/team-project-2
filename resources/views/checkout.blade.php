@@ -422,9 +422,8 @@ if ($user) {
         </div>
       </div>
       <br>
-      <br>
-    
-
+      <br>    
+      <button class="place-order" type="submit">Place Order</button>
     </form>
         @endif
         @endif
