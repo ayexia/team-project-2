@@ -1,0 +1,11 @@
+/*  zoom feature */
+   .product-image {
+    width: 50%; 
+    margin-right: 20px;
+    overflow: hidden;
+  }
+  
+  #zoomImage {
+    width: 100%; 
+    transition: transform 0.5s; 
+  }
