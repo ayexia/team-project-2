@@ -1,0 +1,26 @@
+<script>
+ //zoom in feature
+const productImage = document.getElementById('productImage');
+const zoomImage = document.getElementById('zoomImage');
+
+productImage.addEventListener('mousemove', function(e) {
+ 
+  const { left, top, width, height } = productImage.getBoundingClientRect();
+
+  
+  const mouseX = e.pageX - left;
+  const mouseY = e.pageY - top;
+
+  
+  const percentX = (mouseX / width) * 100;
+  const percentY = (mouseY / height) * 100;
+
+  zoomImage.style.transformOrigin = `${percentX}% ${percentY}%`;
+  zoomImage.style.transform = 'scale(3.0)'; 
+});
+
+productImage.addEventListener('mouseleave', function() {
+  zoomImage.style.transform = 'scale(1)';
+});
+
+    </script>
