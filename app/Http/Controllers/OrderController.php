@@ -26,8 +26,23 @@ class OrderController extends Controller
     public function order()
     {
         $categories = Category::all();
-        return view('orders', compact('categories'));
+        $user = auth()->user();
+        if ($user) {
+            $orders = Order::where('user_id', $user->id)->get();
+        } else {
+            $guestIdentifier = session()->get('guest_identifier', null);
+    
+            if (!$guestIdentifier) {
+                $guestIdentifier = Str::uuid()->toString(); 
+                session()->put('guest_identifier', $guestIdentifier);
+            }
+    
+            $orders = Order::where('guest_identifier', $guestIdentifier)->get();
+        }
+    
+        return view('orders', compact('categories', 'orders'));
     }
+
 
     public function confirmOrder(Request $request)
 {

@@ -5,21 +5,21 @@ use App\Models\CartItem;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
+
 $user = auth()->user();
+$count = 0;
+
 if ($user) {
-    $cart = Cart::where('user_id', optional($user)->id)->first();
-    $count = 0;
-    if($cart){
-    $count = CartItem::where('cart_id', $cart->id)->sum('quantity');
-        }
-    } else {
-        $cartSession = session('cart', []);
-        $count = 0;
-    
-        foreach ($cartSession as $item) {
-            $count += $item['quantity'];
-        }
+    $cart = Cart::where('user_id', $user->id)->first();
+    if ($cart) {
+        $count = CartItem::where('cart_id', $cart->id)->sum('quantity');
     }
+} else {
+    $cartSession = session('cart', []);
+    foreach ($cartSession as $item) {
+        $count += $item['quantity'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,113 +43,111 @@ if ($user) {
         $user = auth()->user();
         ?>
         <div class="search-bar">
-        <form action="/products" method="GET">
-            <input value="{{ Request::get('keyword') }}" type="text" name="keyword" placeholder="Search">
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </form></div>
+            <form action="/products" method="GET">
+                <input value="{{ Request::get('keyword') }}" type="text" name="keyword" placeholder="Search">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
         <div class="user-icons">
-        @if (Auth::check())
-            <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
-        @else
-            <a href="{{ route('login') }}"><i class="fas fa-heart"></i></a>
-        @endif
+            @if (Auth::check())
+                <a href="{{ url('/wishlist') }}"><i class="fas fa-heart"></i></a>
+            @else
+                <a href="{{ route('login') }}"><i class="fas fa-heart"></i></a>
+            @endif
             <a href="{{ url('/cart') }}"><i class="fas fa-shopping-basket"> ({{$count}}) </i></a>
             @if (Route::has('login'))
-                    @auth
-                        <a href="{{ url('/profile') }}"><i class="fas fa-user"></i></a>
-                    @else
-                        <a href="{{ route('login') }}"><i class="fas fa-user"></i></a>
-                    @endauth
+                @auth
+                    <a href="{{ url('/profile') }}"><i class="fas fa-user"></i></a>
+                @else
+                    <a href="{{ route('login') }}"><i class="fas fa-user"></i></a>
+                @endauth
             @endif
-    </div>
+        </div>
     </header>
     <nav>
-    @if (!empty($categories))
-    @foreach($categories as $cat)
-    @if ($loop->iteration <= 5)
-        <a href="{{ route('view.category', ['category' => $cat->name]) }}">{{ $cat->name }}</a>
-    @endif
-    @endforeach
-    @endif
+        @if (!empty($categories))
+            @foreach($categories as $cat)
+                @if ($loop->iteration <= 5)
+                    <a href="{{ route('view.category', ['category' => $cat->name]) }}">{{ $cat->name }}</a>
+                @endif
+            @endforeach
+        @endif
         <a href="{{route('orders')}}">Orders</a>
         <a href="{{ route('about-us') }}">About Us</a>
         <a href="{{ route('contact-us') }}">Contact Us</a>
-        
     </nav>
     <div class="container">
         <div class="promo-banner">
             Free Express Shipping on First Orders | Free Same Day Click and Collect | Free Standard Delivery
-    </div>
-         
-    <main>
-    <h1>Order History</h1>
-    <div>
-        @if(session()->has('success'))
-           <div>
-              {{ session('success') }}
-           </div>
-           @php
-            session()->forget('success');
-            session()->save();
-           @endphp
-        @endif
-    </div>
-    <br>
-    <div class="productContainer">
-        <?php
-            $user = auth()->user();
-            if ($user) {
-                $orders = Order::where('user_id', $user->id)->get();
-            } else {
-                $guestIdentifier = session()->get('guest_identifier');
-                $orders = Order::where('guest_identifier', $guestIdentifier)->get();
-            }
-        ?>
-        @if($orders->isNotEmpty())
-            @foreach($orders as $order) 
-                <?php $orderItems = OrderItem::where('order_id', $order->id)->get(); ?>
-                <div class="order">
-                    <h2>Order Number: {{ $order->id }}</h2>
-                    @foreach ($orderItems as $item)
-                        <div class="order-item">
-                            <img src="{{ $item->product->image_url }}" class="prodImg"/>
-                            <div class="order-item-details">
-                                <h3>{{ $item->product->name }}</h3>
-                                <p>Size: {{ $item->size }}</p>
-                                <p>£{{ $item->product->price }}</p>
-                                <p>Quantity: {{ $item->quantity }}</p>
+        </div>
+        <main>
+            <h1>Order History</h1>
+            <div>
+                @if(session()->has('success'))
+                    <div>
+                        {{ session('success') }}
+                    </div>
+                    @php
+                        session()->forget('success');
+                        session()->save();
+                    @endphp
+                @endif
+            </div>
+            <br>
+            <div class="productContainer">
+                <?php
+                if ($user) {
+                    $orders = Order::where('user_id', $user->id)->get();
+                } else {
+                    $guestIdentifier = session()->get('guest_identifier');
+                    $orders = Order::where('guest_identifier', $guestIdentifier)->get();
+                }
+                ?>
+                @if($orders->isNotEmpty())
+                    @foreach($orders as $order) 
+                        <?php $orderItems = OrderItem::where('order_id', $order->id)->get(); ?>
+                        <div class="order">
+                            <h2>Order Number: {{ $order->id }}</h2>
+                            @foreach ($orderItems as $item)
+                                <div class="order-item">
+                                    <img src="{{ $item->product->image_url }}" class="prodImg"/>
+                                    <div class="order-item-details">
+                                        <h3>{{ $item->product->name }}</h3>
+                                        <p>Size: {{ $item->size }}</p>
+                                        <p>£{{ $item->product->price }}</p>
+                                        <p>Quantity: {{ $item->quantity }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                            <div class="order-details">
+                                <p><span class="teal">Address:</span> {{ $order->address }}</p>
+                                <p><span class="teal">Status:</span> {{ $order->status }}</p>
+                                <p><span class="teal">Total Price:</span> £{{ $order->total_price }}</p>
+                                <p><span class="teal">Order Date:</span> {{ $order->order_date }}</p>
+                                @if ($order->status === 'Pending' || $order->status === 'Processing')
+                                    <form method="POST" action="{{ route('order.cancel', ['order' => $order->id]) }}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-outline-danger">Cancel Order</button>
+                                    </form>
+                                @elseif ($order->status === 'Delivered')
+                                    <form method="POST" action="{{ route('order.return', ['order' => $order->id]) }}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-outline-danger">Return Order</button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     @endforeach
-                    <div class="order-details">
-                        <p><span class="teal">Address:</span> {{ $order->address }}</p>
-                        <p><span class="teal">Status:</span> {{ $order->status }}</p>
-                        <p><span class="teal">Total Price:</span> £{{ $order->total_price }}</p>
-                        <p><span class="teal">Order Date:</span> {{ $order->order_date }}</p>
-                        @if ($order->status === 'Pending' || $order->status === 'Processing')
-                            <form method="POST" action="{{ route('order.cancel', ['order' => $order->id]) }}">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger">Cancel Order</button>
-                            </form>
-                        @elseif ($order->status === 'Delivered')
-                            <form method="POST" action="{{ route('order.return', ['order' => $order->id]) }}">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger">Return Order</button>
-                            </form>
-                        @endif
-                    </div>
-                </div>
-            @endforeach
-        @else
-            <p>No orders placed</p>
-        @endif
-    </div>
-    <!-- Footer section -->
-    <footer>
-        <div class="business-details">
-        <p>Email: info@mlmenswear.com</p>
-        <p>Contact Number: +44 1234 567890</p>
-        <p>Address: 123 Fashion Street, London, UK</p>
+                @else
+                    <p>No orders placed</p>
+                @endif
+            </div>
+            <!-- Footer section -->
+            <footer>
+                <div class="business-details">
+                    <p>Email: info@mlmenswear.com</p>
+                    <p>Contact Number: +44 1234 567890</p>
+                    <p>Address: 123 Fashion Street, London, UK</p>
     </div>
     <p>&copy; 2024 ML Menswear. All rights reserved.</p>
     </footer>
