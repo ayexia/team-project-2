@@ -158,7 +158,7 @@ if ($user) {
 <style>
 /* Order History page styles */
 .order {
-    width: calc(33.33% - 40px); /* Adjust the width as per your preference */
+    width: calc(33.33% - 40px); 
     padding: 20px;
     margin-bottom: 20px;
     background-color: #fff;
@@ -167,8 +167,8 @@ if ($user) {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: inline-block;
     vertical-align: top;
-    margin-right: 20px; /* Add margin between each order */
-    margin-bottom: 20px; /* Add margin between each row */
+    margin-right: 20px; 
+    margin-bottom: 20px;
 }
 
 .order h2 {

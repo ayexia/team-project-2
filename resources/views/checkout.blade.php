@@ -294,7 +294,6 @@ if ($user) {
         <?php  
         $cartSession = session('cart', []);
         ?>
-        @dump(session('cart'))
         @if ($cartSession)
             @foreach($cartSession as $item)
                 <div class="product">
