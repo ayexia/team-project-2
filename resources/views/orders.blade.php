@@ -219,8 +219,4 @@ if ($user) {
     transition: background-color 0.3s ease;
 }
 
-.btn:hover {
-    background-color: #006666;
-}
-
 </style>
