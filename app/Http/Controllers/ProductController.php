@@ -35,6 +35,13 @@ class ProductController extends Controller
     
     }
 
+    public function showAdmin(Request $request, $id)
+    {
+    $product = Product::findOrFail($id);
+    return view('products.show', compact('product'));
+    }   
+    
+
     public function indexForUser(Request $request)
     {
         $products = Product::orderBy('created_at', 'DESC');

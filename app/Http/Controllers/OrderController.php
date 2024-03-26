@@ -105,12 +105,6 @@ class OrderController extends Controller
 
             $order->total_price += ($product->price * $cartItem->quantity);
 
-            $product->quantity -= $cartItem->quantity;
-            if ($product->quantity <= 0) {
-                $product->available = 'no';
-            }
-            $product->save();
-
             $cartItem->delete();
         }
         $cart->delete();
@@ -128,12 +122,7 @@ class OrderController extends Controller
             $orderItem->save();
 
             $order->total_price += ($product->price * $item['quantity']);
-
-            $product->quantity -= $item['quantity'];
-            if ($product->quantity <= 0) {
-                $product->available = 'no';
-            }
-            $product->save();
+            
         }
         session()->forget('cart');
     }
@@ -193,16 +182,32 @@ class OrderController extends Controller
         }
     } 
     public function shippedOrder(Order $order)
-    {
-        if ($order->status === 'Processing') {
-            $order->status = 'Shipped';
-            $order->save();
-    
-            return redirect()->back()->with('success', 'Order has dispatched.');
-        } else {
-            return redirect()->back()->with('error', 'Order could not be dispatched.');
+        {
+    if ($order->status === 'Processing') {
+        $orderItems = OrderItem::where('order_id', $order->id)->get();
+        foreach ($orderItems as $orderItem) {
+            $product = Product::find($orderItem->product_id);
+            $product->quantity -= $orderItem->quantity;
+            if ($product->quantity < 0) {
+                $product->quantity = 0; 
+            }
+
+            if ($product->quantity <= 0) {
+                $product->available = 'no';
+            }
+
+            $product->save();
         }
-    } 
+        
+        $order->status = 'Shipped';
+        $order->save();
+
+        return redirect()->back()->with('success', 'Order has been shipped.');
+        } else {
+        return redirect()->back()->with('error', 'Order could not be shipped.');
+        }
+    }
+
     public function deliveredOrder(Order $order)
     {
         if ($order->status === 'Shipped') {

@@ -80,7 +80,7 @@ if ($user) {
                     <th>Description</th>
                     <th>Price</th>
                     <th>Quantity</th>
-                    <th>Image URL</th>
+                    <th>Image</th>
                     <th>Colour</th>
                     <th>Brand</th>
                     <th>Sizes</th>
@@ -93,7 +93,7 @@ if ($user) {
                     <td>{{$product->description}}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->quantity}}</td>
-                    <td>{{$product->image_url}}</td>
+                    <td><img src="{{ $product->image_url }}" alt="Product Image" style="width: 100px; height: 100px;"></td>
                     <td>{{$product->colour}}</td>
                     <td>{{$product->brand}}</td>
                     <td>
