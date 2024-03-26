@@ -128,7 +128,7 @@ if ($user) {
                     <td>{{ $product->category->name }}</td>
                     <td>{{$product->available}}</td>
                     <td>
-                        <a href="{{route('product.view',  ['id' => $product->id])}}">View</a>
+                        <a href="{{route('product.show', ['product' => $product])}}">View</a>
                     </td>
                     <td>
                         <a href="{{route('product.edit', ['product' => $product])}}">Edit</a>

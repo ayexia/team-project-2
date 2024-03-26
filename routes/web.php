@@ -59,7 +59,6 @@ Route::post('/product', [ProductController::class, 'store'])->name('product.stor
 Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit')->middleware(['auth', 'admin']);
 Route::put('/product/{product}/update', [ProductController::class, 'update'])->name('product.update')->middleware(['auth', 'admin']);
 Route::delete('/product/{product}/destroy', [ProductController::class, 'destroy'])->name('product.destroy')->middleware(['auth', 'admin']);
-Route::get('/product/{id}', [ProductController::class, 'showAdmin'])->name('product.view')->middleware(['auth', 'admin']);
 Route::get('/product/{product}/show', [ProductController::class, 'show'])->name('product.show');
 Route::get('/product/{category}', [ProductController::class, 'viewCategory'])->name('view.category');
 
